@@ -45,7 +45,7 @@ document.querySelector('#experience').innerHTML = `
                     </div>
                 </div>
                 <div class="mt-3 mx-4">
-                    <h5><b>2020 - 2023 -> Licence - Développement d’Application Intranet et Internet (DA2I)</b></h5>
+                    <h5><b>2017 - 2020 -> Licence - Développement d’Application Intranet et Internet (DA2I)</b></h5>
                     <div class="ms-2">
                         <p>École de Management et d’Innovation Technologique (EMIT) / Université de Fianarantsoa</p>
                     </div>
