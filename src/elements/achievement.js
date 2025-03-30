@@ -1,7 +1,7 @@
-import navigatorImage from './../../src/images/navigator.png'
-import ekitiaImage from './../../src/images/ekitia.png'
-import topImage from './../../src/images/nounoutop.png'
-import emitSite from './../../src/images/emit.png'
+import navigatorImage from './../../src/assets/images/navigator.png'
+import ekitiaImage from './../../src/assets/images/ekitia.png'
+import topImage from './../../src/assets/images/nounoutop.png'
+import emitSite from './../../src/assets/images/emit.png'
 
 document.querySelector('#achievement').innerHTML = `
     <div class="container">

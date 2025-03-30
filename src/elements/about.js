@@ -1,9 +1,9 @@
-import charlyImage from './../../src/images/charly.png'
-import linkedinImage from './../../src/images/logos/linkedin.png'
-import facebookImage from './../../src/images/logos/facebook.png'
+import charlyImage from './../../src/assets/images/charly.png'
+import linkedinImage from './../../src/assets/images/logos/linkedin.png'
+import facebookImage from './../../src/assets/images/logos/facebook.png'
 
-import whatsappImage from './../../src/images/logos/whatsapp.png'
-import mailImage from './../../src/images/logos/mail.png'
+import whatsappImage from './../../src/assets/images/logos/whatsapp.png'
+import mailImage from './../../src/assets/images/logos/mail.png'
 
 
 document.querySelector('#about').innerHTML = `
@@ -14,8 +14,8 @@ document.querySelector('#about').innerHTML = `
             </div>
             <div class="col-md-7 my-2 text-center">
                 <h2 class="display-5 title my-4">À propos</h2>
-                <p class="fs-5"> L'informatique n'est pas simplement un métier pour moi, c'est une véritable passion. 
-                Je considère chaque projet comme une œuvre à part entière, où l'innovation et la créativité se rencontrent pour donner vie à des solutions uniques. 
+                <p class="fs-5"> L'informatique n'est pas simplement un métier pour moi, c'est une véritable passion.
+                Je considère chaque projet comme une œuvre à part entière, où l'innovation et la créativité se rencontrent pour donner vie à des solutions uniques.
                 <br><br>
                 Que ce soit pour le développement d'un site web, la conception d'une application ou la mise en place d'une architecture technique complexe, je mets un point d'honneur à travailler avec soin, rigueur et professionnalisme. </p>
                 <div class="mt-5">

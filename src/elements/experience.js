@@ -1,6 +1,6 @@
-import laptopImage from './../../src/images/logos/laptop.png'
-import tropheeImage from './../../src/images/logos/trophee.png'
-import diplomImage from './../../src/images/logos/diplom.png'
+import laptopImage from './../../src/assets/images/logos/laptop.png'
+import tropheeImage from './../../src/assets/images/logos/trophee.png'
+import diplomImage from './../../src/assets/images/logos/diplom.png'
 
 document.querySelector('#experience').innerHTML = `
     <div class="container mb-5">

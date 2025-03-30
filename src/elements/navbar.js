@@ -1,5 +1,5 @@
 import '../handlers/activeNavbar'
-import crLogo from './../../src/images/logos/cr-logo.png'
+import crLogo from './../../src/assets/images/logos/cr-logo.png'
 
 document.querySelector('#navbar').innerHTML = `
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -19,7 +19,7 @@ document.querySelector('#navbar').innerHTML = `
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#experience">Mes expériences</a>
-                    </li>   
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#skill">Mes compétences</a>
                     </li>
