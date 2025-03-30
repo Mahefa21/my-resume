@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*{
+  font-family: Poppins; 
+}
+
+:root {
+  --silver: #C1C1C1;
+  --charcoal: #2c4251;
+  --yellow-green: #628395;
+  --cerulean: #0c7489;
+  --timberwolf: #D7D9CE;
+  --title: #3C4156;
+}
+
+#banner {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#about, #skill, #experience, #achievement {
+  padding: 7.5vh 0vh 0vh 0vh;
+}
+
+#navbar .navbar {
+  background-color: white;
+  box-shadow: 0 4px 4px rgba(146, 161, 176, .15);
+}
+
+#about img.profile {
+  width: -webkit-fill-available;
+  border-radius: 50%;
+}
+
+#about img.logo {
+  width: 40px;
+}
+
+.progress-bar {
+  background-color: var(--charcoal) !important;
+}
+
+.progress {
+  border-radius: inherit !important;
+}
+
+.card-image {
+  height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+}
+
+#banner svg {
+  position: absolute;
+  bottom: 0;
+}
+
+.social-link {
+  position: absolute;
+  bottom: 15%;
+}
+
+#achievement {
+  min-height: 80vh;
+}
+
+.background {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  background-image: url('images/background-white.jpg');
+  background-size: cover;
+  z-index: -1;
+}
+
+.text {
+  background-color: ghostwhite;
+  padding-bottom: 50px;
+}
+
+.title {
+  color: var(--title);
+  text-transform: uppercase;
+  word-wrap: break-word;
+}
+
+@media (min-width: 992px) {
+  .exp-content {
+    border-left: 2px black solid;
+    position: relative;
+  }
+}
+
+.exp-logo {
+  width: 50px;
+  position: relative;
+}
+
+.exp-logo-container {
+  position: absolute;
+  left: -35px;
+  width: 70px;
+  height: 70px;
+  top: 15px;
+  border-radius: 50%;
+  background: white;
+  align-items: center;
+  border: 1px black solid;
+  justify-content: center;
+}
+
+.skill-card {
+  padding: 0px 60px;
+}
+
+.card {
+  border-radius: inherit !important;
+}
+
+.nav-link.active {
+  border-bottom: 1px black solid;
+}
+
