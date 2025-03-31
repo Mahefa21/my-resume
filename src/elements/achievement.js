@@ -77,6 +77,6 @@ document.querySelector('#achievement').innerHTML = `
       </div>
   </div>
   <div class="text-center mt-5">
-    <a class="link fw-bold p-2" href="mailto:raoelimahefacharly@gmail.com" > Intéressé(e) par mon profil ? Entrons en contact !</a>
+    <p>Intéressé(e) par mon profil ? <a class="btn btn-secondary fw-bold p-2" href="mailto:raoelimahefacharly@gmail.com" >Entrons en contact !</a></p>
   </div>
 `

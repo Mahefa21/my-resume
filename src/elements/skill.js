@@ -1,8 +1,8 @@
 document.querySelector('#skill').innerHTML = `
-    <div class="container text-center">
+    <div class="text-center mx-5">
         <h2 class="display-6 title">Mes compétences</h2>
         <div class="row my-5">
-            <div class="col">
+            <div class="col pb-4">
                 <h4 class="">Langages informatiques</h4>
                 <div class="text-start">
                     <div class="skill-card">
@@ -52,17 +52,8 @@ document.querySelector('#skill').innerHTML = `
                     </div>
                     </div>
                 </div>
-
-                <div class="mt-5">
-                    <h4 class="">Langues</h4>
-                    <div class="text-start skill-card">
-                        <p><b>Français : </b>Courant</p>
-                        <p><b>Anglais : </b>Intermédiaire</p>
-                        <p><b>Malagasy : </b>Langue maternelle</p>
-                    </div>
-                </div>
             </div>
-            <div class="col">
+            <div class="col pb-4">
                 <h4 class="">Framework</h4>
                 <div class="text-start">
                     <div class="skill-card">
@@ -107,22 +98,30 @@ document.querySelector('#skill').innerHTML = `
                         </div>
                     </div>
                 </div>
-
-                <div class="mt-5">
-                    <h4 class="">Outils</h4>
-                    <div class="text-start skill-card">
-                        <p><b>IDE : </b>VS Code</p>
-                        <p><b>Gestionnaire de Subversion : </b>Git, GitHub, GitLab, Bitbucket</p>
-                        <p><b>Système d'exploitation : </b>Windows, Linux</p>
-                        <p><b>Gestion de projet : </b>Jira, Oceco</p>
-                        <p><b>Communication : </b>Discord, WhatsApp, Google Meet</p>
-                        <p><b>Bureautique : </b>Word, Excel, PowerPoint</p>
-                        <p><b>Design et création visuelle : </b>Canva, Figma</p>
-                    </div>
-                </div>
             </div>
 
+            <div class="col">
+              <h4 class="">Langues</h4>
+              <div class="text-start skill-card">
+                  <p><b>Français : </b>Courant</p>
+                  <p><b>Anglais : </b>Intermédiaire</p>
+                  <p><b>Malagasy : </b>Langue maternelle</p>
+              </div>
+
+              <div class="mt-5">
+                  <h4 class="">Outils</h4>
+                  <div class="text-start skill-card">
+                      <p><b>IDE : </b>VS Code</p>
+                      <p><b>Gestionnaire de Subversion : </b>Git, GitHub, GitLab, Bitbucket</p>
+                      <p><b>Système d'exploitation : </b>Windows, Linux</p>
+                      <p><b>Gestion de projet : </b>Jira, Oceco</p>
+                      <p><b>Communication : </b>Discord, WhatsApp, Google Meet</p>
+                      <p><b>Bureautique : </b>Word, Excel, PowerPoint</p>
+                      <p><b>Design et création visuelle : </b>Canva, Figma</p>
+                  </div>
+              </div>
+          </div>
         </div>
-        <a class="link fw-bold mt-3" href="mailto:raoelimahefacharly@gmail.com" > Intéressé(e) par mon profil ? Entrons en contact !</a>
+        <p>Intéressé(e) par mon profil ? <a class="btn btn-secondary fw-bold p-2" href="mailto:raoelimahefacharly@gmail.com" >Entrons en contact !</a></p>
     </div>
 `

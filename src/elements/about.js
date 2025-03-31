@@ -7,12 +7,13 @@ import mailImage from './../../src/assets/images/logos/mail.png'
 
 
 document.querySelector('#about').innerHTML = `
-    <div class="container my-5 ">
-        <div class="row ">
-            <div class="col-md-5 text-center">
+    <div class="m-5 ">
+        <div class="row">
+            <div class="col-md-4 text-center d-flex justify-content-center align-items-center">
                 <img class="profile" src="${charlyImage}" alt="">
             </div>
             <div class="col-md-7 my-2 text-center">
+              <div class="about-text">
                 <h2 class="display-5 title my-4">À propos</h2>
                 <p class="fs-5"> L'informatique n'est pas simplement un métier pour moi, c'est une véritable passion.
                 Je considère chaque projet comme une œuvre à part entière, où l'innovation et la créativité se rencontrent pour donner vie à des solutions uniques.
@@ -24,6 +25,7 @@ document.querySelector('#about').innerHTML = `
                     <a class="mt-5 mx-2" target="_blank" href="https://facebook.com/raoel.mahefa"><img class="logo" src="${facebookImage}" alt=""></a>
                     <a class="mt-5 mx-2" href="mailto:raoelimahefacharly@gmail.com"><img class="logo" src="${mailImage}" alt=""></a>
                 </div>
+              </div>
             </div>
         </div>
     </div>
