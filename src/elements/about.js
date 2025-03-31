@@ -19,10 +19,10 @@ document.querySelector('#about').innerHTML = `
                 <br><br>
                 Que ce soit pour le développement d'un site web, la conception d'une application ou la mise en place d'une architecture technique complexe, je mets un point d'honneur à travailler avec soin, rigueur et professionnalisme. </p>
                 <div class="mt-5">
-                    <a class="mt-5 mx-2"target="_blank" href="https://wa.me/261343926527"><img class="logo" src="${whatsappImage}" alt=""></a>
+                    <a class="mt-5 mx-2" target="_blank" href="https://wa.me/261343926527"><img class="logo" src="${whatsappImage}" alt=""></a>
                     <a class="mt-5 mx-2" target="_blank" href="https://linkedin.com/in/raoelimahefa-charly-31759a239"><img class="logo" src="${linkedinImage}" alt=""></a>
-                    <a class="mt-5 mx-2"target="_blank" href="https://facebook.com/raoel.mahefa"><img class="logo" src="${facebookImage}" alt=""></a>
-                    <a class="mt-5 mx-2"target="_blank" href="mailto:raoelimahefacharly@gmail.com"><img class="logo" src="${mailImage}" alt=""></a>
+                    <a class="mt-5 mx-2" target="_blank" href="https://facebook.com/raoel.mahefa"><img class="logo" src="${facebookImage}" alt=""></a>
+                    <a class="mt-5 mx-2" href="mailto:raoelimahefacharly@gmail.com"><img class="logo" src="${mailImage}" alt=""></a>
                 </div>
             </div>
         </div>
