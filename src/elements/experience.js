@@ -13,7 +13,7 @@ document.querySelector('#experience').innerHTML = `
                   <img class="exp-logo" src="${laptopImage}">
               </div>
               <div class="mx-4">
-                  <h5><b>Mars 2024 - Mars 2025 -> Ineland LTD</b> (Remote - Maurice)</h5>
+                  <h5><b>Mars 2024 - Mars 2025 -> Top-Webgroup</b> (Remote - Maurice)</h5>
                   <ul class="fs-5">
                       <li>Développement et optimisation d’une plateforme avec Ruby on Rails, JavaScript: Vue/Stimulus, Turbo et MySQL.</li>
                       <li>Amélioration des performances, debugging et refactoring du code.</li>
@@ -23,7 +23,7 @@ document.querySelector('#experience').innerHTML = `
               <div class="mt-3 mx-4">
                   <h5><b>Juin 2022 - Février 2024 -> Open Atlas</b> (Remote - La Réunion)</h5>
                   <ul class="fs-5">
-                      <li>Développement en PHP (Yii), JavaScript/jQuery et MongoDB.</li>
+                      <li>Développement du site Communecter en PHP (Yii), JavaScript/jQuery et MongoDB.</li>
                       <li>Amélioration UI/UX et ajout de nouvelles fonctionnalités.</li>
                       <li>Debugging, refactoring et recherche de solutions d’optimisation.</li>
                   </ul>

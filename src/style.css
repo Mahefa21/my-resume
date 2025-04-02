@@ -21,6 +21,13 @@
   width: 100%;
   display: flex;
   align-items: center;
+  position: relative;
+}
+
+.c-btn {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
 }
 
 #about, #skill, #experience, #achievement {
