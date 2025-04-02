@@ -23,7 +23,7 @@ document.querySelector('#experience').innerHTML = `
               <div class="mt-3 mx-4">
                   <h5><b>Juin 2022 - Février 2024 -> Open Atlas</b> (Remote - La Réunion)</h5>
                   <ul class="fs-5">
-                      <li>Développement du site Communecter en PHP (Yii), JavaScript/jQuery et MongoDB.</li>
+                      <li>Développement du site web Communecter en PHP (Yii), JavaScript/jQuery et MongoDB.</li>
                       <li>Amélioration UI/UX et ajout de nouvelles fonctionnalités.</li>
                       <li>Debugging, refactoring et recherche de solutions d’optimisation.</li>
                   </ul>
