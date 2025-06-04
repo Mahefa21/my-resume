@@ -17,7 +17,7 @@ document.querySelector('#experience').innerHTML = `
                   <ul class="fs-5">
                       <li>Développement et optimisation d’une plateforme avec Ruby on Rails, JavaScript: Vue/Stimulus, Turbo et MySQL.</li>
                       <li>Amélioration des performances, debugging et refactoring du code.</li>
-                      <li>Intégration de nouvelles fonctionnalités et mise en place de tests unitaires.</li>
+                      <li>Intégration de nouvelles fonctionnalités et mise en place de tests unitaires (RSpec).</li>
                   </ul>
               </div>
               <div class="mt-3 mx-4">
@@ -27,6 +27,14 @@ document.querySelector('#experience').innerHTML = `
                       <li>Amélioration UI/UX et ajout de nouvelles fonctionnalités.</li>
                       <li>Debugging, refactoring et recherche de solutions d’optimisation.</li>
                   </ul>
+              </div>
+              <div class="mt-3 mx-4">
+                <h5><b>Janvier - Septembre 2021 -> Ny Ask</b> (En local - Ankadifotsy, Antananarivo, Madagascar)</h5>
+                <ul class="fs-5">
+                    <li>Développement d'une plateforme de gestion logistique basée sur node js pour le backend, react js pour le frontend et PostgreSQL pour la gestion de la base de donnée.</li>
+                    <li>Mise en place de back-office de gestion des produits entrants et sortants.</li>
+                    <li>Mise en place de système de scan en code barre pour les produits.</li>
+                </ul>
               </div>
           </div>
       </div>
