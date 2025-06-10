@@ -73,33 +73,33 @@ document.querySelector('#skill').innerHTML = `
                     <div class="skill-card">
                         <p class="mt-3">Laravel</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="skill-card">
-                        <p class="mt-3">Vue</p>
+                        <p class="mt-3">Vue Js</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="skill-card">
-                        <p class="mt-3">Stimulus</p>
+                        <p class="mt-3">Stimulus Js</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="skill-card">
-                        <p class="mt-3">React</p>
+                        <p class="mt-3">React Js</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="skill-card">
-                        <p class="mt-3">Express</p>
+                        <p class="mt-3">Express Js</p>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
