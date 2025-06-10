@@ -9,7 +9,9 @@ document.querySelector('#banner').innerHTML = `
         <a href="${charlyCvPdf}" class="btn btn-outline-dark p-2 my-2"> Telecharger mon CV</a>
         <a class="btn btn-outline-dark p-2 ms-2 my-2" href="mailto:raoelimahefacharly@gmail.com" > Intéressé(e) par mon profil ?</a>
     </div>
-    <a href="#about" class="c-btn">
-      <img width="40" src="${cDown}">
-    </a>
+    <div class="container-fluid text-center c-btn">
+      <a href="#about">
+        <img width="40" src="${cDown}">
+      </a>
+    </div>
 `
