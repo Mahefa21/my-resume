@@ -8,14 +8,21 @@ document.querySelector('#skill').innerHTML = `
                     <div class="skill-card">
                         <p class="mt-3">Ruby</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
                     <div class="skill-card">
                         <p class="mt-3">Javascript</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 72%" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <p class="mt-3">Typescript</p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
 
@@ -33,21 +40,21 @@ document.querySelector('#skill').innerHTML = `
                         <div class="skill-card">
                             <p class="mt-3">MySQL</p>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 55%" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
                         <div class="skill-card">
                             <p class="mt-3">MongoDB</p>
                             <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>
                         </div>
 
                         <div class="skill-card">
                         <p class="mt-3">PostgreSQL</p>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
                     </div>
@@ -103,8 +110,8 @@ document.querySelector('#skill').innerHTML = `
             <div class="col">
               <h4 class="">Langues</h4>
               <div class="text-start skill-card">
-                  <p><b>Français : </b>Courant</p>
-                  <p><b>Anglais : </b>Intermédiaire</p>
+                  <p><b>Français : </b>Intermédiaire</p>
+                  <p><b>Anglais : </b>Basique</p>
                   <p><b>Malagasy : </b>Langue maternelle</p>
               </div>
 
@@ -118,6 +125,7 @@ document.querySelector('#skill').innerHTML = `
                       <p><b>Communication : </b>Discord, WhatsApp, Google Meet</p>
                       <p><b>Bureautique : </b>Word, Excel, PowerPoint</p>
                       <p><b>Design et création visuelle : </b>Canva, Figma</p>
+                      <p><b>Virtualisation légère : </b>Docker</p>
                   </div>
               </div>
           </div>

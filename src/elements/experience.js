@@ -15,7 +15,7 @@ document.querySelector('#experience').innerHTML = `
               <div class="mx-4">
                   <h5><b>Mars 2024 - Mars 2025 -> Top-Webgroup</b> (Remote - Maurice)</h5>
                   <ul class="fs-5">
-                      <li>Développement et optimisation d’une plateforme avec Ruby on Rails, JavaScript: Vue/Stimulus, Turbo et MySQL.</li>
+                      <li>Développement et optimisation d’une plateforme avec Ruby on Rails, JavaScript (Vue, Stimulus et Turbo) et MySQL.</li>
                       <li>Amélioration des performances, debugging et refactoring du code.</li>
                       <li>Intégration de nouvelles fonctionnalités et mise en place de tests unitaires (RSpec).</li>
                   </ul>
