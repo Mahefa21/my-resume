@@ -71,7 +71,7 @@ document.querySelector('#achievement').innerHTML = `
                       <span class="badge my-2 text-bg-info">Javascript</span>
                       <span class="badge my-2 text-bg-dark">PostgreSQL</span>
                   </div>
-                  <a target="_blank" href="https://www.emit.mg/accueil" class="btn btn-outline-dark">Voir le site</a>
+                  <a target="_blank" href="https://www.emit.mg" class="btn btn-outline-dark">Voir le site</a>
               </div>
           </div>
       </div>
