@@ -13,6 +13,15 @@ document.querySelector('#experience').innerHTML = `
                   <img class="exp-logo" src="${laptopImage}">
               </div>
               <div class="mx-4">
+                <h5><b>Septembre 2025 - Aujourd’hui → Impact Production</b> (Présentiel - Maurice)</h5>
+                <ul class="fs-5">
+                    <li>Optimisation SEO du site vitrine</li>
+                    <li>Mise à jour des articles de blog</li>
+                    <li>Mise à jour des contenus du site d’Impact Production</li>
+                    <li>Réparation de matériel informatique</li>
+                </ul>
+              </div>
+              <div class="mx-4">
                   <h5><b>Mars 2024 - Mars 2025 -> Top-Webgroup</b> (Remote - Maurice)</h5>
                   <ul class="fs-5">
                       <li>Développement et optimisation d’une plateforme avec Ruby on Rails, JavaScript (Vue, Stimulus et Turbo) et MySQL.</li>
