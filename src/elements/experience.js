@@ -15,10 +15,12 @@ document.querySelector('#experience').innerHTML = `
               <div class="mx-4">
                 <h5><b>Septembre 2025 - Aujourd’hui → Impact Production</b> (Présentiel - Maurice)</h5>
                 <ul class="fs-5">
-                    <li>Optimisation SEO du site vitrine</li>
+                    <li>Proposition de solution d'optimisation SEO du site vitrine</li>
                     <li>Mise à jour des articles de blog</li>
-                    <li>Mise à jour des contenus du site d’Impact Production</li>
+                    <li>Mise à jour des contenus du site web de IPG</li>
+                    <li>Quelques amélioration de design du site web de IPG</li>
                     <li>Réparation de matériel informatique</li>
+                    <li>Planification de publication des blogs dans les réseaux sociaux de la companie</li>
                 </ul>
               </div>
               <div class="mx-4">
