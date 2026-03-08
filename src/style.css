@@ -53,6 +53,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
 }
 
 body {
@@ -313,6 +314,7 @@ body {
   display: flex;
   align-items: center;
   overflow: hidden;
+  scroll-snap-align: start;
 }
 
 /* Three.js canvas handles the background — no blobs needed */
@@ -491,6 +493,7 @@ body {
 .section {
   padding: 100px 0;
   background: var(--bg);
+  scroll-snap-align: start;
 }
 
 .section:nth-child(even) {
