@@ -13,7 +13,7 @@ function render() {
 
         <div class="text-center mb-5" data-reveal>
           <div class="section-tag">✦ ${t('nav.experience')}</div>
-          <h2 class="section-title">${t('experience.title')}</h2>
+          <h2 class="section-title">${t('experience.title').replace('professionnelles', '<span>professionnelles</span>').replace('experience', '<span>experience</span>')}</h2>
           <div class="section-divider mx-auto"></div>
         </div>
 
