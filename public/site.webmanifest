@@ -1,0 +1,58 @@
+{
+  "name": "Charly RAOELIMAHEFA - Full Stack Developer Portfolio",
+  "short_name": "Charly R. Portfolio",
+  "description": "Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#38bdf8",
+  "icons": [
+    {
+      "src": "src/assets/images/logos/cr-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "src/assets/images/logos/cr-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "src/assets/images/logos/cr-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "src/assets/images/charly.png",
+      "sizes": "540x720",
+      "type": "image/png"
+    },
+    {
+      "src": "src/assets/images/charly.png",
+      "sizes": "1080x1440",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Contactez Charly RAOELIMAHEFA",
+      "url": "mailto:raoelimahefacharly@gmail.com",
+      "icons": [
+        {
+          "src": "src/assets/images/logos/cr-logo.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

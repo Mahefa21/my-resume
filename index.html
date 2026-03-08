@@ -3,40 +3,57 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-  <!-- Primary SEO -->
-  <title>RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript</title>
+  <!-- Performance & SEO Basics -->
   <meta name="description" content="Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript. 4+ ans d'expérience en développement d'applications web performantes." />
   <meta name="keywords" content="Charly RAOELIMAHEFA, développeur web, full stack, Ruby on Rails, PHP, JavaScript, Vue.js, React, Node.js, portfolio, Maurice, Madagascar" />
   <meta name="author" content="Charly RAOELIMAHEFA" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="theme-color" content="#f8fafc" />
+  <meta name="color-scheme" content="light dark" />
+  
+  <!-- Canonical -->
   <link rel="canonical" href="https://raoelimahefa.netlify.app/" />
-
+  
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="src/assets/images/logos/cr-logo.png" />
   <link rel="apple-touch-icon" href="src/assets/images/logos/cr-logo.png" />
+  <link rel="manifest" href="/site.webmanifest" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Page Title -->
+  <title>RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript</title>
+
+  <!-- Open Graph Meta Tags -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="RAOELIMAHEFA Charly — Full Stack Developer" />
-  <meta property="og:description" content="Développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript. Découvrez mon portfolio et mes réalisations." />
+  <meta property="og:title" content="RAOELIMAHEFA Charly — Développeur Full Stack Web" />
+  <meta property="og:description" content="Découvrez mon portfolio: 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript. Projets web performants et innovants." />
   <meta property="og:url" content="https://raoelimahefa.netlify.app/" />
   <meta property="og:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="fr_CA" />
   <meta property="og:locale:alternate" content="en_CA" />
+  <meta property="og:site_name" content="Charly RAOELIMAHEFA - Portfolio" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="RAOELIMAHEFA Charly — Full Stack Developer" />
-  <meta name="twitter:description" content="Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack." />
+  <meta name="twitter:description" content="Portfolio & projets web: Ruby on Rails, PHP, JavaScript, Vue.js, React" />
   <meta name="twitter:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+  <meta name="twitter:creator" content="@charlyrao" />
 
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#f8fafc" />
-  <meta name="color-scheme" content="light dark" />
+  <!-- Additional SEO -->
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Charly R. Portfolio" />
 
-  <!-- JSON-LD Structured Data -->
+  <!-- JSON-LD Structured Data - Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,13 +62,56 @@
     "jobTitle": "Full Stack Web Developer",
     "url": "https://raoelimahefa.netlify.app/",
     "email": "raoelimahefacharly@gmail.com",
+    "telephone": "+261343926527",
+    "image": "https://raoelimahefa.netlify.app/src/assets/images/charly.png",
     "sameAs": [
-      "https://facebook.com/raoel.mahefa"
+      "https://facebook.com/raoel.mahefa",
+      "https://github.com/raoelimahefa",
+      "https://linkedin.com/in/raoelimahefa"
     ],
-    "knowsAbout": ["Ruby on Rails", "PHP", "JavaScript", "Vue.js", "React.js", "Node.js", "MySQL", "PostgreSQL", "MongoDB"],
+    "knowsAbout": [
+      "Ruby on Rails",
+      "PHP",
+      "JavaScript",
+      "TypeScript",
+      "Vue.js",
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "Stimulus.js",
+      "Laravel",
+      "MySQL",
+      "PostgreSQL",
+      "MongoDB",
+      "Docker",
+      "Git"
+    ],
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Full Stack Developer"
+    },
     "alumniOf": {
       "@type": "EducationalOrganization",
       "name": "EMIT / Université de Fianarantsoa"
+    }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - Website -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Charly RAOELIMAHEFA Portfolio",
+    "url": "https://raoelimahefa.netlify.app/",
+    "description": "Portfolio professionnel de Charly RAOELIMAHEFA, développeur web Full Stack",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://raoelimahefa.netlify.app/?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
     }
   }
   </script>

@@ -13,8 +13,8 @@ function render() {
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container">
 
-        <a class="navbar-brand" href="#banner">
-          <img class="brand-logo" src="${logoImage}" alt="CR Logo" />
+        <a class="navbar-brand" href="#banner" title="Charly RAOELIMAHEFA - Développeur Full Stack">
+          <img class="brand-logo" src="${logoImage}" alt="CR logo - Charly RAOELIMAHEFA portfolio" width="36" height="36" />
           <span class="brand-name">Charly R.</span>
         </a>
 

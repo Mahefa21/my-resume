@@ -1752,3 +1752,298 @@ body {
 [data-theme="light"] .hero-code-block {
   background: rgba(255, 255, 255, 0.8);
 }
+
+/* ════════════════════════════════════════
+   TOUCH-FRIENDLY OPTIMIZATION
+════════════════════════════════════════ */
+/* Minimum touch target size: 44x44px */
+button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Improve tap feedback */
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active, [role="button"]:active {
+    transform: scale(0.98);
+  }
+}
+
+/* ════════════════════════════════════════
+   PERFORMANCE OPTIMIZATION
+════════════════════════════════════════ */
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* GPU acceleration for smooth scrolling */
+html, body, main {
+  will-change: transform;
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE: TABLET (1024px and down)
+════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  h1, .banner-name {
+    font-size: clamp(32px, 6vw, 64px);
+  }
+
+  h2, .section-title {
+    font-size: clamp(28px, 5vw, 48px);
+  }
+
+  p {
+    font-size: clamp(14px, 2.5vw, 16px);
+  }
+
+  /* Improve spacing on tablets */
+  .section { padding: 60px 0; }
+  
+  button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE: MOBILE LANDSCAPE (768px - 1024px)
+════════════════════════════════════════ */
+@media (max-width: 1024px) and (orientation: landscape) {
+  .section { padding: 40px 0; }
+  
+  #banner { min-height: 80vh; }
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE: LARGE PHONE (481px - 768px)
+════════════════════════════════════════ */
+@media (max-width: 768px) {
+  :root {
+    --radius: 12px;
+    --radius-sm: 6px;
+  }
+
+  .container { padding: 0 16px; }
+
+  .section { padding: 50px 0; }
+
+  h1, .banner-name {
+    font-size: clamp(28px, 6vw, 48px);
+    line-height: 1.2;
+  }
+
+  h2, .section-title {
+    font-size: clamp(24px, 5vw, 36px);
+  }
+
+  h3 {
+    font-size: clamp(18px, 4vw, 24px);
+  }
+
+  p, body {
+    font-size: clamp(14px, 2.3vw, 16px);
+    line-height: 1.6;
+  }
+
+  /* Touch-friendly buttons */
+  button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
+    padding: 12px 16px;
+    font-size: 14px;
+    min-height: 48px;
+  }
+
+  /* Improve gap/spacing */
+  .gap-4 { gap: 12px !important; }
+  .gap-3 { gap: 12px !important; }
+
+  /* Navbar responsive */
+  #navbar { padding: 12px 0; }
+
+  /* Card improvements for mobile */
+  .glass-card, .glass-card-enhanced {
+    padding: 16px;
+  }
+
+  /* Stack flex items */
+  .flex-md-column { flex-direction: column; }
+}
+
+/* ════════════════════════════════════════
+   RESPONSIVE: SMALL PHONE (< 480px)
+════════════════════════════════════════ */
+@media (max-width: 480px) {
+  :root {
+    --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  * { touch-action: manipulation; }
+  
+  .container { padding: 0 12px; }
+
+  .section { padding: 40px 0; }
+
+  h1, .banner-name {
+    font-size: clamp(24px, 5vw, 36px);
+    letter-spacing: -1px;
+  }
+
+  h2, .section-title {
+    font-size: clamp(20px, 4vw, 28px);
+  }
+
+  h3 {
+    font-size: clamp(16px, 3vw, 20px);
+  }
+
+  p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  /* Aggressive mobile button sizing */
+  button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px 16px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  /* Stack everything */
+  .row { gap: 12px; }
+
+  /* Remove unnecessary spacing */
+  .mb-5 { margin-bottom: 24px; }
+  .mb-4 { margin-bottom: 16px; }
+  .mb-3 { margin-bottom: 12px; }
+  .mt-4 { margin-top: 16px; }
+  .mt-3 { margin-top: 12px; }
+
+  /* Hero/Banner optimizations */
+  #banner {
+    min-height: 90vh;
+    padding: 20px 0;
+  }
+
+  #banner .banner-status {
+    font-size: 12px;
+    padding: 8px 12px;
+  }
+
+  .banner-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .banner-actions a {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Card optimization */
+  .glass-card, .glass-card-enhanced {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  /* Profile image mobile */
+  #about .profile-img {
+    width: 140px;
+    height: 140px;
+  }
+
+  /* Skill grid mobile */
+  .skills-hexagon-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .skill-hexagon {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .skill-hexagon-inner {
+    min-height: 70px;
+  }
+
+  /* Timeline mobile */
+  .timeline { padding-left: 12px; }
+  .timeline-dot { left: -20px; }
+  .timeline-card { margin-left: 12px; }
+
+  /* Project grid mobile */
+  .projects-masonry {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 250px;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  /* Footer mobile */
+  #footer footer { padding: 30px 0 15px; }
+
+  .footer-grid {
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .footer-logo-text { font-size: 18px; }
+
+  .footer-socials { gap: 8px; }
+
+  .footer-nav-list { gap: 8px; }
+
+  .footer-nav-list a { font-size: 13px; }
+
+  .footer-copy { font-size: 12px; }
+
+  /* Reduce loader text size */
+  .loader-text { font-size: 12px; }
+}
+
+/* ════════════════════════════════════════
+   PERFORMANCE: CRITICAL META
+════════════════════════════════════════ */
+/* Prioritize Above-the-Fold Content */
+.banner-name, .section-title, .banner-role {
+  font--weight: 700;
+  contain: layout style paint;
+}
+
+/* Image lazy loading container optimization */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Optimize scrollbar performance */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 999px;
+}
