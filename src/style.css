@@ -4,39 +4,39 @@
    DESIGN TOKENS
 ════════════════════════════════════════ */
 :root {
-  --bg:          #0f172a;
-  --bg-2:        #1e293b;
-  --bg-card:     rgba(30, 41, 59, 0.65);
-  --primary:     #38bdf8;
-  --secondary:   #818cf8;
-  --gradient:    linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  --text:        #f1f5f9;
-  --text-muted:  #94a3b8;
-  --border:      rgba(148, 163, 184, 0.12);
-  --shadow:      0 8px 32px rgba(0, 0, 0, 0.45);
-  --radius:      16px;
-  --radius-sm:   8px;
-
-  --navbar-bg:   rgba(15, 23, 42, 0.85);
-  --toggler-inv: invert(1);
-  --loader-bg:   #0f172a;
-  --profile-ring-bg: var(--bg);
-}
-
-/* ════════════════════════════════════════
-   LIGHT THEME OVERRIDES
-════════════════════════════════════════ */
-[data-theme="light"] {
   --bg:          #f8fafc;
   --bg-2:        #f1f5f9;
   --bg-card:     rgba(255, 255, 255, 0.75);
+  --primary:     #38bdf8;
+  --secondary:   #818cf8;
+  --gradient:    linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
   --text:        #0f172a;
   --text-muted:  #475569;
   --border:      rgba(15, 23, 42, 0.1);
   --shadow:      0 8px 32px rgba(0, 0, 0, 0.08);
+  --radius:      16px;
+  --radius-sm:   8px;
+
   --navbar-bg:   rgba(248, 250, 252, 0.88);
   --toggler-inv: invert(0);
   --loader-bg:   #f8fafc;
+  --profile-ring-bg: var(--bg);
+}
+
+/* ════════════════════════════════════════
+   DARK THEME OVERRIDES
+════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:          #0f172a;
+  --bg-2:        #1e293b;
+  --bg-card:     rgba(30, 41, 59, 0.65);
+  --text:        #f1f5f9;
+  --text-muted:  #94a3b8;
+  --border:      rgba(148, 163, 184, 0.12);
+  --shadow:      0 8px 32px rgba(0, 0, 0, 0.45);
+  --navbar-bg:   rgba(15, 23, 42, 0.85);
+  --toggler-inv: invert(1);
+  --loader-bg:   #0f172a;
   --profile-ring-bg: var(--bg);
 }
 
@@ -195,26 +195,26 @@ body {
   height: 36px;
   border-radius: 50%;
   border: 2px solid var(--primary);
-  background: rgba(56, 189, 248, 0.15);
+  background: rgba(15, 23, 42, 0.1);
   padding: 4px;
   object-fit: contain;
   object-position: center;
-  filter: brightness(0) saturate(100%) invert(100%);
+  filter: brightness(1) saturate(100%);
   transition: filter 0.3s ease;
 }
 
 #navbar .brand-logo:hover {
-  filter: brightness(0) saturate(100%) invert(100%) brightness(1.2);
-}
-
-/* Adjust logo for light theme */
-[data-theme="light"] #navbar .brand-logo {
-  background: rgba(15, 23, 42, 0.1);
-  filter: brightness(1) saturate(100%);
-}
-
-[data-theme="light"] #navbar .brand-logo:hover {
   filter: brightness(1.1) saturate(110%);
+}
+
+/* Adjust logo for dark theme */
+[data-theme="dark"] #navbar .brand-logo {
+  background: rgba(56, 189, 248, 0.15);
+  filter: brightness(0) saturate(100%) invert(100%);
+}
+
+[data-theme="dark"] #navbar .brand-logo:hover {
+  filter: brightness(0) saturate(100%) invert(100%) brightness(1.2);
 }
 
 #navbar .brand-name {

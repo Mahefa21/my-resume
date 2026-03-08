@@ -1,4 +1,4 @@
-let currentTheme = localStorage.getItem('theme') || 'dark'
+let currentTheme = localStorage.getItem('theme') || 'light'
 
 export const getTheme = () => currentTheme
 
