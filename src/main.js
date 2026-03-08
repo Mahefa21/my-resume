@@ -7,3 +7,7 @@ import './elements/experience'
 import './elements/achievement'
 import './elements/footer'
 import './handlers/loader'
+import { initMouseFollower } from './utils/mouseFollower'
+
+// Initialize GSAP mouse follower
+initMouseFollower()
