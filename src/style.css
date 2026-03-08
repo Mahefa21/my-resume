@@ -1811,7 +1811,7 @@ html, body, main {
 
   /* Improve spacing on tablets */
   .section { padding: 60px 0; }
-  
+
   button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
     padding: 12px 20px;
     font-size: 14px;
@@ -1823,7 +1823,7 @@ html, body, main {
 ════════════════════════════════════════ */
 @media (max-width: 1024px) and (orientation: landscape) {
   .section { padding: 40px 0; }
-  
+
   #banner { min-height: 80vh; }
 }
 
@@ -1890,7 +1890,7 @@ html, body, main {
   }
 
   * { touch-action: manipulation; }
-  
+
   .container { padding: 0 12px; }
 
   .section { padding: 40px 0; }
