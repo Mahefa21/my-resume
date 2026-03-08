@@ -37,8 +37,8 @@ function render() {
 
   document.querySelector('#banner').innerHTML = `
     <div class="container banner-content">
-      <div class="row align-items-center min-vh-100">
-        <div class="col-lg-8 py-5">
+      <div class="row align-items-center justify-content-center min-vh-100">
+        <div class="col-lg-8 py-5 text-center">
 
           <p class="banner-greeting" data-reveal data-delay="1">${t('banner.greeting')}</p>
 
@@ -50,7 +50,7 @@ Charly
           <p class="banner-role" data-reveal data-delay="3">${t('banner.role')}</p>
           <p class="banner-stack" data-reveal data-delay="4">${t('banner.stack')}</p>
 
-          <div class="banner-actions" data-reveal data-delay="5">
+          <div class="banner-actions justify-content-center" data-reveal data-delay="5">
             <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-primary-grad">
               ${iconDownload}
               ${t('banner.downloadFR')}
