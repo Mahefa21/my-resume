@@ -95,7 +95,7 @@ export default {
         period: '2020 — 2023',
       },
       {
-        degree: 'Baccalauréat — Développement d\'Applications Intranet et Internet (DA2I)',
+        degree: 'Licence — Développement d\'Applications Intranet et Internet (DA2I)',
         school: 'EMIT / Université de Fianarantsoa, Madagascar',
         period: '2017 — 2020',
       },
