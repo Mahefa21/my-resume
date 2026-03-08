@@ -1,135 +1,121 @@
-document.querySelector('#skill').innerHTML = `
-    <div class="text-center mx-5">
-        <h2 class="display-6 title">Mes compétences</h2>
-        <div class="row my-5">
-            <div class="col pb-4">
-                <h4 class="">Langages informatiques</h4>
-                <div class="text-start">
-                    <div class="skill-card">
-                        <p class="mt-3">Ruby</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+import { t, onLangChange } from '../i18n/index.js'
+import { observeReveal } from '../utils/reveal.js'
 
-                    <div class="skill-card">
-                        <p class="mt-3">Javascript</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+const programmingLangs = [
+  { name: 'Ruby', pct: 78 },
+  { name: 'JavaScript', pct: 80 },
+  { name: 'TypeScript', pct: 60 },
+  { name: 'PHP', pct: 60 },
+]
 
-                    <div class="skill-card">
-                        <p class="mt-3">Typescript</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+const frameworks = ['Ruby on Rails', 'Vue.js', 'React.js', 'Stimulus.js', 'Laravel', 'Express.js', 'Node.js', 'Turbo']
 
-                    <div class="skill-card">
-                        <p class="mt-3">PHP</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
+const databases = ['MySQL', 'PostgreSQL', 'MongoDB']
 
-                <div class="mt-5">
-                    <h4 class="">systèmes de gestion de bases de données</h4>
-                    <div class="text-start">
-                        <div class="skill-card">
-                            <p class="mt-3">MySQL</p>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
+const tools = ['Git', 'GitHub', 'GitLab', 'Bitbucket', 'Docker', 'VS Code', 'Jira', 'Figma', 'Canva']
 
-                        <div class="skill-card">
-                            <p class="mt-3">MongoDB</p>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                        </div>
+const spokenLangs = [
+  { key: 'french',   dots: 4, levelKey: 'intermediate' },
+  { key: 'english',  dots: 3, levelKey: 'functional' },
+  { key: 'malagasy', dots: 5, levelKey: 'native' },
+]
 
-                        <div class="skill-card">
-                        <p class="mt-3">PostgreSQL</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col pb-4">
-                <h4 class="">Framework</h4>
-                <div class="text-start">
-                    <div class="skill-card">
-                        <p class="mt-3">Ruby on Rails</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+function dotsHTML(filled) {
+  return Array.from({ length: 5 }, (_, i) =>
+    `<span class="ldot ${i < filled ? 'on' : ''}"></span>`
+  ).join('')
+}
 
-                    <div class="skill-card">
-                        <p class="mt-3">Laravel</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+function render() {
+  document.querySelector('#skill').innerHTML = `
+    <div class="section">
+      <div class="container">
 
-                    <div class="skill-card">
-                        <p class="mt-3">Vue Js</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-
-                    <div class="skill-card">
-                        <p class="mt-3">Stimulus Js</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-
-                    <div class="skill-card">
-                        <p class="mt-3">React Js</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-
-                    <div class="skill-card">
-                        <p class="mt-3">Express Js</p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: 58%" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-              <h4 class="">Langues</h4>
-              <div class="text-start skill-card">
-                  <p><b>Français : </b>Intermédiaire</p>
-                  <p><b>Anglais : </b>Basique</p>
-                  <p><b>Malagasy : </b>Langue maternelle</p>
-              </div>
-
-              <div class="mt-5">
-                  <h4 class="">Outils</h4>
-                  <div class="text-start skill-card">
-                      <p><b>IDE : </b>VS Code</p>
-                      <p><b>Gestionnaire de Subversion : </b>Git, GitHub, GitLab, Bitbucket</p>
-                      <p><b>Système d'exploitation : </b>Windows, Linux</p>
-                      <p><b>Gestion de projet : </b>Jira, Oceco</p>
-                      <p><b>Communication : </b>Discord, WhatsApp, Google Meet</p>
-                      <p><b>Bureautique : </b>Word, Excel, PowerPoint</p>
-                      <p><b>Design et création visuelle : </b>Canva, Figma</p>
-                      <p><b>Virtualisation légère : </b>Docker</p>
-                  </div>
-              </div>
-          </div>
+        <div class="text-center mb-5" data-reveal>
+          <div class="section-tag">✦ ${t('nav.skills')}</div>
+          <h2 class="section-title">${t('skills.title').replace('compétences', '<span>compétences</span>').replace('skills', '<span>skills</span>')}</h2>
+          <div class="section-divider mx-auto"></div>
         </div>
-        <p>Intéressé(e) par mon profil ? <a class="btn btn-secondary fw-bold p-2" href="mailto:raoelimahefacharly@gmail.com" >Entrons en contact !</a></p>
+
+        <div class="row g-4">
+
+          <!-- Programming Languages -->
+          <div class="col-lg-4" data-reveal data-delay="1">
+            <div class="glass-card p-4 h-100">
+              <p class="skill-group-title">${t('skills.languages')}</p>
+              ${programmingLangs.map(s => `
+                <div class="skill-bar-row">
+                  <div class="skill-bar-label">
+                    <span>${s.name}</span>
+                    <span style="color:var(--text-muted)">${s.pct}%</span>
+                  </div>
+                  <div class="skill-bar-track">
+                    <div class="skill-bar-fill" data-width="${s.pct}"></div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Frameworks -->
+          <div class="col-lg-4" data-reveal data-delay="2">
+            <div class="glass-card p-4 h-100">
+              <p class="skill-group-title">${t('skills.frameworks')}</p>
+              <div class="tag-list">
+                ${frameworks.map(f => `<span class="skill-tag">${f}</span>`).join('')}
+              </div>
+
+              <p class="skill-group-title mt-4">${t('skills.databases')}</p>
+              <div class="tag-list">
+                ${databases.map(d => `<span class="skill-tag">${d}</span>`).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Tools & Languages -->
+          <div class="col-lg-4" data-reveal data-delay="3">
+            <div class="glass-card p-4 h-100">
+              <p class="skill-group-title">${t('skills.tools')}</p>
+              <div class="tag-list mb-4">
+                ${tools.map(tool => `<span class="skill-tag">${tool}</span>`).join('')}
+              </div>
+
+              <p class="skill-group-title">${t('skills.spoken')}</p>
+              ${spokenLangs.map(l => `
+                <div class="lang-spoken-item">
+                  <div>
+                    <div class="lang-name">${t('skills.' + l.key)}</div>
+                    <div class="lang-level">${t('skills.' + l.levelKey)}</div>
+                  </div>
+                  <div class="lang-dots">${dotsHTML(l.dots)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
-`
+  `
+
+  // Animate skill bars on reveal
+  observeReveal()
+  animateBars()
+}
+
+function animateBars() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fill = entry.target
+        fill.style.width = fill.dataset.width + '%'
+        observer.unobserve(fill)
+      }
+    })
+  }, { threshold: 0.2 })
+
+  document.querySelectorAll('.skill-bar-fill[data-width]').forEach(el => observer.observe(el))
+}
+
+render()
+onLangChange(render)

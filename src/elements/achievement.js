@@ -2,81 +2,65 @@ import navigatorImage from './../../src/assets/images/navigator.png'
 import ekitiaImage from './../../src/assets/images/ekitia.png'
 import topImage from './../../src/assets/images/nounoutop.png'
 import emitSite from './../../src/assets/images/emit.png'
+import { t, onLangChange } from '../i18n/index.js'
+import { observeReveal } from '../utils/reveal.js'
 
-document.querySelector('#achievement').innerHTML = `
-  <div class="container text-center">
-      <h2 class="display-6 text-center title">Mes réalisations</h2>
-      <div class="container d-flex justify-content-around flex-wrap mt-4">
-          <div class="card text-center mt-4" style="width: 18rem;">
-              <div class="card-image">
-                  <img src="${navigatorImage}" class="card-img-top" alt="...">
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">Développement du site Navigateur des Tiers-Lieux</h5>
-                  <p class="card-text">De chez Communecter (Open Atlas)</p>
-                  <div class="my-2">
-                      <span class="badge my-2 text-bg-primary">Yii</span>
-                      <span class="badge my-2 text-bg-secondary">Javascript</span>
-                      <span class="badge my-2 text-bg-info">jQuery</span>
-                      <span class="badge my-2 text-bg-dark">MongoDB</span>
-                  </div>
-                  <a target="_blank" href="https://navigateur.tiers-lieux.org/" class="btn btn-outline-dark">Voir le site</a>
-              </div>
-          </div>
+const projectImages = [navigatorImage, ekitiaImage, topImage, emitSite]
 
-          <div class="card text-center mt-4" style="width: 18rem;">
-              <div class="card-image">
-                  <img src="${ekitiaImage}" class="card-img-top" alt="...">
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">Développement du site Ekisphère</h5>
-                  <p class="card-text">De chez Communecter (Open Atlas)</p>
-                  <div class="my-2">
-                      <span class="badge my-2 text-bg-primary">Yii</span>
-                      <span class="badge my-2 text-bg-secondary">Javascript</span>
-                      <span class="badge my-2 text-bg-info">jQuery</span>
-                      <span class="badge my-2 text-bg-dark">MongoDB</span>
-                  </div>
-                  <a target="_blank" href="https://www.communecter.org/costum/co/index/slug/ekisphere" class="btn btn-outline-dark">Voir le site</a>
-              </div>
-          </div>
+function render() {
+  const projects = t('projects.items')
 
-          <div class="card mt-4 text-center" style="width: 18rem;">
-              <div class="card-image">
-                  <img src="${topImage}" class="card-img-top" alt="...">
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">Maintenance des sites de top-webgroup</h5>
-                  <p class="card-text">De chez Ineland LTD</p>
-                  <div class="my-2">
-                      <span class="badge my-2 text-bg-primary">Ruby on Rails</span>
-                      <span class="badge my-2 text-bg-secondary">Stimulus/Vue</span>
-                      <span class="badge my-2 text-bg-info">Turbo</span>
-                      <span class="badge my-2 text-bg-dark">MySql</span>
-                  </div>
-                  <a target="_blank" href="https://top-webgroup.com/" class="btn btn-outline-dark">Voir le site</a>
-              </div>
-          </div>
+  document.querySelector('#achievement').innerHTML = `
+    <div class="section">
+      <div class="container">
 
-          <div class="card mt-4 text-center" style="width: 18rem;">
-              <div class="card-image">
-                  <img src="${emitSite}" class="card-img-top" alt="...">
-              </div>
-              <div class="card-body">
-                  <h5 class="card-title">Contribution au développement du site de mon école</h5>
-                  <p class="card-text">De chez EMIT</p>
-                  <div class="my-2">
-                      <span class="badge my-2 text-bg-primary">Strapi</span>
-                      <span class="badge my-2 text-bg-secondary">Drag and Drop</span>
-                      <span class="badge my-2 text-bg-info">Javascript</span>
-                      <span class="badge my-2 text-bg-dark">PostgreSQL</span>
+        <div class="text-center mb-5" data-reveal>
+          <div class="section-tag">✦ ${t('nav.projects')}</div>
+          <h2 class="section-title">${t('projects.title').replace('réalisations', '<span>réalisations</span>').replace('projects', '<span>projects</span>')}</h2>
+          <div class="section-divider mx-auto"></div>
+        </div>
+
+        <div class="row g-4">
+          ${projects.map((project, i) => `
+            <div class="col-md-6 col-xl-3" data-reveal data-delay="${i + 1}">
+              <div class="project-card">
+                <div class="project-card-top"></div>
+                <img src="${projectImages[i]}" alt="${project.name}"
+                  style="width:100%; height:140px; object-fit:cover; display:block;" />
+                <div class="project-card-body">
+                  <div class="project-employer">${project.employer}</div>
+                  <div class="project-name">${project.name}</div>
+                  <p class="project-description">${project.description}</p>
+                  <div class="project-tech">
+                    ${project.tech.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
                   </div>
-                  <a target="_blank" href="https://www.emit.mg" class="btn btn-outline-dark">Voir le site</a>
+                  <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link">
+                    ${t('projects.visitSite')}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
-          </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <div class="text-center mt-5" data-reveal>
+          <a href="mailto:raoelimahefacharly@gmail.com" class="btn-primary-grad">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+            ${t('banner.contact')}
+          </a>
+        </div>
+
       </div>
-  </div>
-  <div class="text-center mt-5">
-    <p>Intéressé(e) par mon profil ? <a class="btn btn-secondary fw-bold p-2" href="mailto:raoelimahefacharly@gmail.com" >Entrons en contact !</a></p>
-  </div>
-`
+    </div>
+  `
+
+  observeReveal()
+}
+
+render()
+onLangChange(render)

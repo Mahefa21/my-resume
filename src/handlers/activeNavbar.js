@@ -1,31 +1,21 @@
-import $ from 'jquery';
+export function initActiveNavbar() {
+  function setActiveLink() {
+    const sections = document.querySelectorAll('section[id]')
+    const navLinks = document.querySelectorAll('#navbar .nav-link')
+    let current = ''
 
-$(document).ready(function() {
-    var lastScrollTop = 0;
-    function setActiveLink() {
-        var currentSection = null;
-        $('section').each(function() {
-            var section = $(this);
-            var rect = section[0].getBoundingClientRect();
-            if (rect.top <= $(window).height() / 2 && rect.bottom >= $(window).height() / 2) {
-                currentSection = section.attr('id');
-            }
-        });
-        $('.nav-link').removeClass('active');
-        if (currentSection) {
-            $('a[href="#' + currentSection + '"]').not('footer a[href="#' + currentSection + '"]').addClass('active');
-        }
-    }
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect()
+      if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+        current = section.id
+      }
+    })
 
-    function handleScroll() {
-        var currentScrollTop = $(window).scrollTop();
-        if (currentScrollTop > lastScrollTop) {
-            $('.navbar').addClass('scrolled');
-        } else {
-            $('.navbar').removeClass('scrolled');
-        }
-        setActiveLink();
-    }
-    $(window).on('scroll', handleScroll);
-    setActiveLink();
-});
+    navLinks.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${current}`)
+    })
+  }
+
+  window.addEventListener('scroll', setActiveLink, { passive: true })
+  setActiveLink()
+}

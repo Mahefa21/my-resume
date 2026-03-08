@@ -1,47 +1,96 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr-CA" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="src/assets/images/logos/cr-logo.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RAOELIMAHEFA Charly</title>
+
+  <!-- Primary SEO -->
+  <title>RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript</title>
+  <meta name="description" content="Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript. 4+ ans d'expérience en développement d'applications web performantes." />
+  <meta name="keywords" content="Charly RAOELIMAHEFA, développeur web, full stack, Ruby on Rails, PHP, JavaScript, Vue.js, React, Node.js, portfolio, Maurice, Madagascar" />
+  <meta name="author" content="Charly RAOELIMAHEFA" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://raoelimahefa.netlify.app/" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="src/assets/images/logos/cr-logo.png" />
+  <link rel="apple-touch-icon" href="src/assets/images/logos/cr-logo.png" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="RAOELIMAHEFA Charly — Full Stack Developer" />
+  <meta property="og:description" content="Développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript. Découvrez mon portfolio et mes réalisations." />
+  <meta property="og:url" content="https://raoelimahefa.netlify.app/" />
+  <meta property="og:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+  <meta property="og:locale" content="fr_CA" />
+  <meta property="og:locale:alternate" content="en_CA" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="RAOELIMAHEFA Charly — Full Stack Developer" />
+  <meta name="twitter:description" content="Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack." />
+  <meta name="twitter:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="color-scheme" content="dark light" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Charly RAOELIMAHEFA",
+    "jobTitle": "Full Stack Web Developer",
+    "url": "https://raoelimahefa.netlify.app/",
+    "email": "raoelimahefacharly@gmail.com",
+    "sameAs": [
+      "https://facebook.com/raoel.mahefa"
+    ],
+    "knowsAbout": ["Ruby on Rails", "PHP", "JavaScript", "Vue.js", "React.js", "Node.js", "MySQL", "PostgreSQL", "MongoDB"],
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "EMIT / Université de Fianarantsoa"
+    }
+  }
+  </script>
+
   <script type="module" src="/src/dependancies.js"></script>
 </head>
 
 <body>
+
+  <!-- LOADER -->
   <div id="loader">
-    <img id="loader-image" src="src/assets/images/logos/cr-logo.png" alt="Loading..." />
+    <div class="loader-rings">
+      <div class="loader-ring loader-ring-outer"></div>
+      <div class="loader-ring loader-ring-inner"></div>
+      <div class="loader-initials">CR</div>
+    </div>
+    <div class="loader-text">Loading</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar-fill"></div>
+    </div>
   </div>
-  <div class="background"></div>
-  <div id="navbar"></div>
+
+  <!-- NAVBAR -->
+  <header id="navbar"></header>
+
+  <!-- HERO -->
   <section id="banner"></section>
-  <div class="text">
+
+  <!-- MAIN SECTIONS -->
+  <main>
     <section id="about"></section>
     <section id="experience"></section>
     <section id="skill"></section>
     <section id="achievement"></section>
-  </div>
-  <footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li>
-          <a class="nav-link px-2 text-body-secondary" href="#banner">Accueil</a>
-      </li>
-      <li>
-          <a class="nav-link px-2 text-body-secondary" href="#about">À propos</a>
-      </li>
-      <li>
-          <a class="nav-link px-2 text-body-secondary" href="#experience">Mes expériences</a>
-      </li>
-      <li>
-          <a class="nav-link px-2 text-body-secondary" href="#skill">Mes compétences</a>
-      </li>
-      <li>
-          <a class="nav-link px-2 text-body-secondary" href="#achievement">Mes réalisations</a>
-      </li>
-  </ul>
-    <p class="text-center text-body-secondary">© 2025 By RAOELIMAHEFA Charly</p>
-  </footer>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footer"></div>
+
   <script type="module" src="/src/main.js"></script>
 </body>
 
