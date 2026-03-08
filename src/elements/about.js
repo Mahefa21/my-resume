@@ -8,68 +8,58 @@ function render() {
     <div class="section">
       <div class="container">
 
-        <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">✦ ${t('nav.about')}</div>
-          <h2 class="section-title">${t('about.title').replace('moi', '<span>moi</span>').replace('me', '<span>me</span>')}</h2>
-          <div class="section-divider mx-auto"></div>
-        </div>
+        <div class="about-split">
 
-        <!-- Bento Grid -->
-        <div class="bento-grid about-bento">
+          <!-- Left: Photo + Socials -->
+          <div class="about-left" data-reveal="left" data-delay="1">
+            <div class="about-photo-card">
+              <img class="about-photo" src="${charlyImage}" alt="Charly RAOELIMAHEFA" />
+              <div class="about-photo-border"></div>
+            </div>
+            <div class="about-socials">
+              <a class="social-link-btn" target="_blank" href="https://wa.me/261343926527" aria-label="WhatsApp">
+                ${iconWhatsapp}
+              </a>
+              <a class="social-link-btn" target="_blank" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
+                ${iconFacebook}
+              </a>
+              <a class="social-link-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">
+                ${iconMail}
+              </a>
+            </div>
+          </div>
 
-          <!-- Photo Card -->
-          <div class="bento-item bento-photo" data-reveal="left" data-delay="1">
-            <div class="glass-card bento-card h-100 d-flex flex-column align-items-center justify-content-center p-4">
-              <div class="profile-wrap d-inline-block">
-                <div class="profile-ring"></div>
-                <div class="profile-ring-mask"></div>
-                <img class="profile-img" src="${charlyImage}" alt="Charly RAOELIMAHEFA" />
+          <!-- Right: Content -->
+          <div class="about-right">
+            <div data-reveal data-delay="1">
+              <div class="section-tag">✦ ${t('nav.about')}</div>
+              <h2 class="section-title">${t('about.title').replace('moi', '<span>moi</span>').replace('me', '<span>me</span>')}</h2>
+              <div class="section-divider mb-4"></div>
+            </div>
+
+            <p class="about-text" data-reveal data-delay="2">
+              ${t('about.p1')}
+            </p>
+            <p class="about-text" data-reveal data-delay="3">
+              ${t('about.p2')}
+            </p>
+
+            <!-- Stats Row -->
+            <div class="about-stats" data-reveal data-delay="4">
+              <div class="about-stat-item">
+                <div class="stat-value">4+</div>
+                <div class="stat-label">${t('about.yearsExp')}</div>
               </div>
-              <div class="social-links justify-content-center mt-4">
-                <a class="social-link-btn" target="_blank" href="https://wa.me/261343926527" aria-label="WhatsApp">
-                  ${iconWhatsapp}
-                </a>
-                <a class="social-link-btn" target="_blank" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
-                  ${iconFacebook}
-                </a>
-                <a class="social-link-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">
-                  ${iconMail}
-                </a>
+              <div class="about-stat-divider"></div>
+              <div class="about-stat-item">
+                <div class="stat-value">4+</div>
+                <div class="stat-label">${t('about.projectsDone')}</div>
               </div>
-            </div>
-          </div>
-
-          <!-- Bio Card -->
-          <div class="bento-item bento-bio" data-reveal data-delay="2">
-            <div class="glass-card bento-card h-100 p-4">
-              <p class="bento-bio-text">
-                ${t('about.p1')}
-              </p>
-              <p class="bento-bio-text mb-0">
-                ${t('about.p2')}
-              </p>
-            </div>
-          </div>
-
-          <!-- Stat Cards -->
-          <div class="bento-item bento-stat" data-reveal="scale" data-delay="2">
-            <div class="glass-card bento-card h-100 bento-stat-inner">
-              <div class="stat-value">4+</div>
-              <div class="stat-label">${t('about.yearsExp')}</div>
-            </div>
-          </div>
-
-          <div class="bento-item bento-stat" data-reveal="scale" data-delay="3">
-            <div class="glass-card bento-card h-100 bento-stat-inner">
-              <div class="stat-value">4+</div>
-              <div class="stat-label">${t('about.projectsDone')}</div>
-            </div>
-          </div>
-
-          <div class="bento-item bento-stat" data-reveal="scale" data-delay="4">
-            <div class="glass-card bento-card h-100 bento-stat-inner">
-              <div class="stat-value">4</div>
-              <div class="stat-label">${t('about.companies')}</div>
+              <div class="about-stat-divider"></div>
+              <div class="about-stat-item">
+                <div class="stat-value">4</div>
+                <div class="stat-label">${t('about.companies')}</div>
+              </div>
             </div>
           </div>
 
