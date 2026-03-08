@@ -20,13 +20,41 @@ function render() {
           <div class="section-divider mx-auto"></div>
         </div>
 
-        <div class="row g-4">
-          ${projects.map((project, i) => `
-            <div class="col-md-6 col-xl-3" data-reveal data-delay="${i + 1}">
-              <div class="project-card">
-                <div class="project-card-top"></div>
-                <img src="${projectImages[i]}" alt="${project.name}"
-                  style="width:100%; height:140px; object-fit:cover; display:block;" />
+        <!-- Featured Project -->
+        ${projects.length > 0 ? `
+          <div class="project-featured" data-reveal data-delay="1">
+            <div class="glass-card project-featured-card">
+              <div class="project-featured-img">
+                <img src="${projectImages[0]}" alt="${projects[0].name}" />
+                <div class="project-featured-overlay"></div>
+              </div>
+              <div class="project-featured-content">
+                <div class="project-employer">${projects[0].employer}</div>
+                <div class="project-name project-name-lg">${projects[0].name}</div>
+                <p class="project-description">${projects[0].description}</p>
+                <div class="project-tech">
+                  ${projects[0].tech.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
+                </div>
+                <a href="${projects[0].link}" target="_blank" rel="noopener noreferrer" class="btn-primary-grad btn-sm-grad">
+                  ${t('projects.visitSite')}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Other Projects Grid -->
+        <div class="projects-grid">
+          ${projects.slice(1).map((project, i) => `
+            <div class="projects-grid-item" data-reveal data-delay="${i + 2}">
+              <div class="project-card glass-card">
+                <div class="project-card-img-wrap">
+                  <img src="${projectImages[i + 1]}" alt="${project.name}" />
+                  <div class="project-card-img-overlay"></div>
+                </div>
                 <div class="project-card-body">
                   <div class="project-employer">${project.employer}</div>
                   <div class="project-name">${project.name}</div>

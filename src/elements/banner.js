@@ -37,10 +37,13 @@ function render() {
 
   document.querySelector('#banner').innerHTML = `
     <div class="container banner-content">
-      <div class="row align-items-center justify-content-center min-vh-100">
-        <div class="col-lg-8 py-5 text-center">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-7 py-5">
 
-          <p class="banner-greeting" data-reveal data-delay="1">${t('banner.greeting')}</p>
+          <div class="banner-status" data-reveal data-delay="1">
+            <span class="status-dot"></span>
+            ${t('banner.greeting')}
+          </div>
 
           <h1 class="banner-name" id="animatedName" data-reveal data-delay="2">
             RAOELIMAHEFA
@@ -48,9 +51,17 @@ Charly
           </h1>
 
           <p class="banner-role" data-reveal data-delay="3">${t('banner.role')}</p>
-          <p class="banner-stack" data-reveal data-delay="4">${t('banner.stack')}</p>
 
-          <div class="banner-actions justify-content-center" data-reveal data-delay="5">
+          <div class="banner-stack-wrap" data-reveal data-delay="4">
+            <div class="banner-stack-pills">
+              <span class="stack-pill">Ruby</span>
+              <span class="stack-pill">PHP</span>
+              <span class="stack-pill">JavaScript</span>
+              <span class="stack-pill">TypeScript</span>
+            </div>
+          </div>
+
+          <div class="banner-actions" data-reveal data-delay="5">
             <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-primary-grad">
               ${iconDownload}
               ${t('banner.downloadFR')}
@@ -67,6 +78,21 @@ Charly
             </a>
           </div>
 
+        </div>
+
+        <div class="col-lg-5 d-none d-lg-flex justify-content-center">
+          <div class="hero-visual" data-reveal="scale" data-delay="3">
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-code-block">
+              <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">developer</span> = {</div>
+              <div class="code-line code-indent"><span class="code-prop">name</span>: <span class="code-string">"Charly"</span>,</div>
+              <div class="code-line code-indent"><span class="code-prop">role</span>: <span class="code-string">"Full Stack"</span>,</div>
+              <div class="code-line code-indent"><span class="code-prop">passion</span>: <span class="code-string">"Building"</span>,</div>
+              <div class="code-line code-indent"><span class="code-prop">coffee</span>: <span class="code-bool">true</span>,</div>
+              <div class="code-line">};</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
