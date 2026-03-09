@@ -52,7 +52,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
 }
 
 body {
@@ -1418,7 +1418,6 @@ body {
 ════════════════════════════════════════ */
 #footer {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
 }
 
 #footer footer {
@@ -1859,6 +1858,10 @@ main {
    RESPONSIVE: LARGE PHONE (481px - 768px)
 ════════════════════════════════════════ */
 @media (max-width: 768px) {
+  html {
+    scroll-snap-type: none;
+  }
+
   :root {
     --radius: 12px;
     --radius-sm: 6px;
