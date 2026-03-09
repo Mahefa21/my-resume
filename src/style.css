@@ -59,6 +59,12 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#navbar, #banner, main, #footer {
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* Custom scrollbar */
@@ -732,6 +738,7 @@ body {
   color: var(--text-muted);
   line-height: 1.8;
   margin-bottom: 16px;
+  overflow-wrap: break-word;
 }
 
 .about-stats {
@@ -744,11 +751,13 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   backdrop-filter: blur(12px);
+  flex-wrap: wrap;
 }
 
 .about-stat-item {
   text-align: center;
   flex: 1;
+  min-width: 0;
 }
 
 .about-stat-divider {
@@ -946,7 +955,8 @@ body {
   font-size: 13px;
   font-weight: 500;
   color: var(--text-muted);
-  white-space: nowrap;
+  text-align: center;
+  overflow-wrap: break-word;
 }
 
 /* Marquee for tools */
@@ -1459,6 +1469,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-left: 0;
 }
 
 .footer-nav-list a {
@@ -1467,6 +1478,8 @@ body {
   font-weight: 500;
   text-decoration: none;
   transition: color 0.2s;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .footer-nav-list a:hover {
@@ -1643,6 +1656,17 @@ body {
   #about .profile-img {
     width: 180px;
     height: 180px;
+  }
+
+  /* About stats tablet/mobile */
+  .about-stats {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .about-photo-card {
+    width: 100%;
+    max-width: 280px;
   }
 
   /* Bento → single column */
@@ -1981,6 +2005,37 @@ main {
     height: 140px;
   }
 
+  /* About stats mobile */
+  .about-stats {
+    padding: 16px 12px;
+    gap: 8px 12px;
+    justify-content: center;
+  }
+
+  .about-stat-divider {
+    display: none;
+  }
+
+  .about-stat-item {
+    min-width: 70px;
+  }
+
+  .stat-value {
+    font-size: 28px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .about-photo-card {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    aspect-ratio: 280 / 340;
+  }
+
   /* Skill grid mobile */
   .skills-hexagon-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -2023,9 +2078,16 @@ main {
 
   .footer-socials { gap: 8px; }
 
-  .footer-nav-list { gap: 8px; }
+  .footer-nav-list {
+    gap: 8px;
+    align-items: center;
+  }
 
   .footer-nav-list a { font-size: 13px; }
+
+  .footer-links-col {
+    text-align: center;
+  }
 
   .footer-copy { font-size: 12px; }
 
