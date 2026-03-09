@@ -1789,8 +1789,8 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
 }
 
 /* GPU acceleration for smooth scrolling */
-html, body, main {
-  will-change: transform;
+main {
+  will-change: scroll-position;
 }
 
 /* ════════════════════════════════════════
@@ -1873,8 +1873,20 @@ html, body, main {
   .gap-4 { gap: 12px !important; }
   .gap-3 { gap: 12px !important; }
 
-  /* Navbar responsive */
+  /* Navbar responsive - center collapsed content */
   #navbar { padding: 12px 0; }
+
+  #navbar .navbar-collapse {
+    text-align: center;
+  }
+
+  #navbar .navbar-nav {
+    align-items: center;
+  }
+
+  #navbar .navbar-collapse .d-flex {
+    justify-content: center;
+  }
 
   /* Card improvements for mobile */
   .glass-card, .glass-card-enhanced {
