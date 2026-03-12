@@ -52,7 +52,7 @@ function render() {
               </div>
               <div class="about-stat-divider"></div>
               <div class="about-stat-item">
-                <div class="stat-value">10+</div>
+                <div class="stat-value">5+</div>
                 <div class="stat-label">${t('about.projectsDone')}</div>
               </div>
               <div class="about-stat-divider"></div>
