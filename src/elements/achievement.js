@@ -5,7 +5,7 @@ import emitSite from './../../src/assets/images/emit.png'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 
-const projectImages = [navigatorImage, ekitiaImage, topImage, emitSite]
+const projectImages = [ekitiaImage, topImage, navigatorImage, emitSite]
 
 function render() {
   const projects = t('projects.items')
@@ -35,7 +35,7 @@ function render() {
                 <div class="project-tech">
                   ${projects[0].tech.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
                 </div>
-                <a href="${projects[0].link}" target="_blank" rel="noopener noreferrer" class="btn-primary-grad btn-sm-grad">
+                <a href="https://bliss-planning.duckdns.org/" target="_blank" rel="noopener noreferrer" class="btn-primary-grad btn-sm-grad">
                   ${t('projects.visitSite')}
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
