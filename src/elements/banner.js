@@ -54,9 +54,9 @@ Charly
 
           <div class="banner-stack-wrap" data-reveal data-delay="4">
             <div class="banner-stack-pills">
-              <span class="stack-pill">Node.js</span>
-              <span class="stack-pill">React</span>
-              <span class="stack-pill">React Native</span>
+              <span class="stack-pill">Ruby</span>
+              <span class="stack-pill">PHP</span>
+              <span class="stack-pill">JavaScript</span>
               <span class="stack-pill">TypeScript</span>
             </div>
           </div>
@@ -87,8 +87,8 @@ Charly
             <div class="hero-code-block">
               <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">developer</span> = {</div>
               <div class="code-line code-indent"><span class="code-prop">name</span>: <span class="code-string">"Charly"</span>,</div>
-              <div class="code-line code-indent"><span class="code-prop">stack</span>: <span class="code-string">"Node.js · React Native"</span>,</div>
-              <div class="code-line code-indent"><span class="code-prop">focus</span>: <span class="code-string">"Full Stack JS"</span>,</div>
+              <div class="code-line code-indent"><span class="code-prop">role</span>: <span class="code-string">"Full Stack"</span>,</div>
+              <div class="code-line code-indent"><span class="code-prop">passion</span>: <span class="code-string">"Building"</span>,</div>
               <div class="code-line code-indent"><span class="code-prop">coffee</span>: <span class="code-bool">true</span>,</div>
               <div class="code-line">};</div>
             </div>

@@ -47,12 +47,12 @@ function render() {
             <!-- Stats Row -->
             <div class="about-stats" data-reveal data-delay="4">
               <div class="about-stat-item">
-                <div class="stat-value">5+</div>
+                <div class="stat-value">4+</div>
                 <div class="stat-label">${t('about.yearsExp')}</div>
               </div>
               <div class="about-stat-divider"></div>
               <div class="about-stat-item">
-                <div class="stat-value">5+</div>
+                <div class="stat-value">4+</div>
                 <div class="stat-label">${t('about.projectsDone')}</div>
               </div>
               <div class="about-stat-divider"></div>

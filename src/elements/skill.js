@@ -4,18 +4,21 @@ import { observeReveal } from '../utils/reveal.js'
 const devicon = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}`
 
 const programmingLangs = [
-  { name: 'JavaScript', pct: 90, color: '#f7df1e', icon: devicon('javascript/javascript-original.svg') },
-  { name: 'TypeScript', pct: 75, color: '#3178c6', icon: devicon('typescript/typescript-original.svg') },
+  { name: 'Ruby', pct: 78, color: '#e74c3c', icon: devicon('ruby/ruby-original.svg') },
+  { name: 'JavaScript', pct: 80, color: '#f7df1e', icon: devicon('javascript/javascript-original.svg') },
+  { name: 'TypeScript', pct: 60, color: '#3178c6', icon: devicon('typescript/typescript-original.svg') },
+  { name: 'PHP', pct: 60, color: '#777bb4', icon: devicon('php/php-original.svg') },
 ]
 
 const frameworks = [
+  { name: 'Ruby on Rails', icon: devicon('rails/rails-plain.svg') },
+  { name: 'Vue.js', icon: devicon('vuejs/vuejs-original.svg') },
   { name: 'React.js', icon: devicon('react/react-original.svg') },
-  { name: 'React Native', icon: devicon('react/react-original.svg') },
+  { name: 'Stimulus.js', icon: devicon('javascript/javascript-original.svg') },
+  { name: 'Laravel', icon: devicon('laravel/laravel-original.svg') },
   { name: 'Express.js', icon: devicon('express/express-original.svg') },
   { name: 'Node.js', icon: devicon('nodejs/nodejs-original.svg') },
-  { name: 'Vue.js', icon: devicon('vuejs/vuejs-original.svg') },
-  { name: 'Socket.io', icon: devicon('socketio/socketio-original.svg') },
-  { name: 'Strapi', icon: devicon('strapi/strapi-original.svg') },
+  { name: 'Turbo', icon: devicon('ruby/ruby-original.svg') },
 ]
 
 const databases = [
@@ -25,15 +28,15 @@ const databases = [
 ]
 
 const tools = [
-  { name: 'Firebase', icon: devicon('firebase/firebase-original.svg') },
   { name: 'Git', icon: devicon('git/git-original.svg') },
   { name: 'GitHub', icon: devicon('github/github-original.svg') },
   { name: 'GitLab', icon: devicon('gitlab/gitlab-original.svg') },
+  { name: 'Bitbucket', icon: devicon('bitbucket/bitbucket-original.svg') },
   { name: 'Docker', icon: devicon('docker/docker-original.svg') },
   { name: 'VS Code', icon: devicon('vscode/vscode-original.svg') },
   { name: 'Jira', icon: devicon('jira/jira-original.svg') },
   { name: 'Figma', icon: devicon('figma/figma-original.svg') },
-  { name: 'Postman', icon: devicon('postman/postman-original.svg') },
+  { name: 'Canva', icon: devicon('canva/canva-original.svg') },
 ]
 
 const spokenLangs = [
