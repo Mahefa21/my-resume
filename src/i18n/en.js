@@ -8,7 +8,7 @@ export default {
   },
   banner: {
     greeting: 'Hi, I am',
-    role: 'Full Stack Web Developer',
+    role: 'Software Developer & AI Solutions',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -17,8 +17,8 @@ export default {
   },
   about: {
     title: 'About me',
-    p1: "IT is not simply a job for me — it is a genuine passion. I see every project as a unique creation where innovation and creativity come together to build something meaningful and lasting.",
-    p2: "Whether it is developing a website, designing an application, or setting up a complex technical architecture, I take pride in delivering careful, rigorous, and professional work at every stage.",
+    p1: "My goal is straightforward: help businesses solve real problems using the power of artificial intelligence. At a time when AI is fundamentally changing the way organizations work, I put these technologies to use on the ground, where it matters most.",
+    p2: "From document digitalization to business process automation, I design custom, practical AI solutions — leveraging tools like Ollama, HuggingFace Transformers, and Mistral AI to address the specific challenges each organization faces.",
     yearsExp: 'Years of experience',
     projectsDone: 'Projects delivered',
     companies: 'Companies',
@@ -43,15 +43,15 @@ export default {
     awardsTitle: 'Awards & Hackathons',
     jobs: [
       {
-        title: 'Web Developer & Digital Content Manager',
+        title: 'AI Transformation',
         company: 'Impact Production Group (IPG)',
         location: 'On-site · Mauritius',
         period: 'September 2025 — Present',
         bullets: [
+          'Research, design and implementation of AI-powered solutions to address the company\'s operational challenges',
+          'Built a digitalization system for import documentation (TrOCR, LayoutLM, Mistral AI via Ollama, Python, PostgreSQL), replacing legacy paper-based processes across relevant departments',
           'Proposed and implemented SEO optimization strategies for the company website',
-          'Updated blog articles and website content for IPG',
           'Planned and published content across corporate social media channels',
-          'Provided technical support including hardware maintenance and repair',
         ],
       },
       {

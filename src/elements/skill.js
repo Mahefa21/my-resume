@@ -8,6 +8,7 @@ const programmingLangs = [
   { name: 'JavaScript', pct: 80, color: '#f7df1e', icon: devicon('javascript/javascript-original.svg') },
   { name: 'TypeScript', pct: 60, color: '#3178c6', icon: devicon('typescript/typescript-original.svg') },
   { name: 'PHP', pct: 60, color: '#777bb4', icon: devicon('php/php-original.svg') },
+  { name: 'Python', pct: 65, color: '#3776ab', icon: devicon('python/python-original.svg') },
 ]
 
 const frameworks = [
@@ -19,6 +20,7 @@ const frameworks = [
   { name: 'Express.js', icon: devicon('express/express-original.svg') },
   { name: 'Node.js', icon: devicon('nodejs/nodejs-original.svg') },
   { name: 'Turbo', icon: devicon('ruby/ruby-original.svg') },
+  { name: 'HuggingFace Transformers', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg' },
 ]
 
 const databases = [
@@ -37,6 +39,8 @@ const tools = [
   { name: 'Jira', icon: devicon('jira/jira-original.svg') },
   { name: 'Figma', icon: devicon('figma/figma-original.svg') },
   { name: 'Canva', icon: devicon('canva/canva-original.svg') },
+  { name: 'Ollama', icon: 'https://ollama.com/public/ollama.png' },
+  { name: 'Mistral AI', icon: devicon('python/python-original.svg') },
 ]
 
 const spokenLangs = [

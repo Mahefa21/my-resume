@@ -52,16 +52,7 @@ Charly
 
           <p class="banner-role" data-reveal data-delay="3">${t('banner.role')}</p>
 
-          <div class="banner-stack-wrap" data-reveal data-delay="4">
-            <div class="banner-stack-pills">
-              <span class="stack-pill">Ruby</span>
-              <span class="stack-pill">PHP</span>
-              <span class="stack-pill">JavaScript</span>
-              <span class="stack-pill">TypeScript</span>
-            </div>
-          </div>
-
-          <div class="banner-actions" data-reveal data-delay="5">
+          <div class="banner-actions" data-reveal data-delay="4">
             <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-primary-grad">
               ${iconDownload}
               ${t('banner.downloadFR')}

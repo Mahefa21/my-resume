@@ -8,7 +8,7 @@ export default {
   },
   banner: {
     greeting: 'Bonjour, je suis',
-    role: 'Développeur web Full Stack',
+    role: 'Développeur informatique & Solutions IA',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -17,8 +17,8 @@ export default {
   },
   about: {
     title: 'À propos de moi',
-    p1: "L'informatique n'est pas simplement un métier pour moi, c'est une véritable passion. Je considère chaque projet comme une œuvre à part entière, où l'innovation et la créativité se rencontrent pour donner vie à des solutions uniques.",
-    p2: "Que ce soit pour le développement d'un site web, la conception d'une application ou la mise en place d'une architecture technique complexe, je mets un point d'honneur à travailler avec soin, rigueur et professionnalisme.",
+    p1: "Mon objectif est simple : aider les entreprises à résoudre leurs problèmes concrets grâce à la puissance de l'intelligence artificielle. À une époque où l'IA transforme profondément les façons de travailler, je mets ces technologies au service des besoins réels du terrain.",
+    p2: "De la digitalisation de documents à l'automatisation de processus métier, je conçois des solutions IA sur mesure, accessibles et efficaces, en m'appuyant sur des outils comme Ollama, HuggingFace Transformers ou Mistral AI pour répondre précisément aux défis de chaque organisation.",
     yearsExp: "Ans d'expérience",
     projectsDone: 'Projets réalisés',
     companies: 'Entreprises',
@@ -43,15 +43,15 @@ export default {
     awardsTitle: 'Distinctions & Hackathons',
     jobs: [
       {
-        title: 'Développeur web & Responsable digital',
+        title: 'Transformation IA',
         company: 'Impact Production Group (IPG)',
         location: 'Présentiel · Maurice',
         period: 'Septembre 2025 — Présent',
         bullets: [
+          'Recherche, conception et réalisation de solutions IA pour répondre aux besoins opérationnels de l\'entreprise',
+          'Développement d\'un système de digitalisation des documents d\'importation de marchandises (TrOCR, LayoutLM, Mistral AI via Ollama, Python, PostgreSQL), remplaçant les anciens processus papier des services concernés',
           'Optimisation SEO du site vitrine et amélioration du design web',
-          'Mise à jour des contenus et articles de blogue du site IPG',
           'Planification et publication de contenus sur les réseaux sociaux',
-          'Soutien technique : maintenance et réparation de matériel informatique',
         ],
       },
       {
