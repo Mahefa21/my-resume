@@ -5,10 +5,24 @@ export default {
     experience: 'Experience',
     skills: 'Skills',
     projects: 'Projects',
+    contact: 'Contact',
+  },
+  meta: {
+    title: 'RAOELIMAHEFA Charly — Full Stack Developer | Ruby on Rails, PHP, JavaScript, AI',
+    description: "Portfolio of Charly RAOELIMAHEFA, Full Stack developer based in Madagascar. 4+ years of experience in Ruby on Rails, PHP, JavaScript, Vue.js and React. High-performance web solutions and AI integration.",
+  },
+  loader: {
+    text: 'Loading',
+  },
+  scrollHint: {
+    down: 'SCROLL',
+    downAria: 'Scroll down',
+    top: 'TOP',
+    topAria: 'Back to top of page',
   },
   banner: {
     greeting: 'Hi, I am',
-    role: 'Software Developer & AI Solutions',
+    role: 'Full Stack Developer',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -18,7 +32,7 @@ export default {
   about: {
     title: 'About me',
     p1: "My goal is straightforward: help businesses solve real problems using the power of artificial intelligence. At a time when AI is fundamentally changing the way organizations work, I put these technologies to use on the ground, where it matters most.",
-    p2: "From document digitalization to business process automation, I design custom, practical AI solutions — leveraging tools like Ollama, HuggingFace Transformers, and Mistral AI to address the specific challenges each organization faces.",
+    p2: "From document digitalization to business process automation, I design custom, practical AI solutions — leveraging tools like Ollama and Mistral AI to address the specific challenges each organization faces.",
     yearsExp: 'Years of experience',
     projectsDone: 'Projects delivered',
     companies: 'Companies',
@@ -43,10 +57,10 @@ export default {
     awardsTitle: 'Awards & Hackathons',
     jobs: [
       {
-        title: 'AI Transformation',
+        title: 'Web Designer / Digital Marketing',
         company: 'Impact Production Group (IPG)',
         location: 'On-site · Mauritius',
-        period: 'September 2025 — Present',
+        period: 'October 2025 — April 2026',
         bullets: [
           'Research, design and implementation of AI-powered solutions to address the company\'s operational challenges',
           'Built a digitalization system for import documentation (TrOCR, LayoutLM, Mistral AI via Ollama, Python, PostgreSQL), replacing legacy paper-based processes across relevant departments',
@@ -56,7 +70,7 @@ export default {
       },
       {
         title: 'Full Stack Ruby on Rails Developer',
-        company: 'Top-Webgroup',
+        company: 'Top-Webgroup (Ineland LTD)',
         location: 'Remote · Mauritius',
         period: 'March 2024 — March 2025',
         bullets: [
@@ -92,7 +106,7 @@ export default {
       {
         degree: "Master's Degree — IT Modelling and Engineering (M2I)",
         school: 'EMIT / University of Fianarantsoa, Madagascar',
-        period: '2020 — 2023',
+        period: '2021 — 2023',
       },
       {
         degree: "Bachelor's Degree — Intranet & Internet Application Development (DA2I)",
@@ -155,6 +169,37 @@ export default {
         link: 'https://emit.mg',
       },
     ],
+  },
+  contact: {
+    title: 'Get in touch',
+    subtitle: 'An idea, a project, an opportunity? Drop me a line, I respond quickly.',
+    nameLabel: 'Your name',
+    namePlaceholder: 'John Doe',
+    emailLabel: 'Your email',
+    emailPlaceholder: 'john@example.com',
+    subjectLabel: 'Subject',
+    subjectPlaceholder: 'What is this about?',
+    messageLabel: 'Your message',
+    messagePlaceholder: 'Tell me about your project, question, or proposal…',
+    submit: 'Send message',
+    submitting: 'Sending…',
+    success: 'Message sent! I will get back to you shortly.',
+    error: 'Oops, something went wrong. Please try again or email raoelimahefacharly@gmail.com.',
+    directEmail: 'Or email me directly at',
+  },
+  chat: {
+    fab: 'Chat',
+    title: 'Ask me anything',
+    subtitle: 'AI assistant · Ask about Charly',
+    greeting: "Hi 👋 I'm Charly's AI assistant. Ask me anything about his experience, skills or projects.",
+    placeholder: 'Type your question…',
+    send: 'Send',
+    typing: 'Thinking…',
+    error: "Couldn't reach the assistant. Please try again later or email raoelimahefacharly@gmail.com.",
+    poweredBy: 'Powered by Llama 3 · Groq',
+    suggestion1: 'What is his experience?',
+    suggestion2: 'What tech does he use?',
+    suggestion3: 'How can I contact him?',
   },
   footer: {
     copyright: '© 2026 RAOELIMAHEFA Charly — All rights reserved',

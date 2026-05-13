@@ -1,8 +1,9 @@
-import cvFR from './../../src/assets/documents/CV-RAOELIMAHEFA-Charly-FR.pdf'
-import cvEN from './../../src/assets/documents/CV-RAOELIMAHEFA-Charly-EN.pdf'
+// CV PDFs served as static assets from /public (not bundled)
+const cvFR = '/CV-RAOELIMAHEFA-Charly-FR.pdf'
+const cvEN = '/CV-RAOELIMAHEFA-Charly-EN.pdf'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
-import { iconDownload, iconMail, iconChevronDown } from '../utils/icons.js'
+import { iconDownload, iconMail } from '../utils/icons.js'
 // Lazy-load Three.js so it doesn't block initial page render
 const loadThreeBg = () => import('../utils/three-bg.js')
 
@@ -88,22 +89,28 @@ Charly
       </div>
     </div>
 
-    <a href="#about" class="scroll-indicator">
-      <span>${t('banner.scroll')}</span>
-      ${iconChevronDown}
-    </a>
   `
 
   // Animate the name letters
   const nameEl = document.getElementById('animatedName')
   if (nameEl) animateName(nameEl)
 
-  // Init Three.js background (lazy loaded)
+  // Init Three.js background — skip on mobile or if user prefers reduced motion,
+  // and defer until browser is idle to preserve LCP/FCP on desktop.
   const banner = document.querySelector('#banner')
-  if (banner) {
-    loadThreeBg().then(({ initThreeBg }) => {
-      cleanupThree = initThreeBg(banner)
-    })
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const isMobile = window.matchMedia('(max-width: 768px)').matches
+  if (banner && !prefersReducedMotion && !isMobile) {
+    const startThree = () => {
+      loadThreeBg().then(({ initThreeBg }) => {
+        cleanupThree = initThreeBg(banner)
+      })
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startThree, { timeout: 2500 })
+    } else {
+      setTimeout(startThree, 1500)
+    }
   }
 
   observeReveal()

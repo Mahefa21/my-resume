@@ -1,7 +1,7 @@
-import navigatorImage from './../../src/assets/images/navigator.png'
-import ekitiaImage from './../../src/assets/images/ekitia.png'
-import topImage from './../../src/assets/images/nounoutop.png'
-import emitSite from './../../src/assets/images/emit.png'
+import navigatorImage from './../../src/assets/images/navigator.webp'
+import ekitiaImage from './../../src/assets/images/ekitia.webp'
+import topImage from './../../src/assets/images/nounoutop.webp'
+import emitSite from './../../src/assets/images/emit.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 

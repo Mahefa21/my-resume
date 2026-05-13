@@ -5,10 +5,24 @@ export default {
     experience: 'Expériences',
     skills: 'Compétences',
     projects: 'Réalisations',
+    contact: 'Contact',
+  },
+  meta: {
+    title: 'RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript, IA',
+    description: "Portfolio de Charly RAOELIMAHEFA, développeur Full Stack basé à Madagascar. 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript, Vue.js et React. Solutions web performantes et intégration IA.",
+  },
+  loader: {
+    text: 'Chargement',
+  },
+  scrollHint: {
+    down: 'DÉFILER',
+    downAria: 'Faire défiler vers le bas',
+    top: 'HAUT',
+    topAria: 'Retour en haut de la page',
   },
   banner: {
     greeting: 'Bonjour, je suis',
-    role: 'Développeur informatique & Solutions IA',
+    role: 'Développeur Full Stack',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -18,7 +32,7 @@ export default {
   about: {
     title: 'À propos de moi',
     p1: "Mon objectif est simple : aider les entreprises à résoudre leurs problèmes concrets grâce à la puissance de l'intelligence artificielle. À une époque où l'IA transforme profondément les façons de travailler, je mets ces technologies au service des besoins réels du terrain.",
-    p2: "De la digitalisation de documents à l'automatisation de processus métier, je conçois des solutions IA sur mesure, accessibles et efficaces, en m'appuyant sur des outils comme Ollama, HuggingFace Transformers ou Mistral AI pour répondre précisément aux défis de chaque organisation.",
+    p2: "De la digitalisation de documents à l'automatisation de processus métier, je conçois des solutions IA sur mesure, accessibles et efficaces, en m'appuyant sur des outils comme Ollama et Mistral AI pour répondre précisément aux défis de chaque organisation.",
     yearsExp: "Ans d'expérience",
     projectsDone: 'Projets réalisés',
     companies: 'Entreprises',
@@ -43,10 +57,10 @@ export default {
     awardsTitle: 'Distinctions & Hackathons',
     jobs: [
       {
-        title: 'Transformation IA',
+        title: 'Web Designer / Digital Marketing',
         company: 'Impact Production Group (IPG)',
         location: 'Présentiel · Maurice',
-        period: 'Septembre 2025 — Présent',
+        period: 'Octobre 2025 — Avril 2026',
         bullets: [
           'Recherche, conception et réalisation de solutions IA pour répondre aux besoins opérationnels de l\'entreprise',
           'Développement d\'un système de digitalisation des documents d\'importation de marchandises (TrOCR, LayoutLM, Mistral AI via Ollama, Python, PostgreSQL), remplaçant les anciens processus papier des services concernés',
@@ -56,7 +70,7 @@ export default {
       },
       {
         title: 'Développeur Full Stack Ruby on Rails',
-        company: 'Top-Webgroup',
+        company: 'Top-Webgroup (Ineland LTD)',
         location: 'Télétravail · Maurice',
         period: 'Mars 2024 — Mars 2025',
         bullets: [
@@ -92,7 +106,7 @@ export default {
       {
         degree: 'Maîtrise — Modélisation et Ingénierie Informatique (M2I)',
         school: 'EMIT / Université de Fianarantsoa, Madagascar',
-        period: '2020 — 2023',
+        period: '2021 — 2023',
       },
       {
         degree: 'Licence — Développement d\'Applications Intranet et Internet (DA2I)',
@@ -155,6 +169,37 @@ export default {
         link: 'https://emit.mg',
       },
     ],
+  },
+  contact: {
+    title: 'Me contacter',
+    subtitle: 'Une idée, un projet, une opportunité ? Écrivez-moi, je réponds rapidement.',
+    nameLabel: 'Votre nom',
+    namePlaceholder: 'Jean Dupont',
+    emailLabel: 'Votre email',
+    emailPlaceholder: 'jean@exemple.com',
+    subjectLabel: 'Sujet',
+    subjectPlaceholder: 'À propos de quoi ?',
+    messageLabel: 'Votre message',
+    messagePlaceholder: 'Décrivez votre demande, projet ou question…',
+    submit: 'Envoyer le message',
+    submitting: 'Envoi en cours…',
+    success: 'Message envoyé ! Je reviens vers vous très vite.',
+    error: 'Oups, une erreur est survenue. Réessayez ou écrivez à raoelimahefacharly@gmail.com.',
+    directEmail: 'Ou écrivez-moi directement à',
+  },
+  chat: {
+    fab: 'Discuter',
+    title: 'Pose-moi tes questions',
+    subtitle: 'Assistant IA · Posez vos questions sur Charly',
+    greeting: "Bonjour 👋 Je suis l'assistant IA de Charly. Posez-moi n'importe quelle question sur son parcours, ses compétences ou ses projets.",
+    placeholder: 'Écrivez votre question…',
+    send: 'Envoyer',
+    typing: 'Charly réfléchit…',
+    error: "Impossible de joindre l'assistant. Réessayez plus tard ou écrivez à raoelimahefacharly@gmail.com.",
+    poweredBy: 'Propulsé par Llama 3 · Groq',
+    suggestion1: 'Quelles sont ses expériences ?',
+    suggestion2: 'Quelles technos maîtrise-t-il ?',
+    suggestion3: 'Comment le contacter ?',
   },
   footer: {
     copyright: '© 2026 RAOELIMAHEFA Charly — Tous droits réservés',

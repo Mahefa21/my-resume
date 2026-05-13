@@ -11,10 +11,10 @@ function render() {
             <div class="footer-logo-text">Charly R.</div>
             <p class="footer-tagline">Full Stack Web Developer</p>
             <div class="footer-socials">
-              <a class="social-link-btn" target="_blank" href="https://wa.me/261343926527" aria-label="WhatsApp">
+              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://wa.me/261343926527" aria-label="WhatsApp">
                 ${iconWhatsapp}
               </a>
-              <a class="social-link-btn" target="_blank" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
+              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
                 ${iconFacebook}
               </a>
               <a class="social-link-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">
@@ -38,7 +38,7 @@ function render() {
             <div class="footer-col-title">Contact</div>
             <ul class="footer-nav-list">
               <li><a href="mailto:raoelimahefacharly@gmail.com">raoelimahefacharly@gmail.com</a></li>
-              <li><a href="https://wa.me/261343926527" target="_blank">+261 34 39 265 27</a></li>
+              <li><a href="https://wa.me/261343926527" target="_blank" rel="noopener noreferrer">+261 34 39 265 27</a></li>
             </ul>
           </div>
 

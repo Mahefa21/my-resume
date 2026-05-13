@@ -20,7 +20,6 @@ const frameworks = [
   { name: 'Express.js', icon: devicon('express/express-original.svg') },
   { name: 'Node.js', icon: devicon('nodejs/nodejs-original.svg') },
   { name: 'Turbo', icon: devicon('ruby/ruby-original.svg') },
-  { name: 'HuggingFace Transformers', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg' },
 ]
 
 const databases = [

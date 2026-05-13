@@ -1,39 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://raoelimahefa.netlify.app/</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://raoelimahefa.netlify.app/#banner</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://raoelimahefa.netlify.app/#about</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://raoelimahefa.netlify.app/#experience</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://raoelimahefa.netlify.app/#skill</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://raoelimahefa.netlify.app/#achievement</loc>
-    <lastmod>2026-03-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://raoelimahefa.netlify.app/?lang=fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://raoelimahefa.netlify.app/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://raoelimahefa.netlify.app/"/>
   </url>
 </urlset>

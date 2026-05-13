@@ -1,16 +1,7 @@
 # Robots.txt for Charly RAOELIMAHEFA Portfolio
-# For search engines
 
 # Allow all bots
 User-agent: *
-Allow: /
-Disallow: /
-
-# Specific bot rules
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
 Allow: /
 
 # Sitemap location

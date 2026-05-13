@@ -1,4 +1,4 @@
-import charlyImage from './../../src/assets/images/charly.png'
+import charlyImage from './../../src/assets/images/charly.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { iconWhatsapp, iconFacebook, iconMail } from '../utils/icons.js'
@@ -17,10 +17,10 @@ function render() {
               <div class="about-photo-border"></div>
             </div>
             <div class="about-socials">
-              <a class="social-link-btn" target="_blank" href="https://wa.me/261343926527" aria-label="WhatsApp">
+              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://wa.me/261343926527" aria-label="WhatsApp">
                 ${iconWhatsapp}
               </a>
-              <a class="social-link-btn" target="_blank" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
+              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
                 ${iconFacebook}
               </a>
               <a class="social-link-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">

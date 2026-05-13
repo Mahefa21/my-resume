@@ -1,4 +1,4 @@
-import logoImage from './../../src/assets/images/logos/cr-logo.png'
+import logoImage from './../../src/assets/images/logos/cr-logo.webp'
 import { t, getLang, setLang, onLangChange } from '../i18n/index.js'
 import { initActiveNavbar } from '../handlers/activeNavbar.js'
 import { getTheme, toggleTheme, onThemeChange } from '../utils/theme.js'
@@ -40,6 +40,9 @@ function render() {
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#achievement">${t('nav.projects')}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">${t('nav.contact')}</a>
             </li>
           </ul>
 

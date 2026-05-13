@@ -1,50 +1,59 @@
 <!doctype html>
-<html lang="fr-CA" data-theme="light">
+<html lang="fr" data-theme="light">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- Performance & SEO Basics -->
-  <meta name="description" content="Portfolio de Charly RAOELIMAHEFA, développeur web Full Stack spécialisé en Ruby on Rails, PHP et JavaScript. 4+ ans d'expérience en développement d'applications web performantes." />
-  <meta name="keywords" content="Charly RAOELIMAHEFA, développeur web, full stack, Ruby on Rails, PHP, JavaScript, Vue.js, React, Node.js, portfolio, Maurice, Madagascar" />
+  <meta name="description" content="Portfolio de Charly RAOELIMAHEFA, développeur Full Stack basé à Madagascar. 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript, Vue.js et React. Solutions web performantes et intégration IA." />
+  <meta name="keywords" content="Charly RAOELIMAHEFA, développeur Full Stack, Ruby on Rails, PHP, JavaScript, Vue.js, React, Node.js, Python, IA, intelligence artificielle, portfolio, Madagascar, Antananarivo" />
   <meta name="author" content="Charly RAOELIMAHEFA" />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#f8fafc" />
   <meta name="color-scheme" content="light dark" />
+  <meta name="geo.region" content="MG-T" />
+  <meta name="geo.placename" content="Antananarivo, Madagascar" />
 
   <!-- Canonical -->
   <link rel="canonical" href="https://raoelimahefa.netlify.app/" />
+
+  <!-- hreflang: same page served in both languages via ?lang= -->
+  <link rel="alternate" hreflang="fr" href="https://raoelimahefa.netlify.app/?lang=fr" />
+  <link rel="alternate" hreflang="en" href="https://raoelimahefa.netlify.app/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://raoelimahefa.netlify.app/" />
 
   <!-- Preconnect for Performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="src/assets/images/logos/cr-logo.png" />
-  <link rel="apple-touch-icon" href="src/assets/images/logos/cr-logo.png" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Page Title -->
-  <title>RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript</title>
+  <title>RAOELIMAHEFA Charly — Développeur Full Stack | Ruby on Rails, PHP, JavaScript, IA</title>
 
   <!-- Open Graph Meta Tags -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="RAOELIMAHEFA Charly — Développeur Full Stack Web" />
-  <meta property="og:description" content="Découvrez mon portfolio: 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript. Projets web performants et innovants." />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="RAOELIMAHEFA Charly — Développeur Full Stack" />
+  <meta property="og:description" content="Portfolio: 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript, Vue.js et React. Solutions web et intégration IA. Basé à Madagascar." />
   <meta property="og:url" content="https://raoelimahefa.netlify.app/" />
-  <meta property="og:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+  <meta property="og:image" content="https://raoelimahefa.netlify.app/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:locale" content="fr_CA" />
-  <meta property="og:locale:alternate" content="en_CA" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:locale:alternate" content="en_US" />
   <meta property="og:site_name" content="Charly RAOELIMAHEFA - Portfolio" />
+  <meta property="profile:first_name" content="Charly" />
+  <meta property="profile:last_name" content="RAOELIMAHEFA" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="RAOELIMAHEFA Charly — Full Stack Developer" />
-  <meta name="twitter:description" content="Portfolio & projets web: Ruby on Rails, PHP, JavaScript, Vue.js, React" />
-  <meta name="twitter:image" content="https://raoelimahefa.netlify.app/src/assets/images/charly.png" />
+  <meta name="twitter:description" content="Portfolio & projets: Ruby on Rails, PHP, JavaScript, Vue.js, React, Python, IA" />
+  <meta name="twitter:image" content="https://raoelimahefa.netlify.app/og-image.png" />
   <meta name="twitter:creator" content="@charlyrao" />
 
   <!-- Additional SEO -->
@@ -59,11 +68,20 @@
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Charly RAOELIMAHEFA",
-    "jobTitle": "Full Stack Web Developer",
+    "givenName": "Charly",
+    "familyName": "RAOELIMAHEFA",
+    "jobTitle": "Développeur Full Stack",
+    "description": "Développeur Full Stack basé à Madagascar, 4+ ans d'expérience en Ruby on Rails, PHP, JavaScript, Vue.js, React et intégration de solutions IA.",
     "url": "https://raoelimahefa.netlify.app/",
     "email": "raoelimahefacharly@gmail.com",
     "telephone": "+261343926527",
-    "image": "https://raoelimahefa.netlify.app/src/assets/images/charly.png",
+    "image": "https://raoelimahefa.netlify.app/og-image.png",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "LOT AD 13 BIS Ambohitrarahaba",
+      "addressLocality": "Antananarivo",
+      "addressCountry": "MG"
+    },
     "sameAs": [
       "https://facebook.com/raoel.mahefa",
       "https://github.com/raoelimahefa",
@@ -74,6 +92,7 @@
       "PHP",
       "JavaScript",
       "TypeScript",
+      "Python",
       "Vue.js",
       "React.js",
       "Node.js",
@@ -84,16 +103,33 @@
       "PostgreSQL",
       "MongoDB",
       "Docker",
-      "Git"
+      "Git",
+      "Intelligence Artificielle",
+      "Ollama",
+      "Mistral AI"
     ],
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Full Stack Developer"
-    },
     "alumniOf": {
       "@type": "EducationalOrganization",
-      "name": "EMIT / Université de Fianarantsoa"
+      "name": "EMIT — Université de Fianarantsoa",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "MG"
+      }
     }
+  }
+  </script>
+
+  <!-- JSON-LD Structured Data - ProfilePage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": "Charly RAOELIMAHEFA",
+      "url": "https://raoelimahefa.netlify.app/"
+    },
+    "dateModified": "2026-05-14"
   }
   </script>
 
@@ -104,15 +140,8 @@
     "@type": "WebSite",
     "name": "Charly RAOELIMAHEFA Portfolio",
     "url": "https://raoelimahefa.netlify.app/",
-    "description": "Portfolio professionnel de Charly RAOELIMAHEFA, développeur web Full Stack",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://raoelimahefa.netlify.app/?q={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
+    "description": "Portfolio professionnel de Charly RAOELIMAHEFA, développeur Full Stack",
+    "inLanguage": ["fr", "en"]
   }
   </script>
 
@@ -200,6 +229,44 @@
 
 <body>
 
+  <!-- SEO content visible to crawlers and screen readers (visually hidden) -->
+  <div class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
+    <h1>Charly RAOELIMAHEFA — Développeur Full Stack</h1>
+    <p>
+      Développeur Full Stack basé à Antananarivo, Madagascar. Plus de 4 ans
+      d'expérience en Ruby on Rails, PHP (Yii, Laravel), JavaScript, Vue.js,
+      React et Node.js. Expérience en intégration de solutions IA avec
+      Ollama et Mistral AI. Diplômé d'un Master 2
+      en Modélisation et Ingénierie Informatique (EMIT, Université de
+      Fianarantsoa).
+    </p>
+    <h2>Expériences professionnelles</h2>
+    <ul>
+      <li>Web Designer / Digital Marketing — Impact Production Group (IPG), Maurice (oct. 2025 – avr. 2026)</li>
+      <li>Développeur Full Stack Ruby on Rails — Top-Webgroup (Ineland LTD), Maurice (mars 2024 – mars 2025)</li>
+      <li>Développeur Full Stack PHP / JavaScript — Open Atlas, La Réunion (juin 2022 – fév. 2024)</li>
+      <li>Développeur Full Stack Node.js / React — Ny Ask, Madagascar (jan. – sept. 2021)</li>
+    </ul>
+    <h2>Compétences</h2>
+    <p>
+      Langages : Ruby, JavaScript, TypeScript, PHP, Python. Frameworks : Ruby
+      on Rails, Vue.js, React.js, Laravel, Express.js, Node.js. Bases de
+      données : PostgreSQL, MySQL, MongoDB. Outils :
+      Git, Docker, Ollama, Mistral AI.
+    </p>
+    <p>
+      Contact : raoelimahefacharly@gmail.com — +261 34 39 265 27 — Antananarivo, Madagascar.
+    </p>
+  </div>
+
+  <noscript>
+    <div style="padding:2rem;max-width:780px;margin:0 auto;font-family:system-ui,sans-serif;">
+      <h2>JavaScript requis</h2>
+      <p>Ce portfolio nécessite JavaScript pour s'afficher complètement. Veuillez l'activer dans votre navigateur.</p>
+      <p>Contact : <a href="mailto:raoelimahefacharly@gmail.com">raoelimahefacharly@gmail.com</a> — +261 34 39 265 27 — Antananarivo, Madagascar.</p>
+    </div>
+  </noscript>
+
   <!-- LOADER -->
   <div id="loader">
     <div class="loader-rings">
@@ -225,7 +292,16 @@
     <section id="experience"></section>
     <section id="skill"></section>
     <section id="achievement"></section>
+    <section id="contact"></section>
   </main>
+
+  <!-- Hidden static form so Netlify can detect it at build time (real form is JS-rendered) -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+    <input type="text" name="subject" />
+    <textarea name="message"></textarea>
+  </form>
 
   <!-- FOOTER -->
   <div id="footer"></div>
