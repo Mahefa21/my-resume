@@ -41,9 +41,6 @@ function render() {
             <li class="nav-item">
               <a class="nav-link" href="#achievement">${t('nav.projects')}</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">${t('nav.contact')}</a>
-            </li>
           </ul>
 
           <div class="d-flex align-items-center gap-2 ms-lg-3 mt-2 mt-lg-0">
