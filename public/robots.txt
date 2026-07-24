@@ -1,11 +1,9 @@
-# Robots.txt for Charly RAOELIMAHEFA Portfolio
+# Robots.txt — Charly RAOELIMAHEFA Portfolio
 
-# Allow all bots
 User-agent: *
 Allow: /
 
-# Sitemap location
-Sitemap: https://raoelimahefa.netlify.app/sitemap.xml
+# No Crawl-delay directive on purpose: Google ignores it, but Bingbot honours
+# it — declaring one only slows down the crawler we want indexing us faster.
 
-# Crawl delay
-Crawl-delay: 1
+Sitemap: https://raoelimahefa.netlify.app/sitemap.xml
