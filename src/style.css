@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/* Poppins is loaded from a <link> in index.html, not with @import.
+   An @import here forced the browser to download and parse this stylesheet
+   before it could even discover the font request, serialising the chain
+   HTML → style.css → Google CSS → font files and delaying first paint. */
 
 /* ════════════════════════════════════════
    DESIGN TOKENS
@@ -347,37 +350,70 @@ body {
   z-index: 1;
 }
 
-/* Status badge */
+/* Status badge — the greeting is cut mid-word: its first three letters are
+   enclosed in a circle and the remainder runs out of it, "(Bon)jour, je suis".
+   The container carries no background or border of its own; the circle is the
+   only enclosed part, which is what makes the split readable. */
 .banner-status {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid rgba(56, 189, 248, 0.2);
+  gap: 0;
+  margin-bottom: 20px;
   color: var(--primary);
   font-size: 15px;
   font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 999px;
-  margin-bottom: 20px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #34d399;
-  animation: statusPulse 2s ease-in-out infinite;
+/* Shared circle-label device — see src/utils/circleLabel.js.
+   Everything is sized in em, so the same markup works at 15px in the hero and
+   13px on section tags without a second set of rules. */
+.circle-label {
+  display: inline-flex;
+  align-items: center;
 }
 
-@keyframes statusPulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.4); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+.circle-label-head {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Sized to its text, not fixed: a fixed square centres the letters, leaving
+     ~10px of dead space between the last letter and the stroke — which visually
+     detaches "Hel" from "lo". Hugging the text keeps the word joined.
+     min-width only catches the one-letter case (FR "À propos") so it doesn't
+     collapse to a dot; every other head is wider than it anyway. */
+  min-width: 2.4em;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  padding: 0 0.22em;
+  border-radius: 50%;
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  background: rgba(56, 189, 248, 0.1);
+  /* letter-spacing adds a trailing gap after the last letter, pushing the text
+     left of true centre — put it back. */
+  text-indent: 0.15em;
+}
+
+.circle-label-tail {
+  /* Pulled back onto the stroke: with the circle hugging its text, the residual
+     gap is the padding plus the border, which is already more than a normal
+     inter-letter space. The word has to read as one. */
+  margin-left: -0.12em;
+}
+
+/* The H1 is only a wrapper — its two children carry all the visible styling,
+   so the name and the role sit in one heading without changing the layout. */
+.banner-heading {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  line-height: inherit;
 }
 
 .banner-name {
+  display: block;
   font-size: clamp(40px, 7vw, 72px);
   font-weight: 900;
   color: var(--text);
@@ -410,13 +446,38 @@ body {
 }
 
 .banner-role {
+  display: block;
   font-size: clamp(20px, 3vw, 30px);
   font-weight: 700;
+  /* Reset what it now inherits from the H1 at small breakpoints. */
+  letter-spacing: normal;
+  line-height: 1.2;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-top: 8px;
+}
+
+.banner-tagline {
+  max-width: 60ch;
+  margin-top: 18px;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+/* Key phrases inside body copy.
+   The surrounding prose is --text-muted, so stepping up to the full-contrast
+   --text plus a moderate 600 weight is enough to make a phrase surface when
+   scanning — without the shouty look of a default browser <strong>, which
+   would fight the headings for attention. */
+.about-text strong,
+.banner-tagline strong,
+.project-description strong,
+.timeline-bullets li strong {
+  font-weight: 600;
+  color: var(--text);
 }
 
 /* Stack pills */
@@ -629,19 +690,17 @@ body {
   background: var(--bg-2);
 }
 
+/* The pill background/border is gone: the circle around the first letters is
+   now the only enclosed part, and keeping a second outline around the whole
+   label would fight it. */
 .section-tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
   color: var(--primary);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 8px 16px;
-  border-radius: 999px;
   margin-bottom: 14px;
 }
 
@@ -857,20 +916,12 @@ body {
 .skill-circle-svg {
   width: 110px;
   height: 110px;
-  transform: rotate(-90deg);
 }
 
 .skill-circle-bg {
   fill: none;
   stroke: var(--bg-2);
   stroke-width: 6;
-}
-
-.skill-circle-fill {
-  fill: none;
-  stroke-width: 6;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skill-circle-wrap {
@@ -894,12 +945,6 @@ body {
   width: 40px;
   height: 40px;
   object-fit: contain;
-}
-
-.skill-circle-pct {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text-muted);
 }
 
 .skill-circle-name {
@@ -2102,8 +2147,11 @@ main {
    PERFORMANCE: CRITICAL META
 ════════════════════════════════════════ */
 /* Prioritize Above-the-Fold Content */
+/* NB: this rule used to carry a `font--weight: 700` typo. It was silently
+   dropped by the parser, so each element kept its own weight (.banner-name is
+   900). Removed rather than corrected — "fixing" it would have restyled the
+   name. Only the containment hint was ever doing anything here. */
 .banner-name, .section-title, .banner-role {
-  font--weight: 700;
   contain: layout style paint;
 }
 
@@ -2130,436 +2178,70 @@ img {
 }
 
 /* ================================================================
-   CONTACT SECTION
-   ================================================================ */
-.contact-subtitle {
-  color: var(--text-muted, #64748b);
-  font-size: 1rem;
-  max-width: 560px;
-  margin: 0 auto 2.5rem;
-  line-height: 1.6;
-}
-
-.contact-form {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 2.2rem 2rem;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.1rem;
-}
-
-.contact-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.contact-field label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  color: var(--text-secondary, #475569);
-}
-
-.contact-field input,
-.contact-field textarea {
-  width: 100%;
-  padding: 0.85rem 1rem;
-  border-radius: 12px;
-  border: 1.5px solid rgba(148, 163, 184, 0.25);
-  background: var(--bg-soft, rgba(255, 255, 255, 0.55));
-  color: var(--text-primary, #0f172a);
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-  outline: none;
-}
-
-[data-theme="dark"] .contact-field input,
-[data-theme="dark"] .contact-field textarea {
-  background: rgba(15, 23, 42, 0.5);
-  color: #e2e8f0;
-  border-color: rgba(148, 163, 184, 0.2);
-}
-
-.contact-field input:focus,
-.contact-field textarea:focus {
-  border-color: #38bdf8;
-  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15);
-}
-
-.contact-field textarea {
-  resize: vertical;
-  min-height: 140px;
-}
-
-.contact-submit {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.85rem 1.6rem;
-  border: none;
-  cursor: pointer;
-}
-
-.contact-submit:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-.contact-submit svg {
-  width: 18px;
-  height: 18px;
-}
-
-.contact-status {
-  font-size: 0.92rem;
-  min-height: 1.3em;
-  margin-top: 0.2rem;
-}
-
-.contact-status.is-success {
-  color: #059669;
-  font-weight: 600;
-}
-
-.contact-status.is-error {
-  color: #dc2626;
-  font-weight: 600;
-}
-
-.contact-direct {
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-  color: var(--text-muted, #64748b);
-  text-align: center;
-}
-
-.contact-direct a {
-  color: #38bdf8;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.contact-direct a:hover {
-  text-decoration: underline;
-}
-
-/* Tablet — collapse contact grid earlier to avoid cramped inputs */
-@media (max-width: 768px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .contact-form {
-    padding: 1.6rem 1.2rem;
-  }
-  .contact-submit {
-    align-self: stretch;
-    justify-content: center;
-  }
-}
-
-/* ================================================================
-   CHAT WIDGET (floating bubble + panel)
+   FLOATING CONTACT BUTTONS (WhatsApp + Messenger)
    ================================================================ */
 #chat-widget-root {
-  --chat-accent: #38bdf8;
-  --chat-accent-2: #818cf8;
-  --chat-bg: #ffffff;
-  --chat-fg: #0f172a;
-  --chat-muted: #64748b;
-  --chat-bubble-user-bg: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  --chat-bubble-assistant-bg: #f1f5f9;
-  --chat-border: rgba(148, 163, 184, 0.2);
   position: fixed;
   inset: auto 0 0 auto;
   z-index: 9000;
   pointer-events: none;
 }
 
-[data-theme="dark"] #chat-widget-root {
-  --chat-bg: #1e293b;
-  --chat-fg: #e2e8f0;
-  --chat-muted: #94a3b8;
-  --chat-bubble-assistant-bg: #334155;
-  --chat-border: rgba(148, 163, 184, 0.15);
-}
-
-.chat-fab {
+.floating-contact {
   pointer-events: auto;
   position: fixed;
   right: 22px;
   bottom: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 9000;
+}
+
+.floating-contact-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.85rem 1.2rem;
-  border: none;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(56, 189, 248, 0.35), 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.chat-fab:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(56, 189, 248, 0.45), 0 4px 8px rgba(0, 0, 0, 0.1);
+.floating-contact-btn:hover {
+  transform: translateY(-3px);
 }
 
-.chat-fab.is-open {
-  padding: 0.75rem;
+.floating-contact-btn svg {
+  width: 26px;
+  height: 26px;
 }
 
-.chat-fab.is-open .chat-fab-label,
-.chat-fab.is-open .chat-fab-dot { display: none; }
-
-.chat-fab-label {
-  letter-spacing: 0.2px;
+.floating-contact-whatsapp {
+  background: #25d366;
 }
 
-.chat-fab-dot {
-  position: absolute;
-  top: 8px;
-  right: 12px;
-  width: 9px;
-  height: 9px;
-  background: #22c55e;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  animation: chat-pulse 2s ease-in-out infinite;
-}
-
-@keyframes chat-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
-}
-
-.chat-panel {
-  pointer-events: auto;
-  position: fixed;
-  right: 22px;
-  bottom: 90px;
-  width: 380px;
-  max-width: calc(100vw - 32px);
-  height: 540px;
-  max-height: calc(100vh - 120px);
-  background: var(--chat-bg);
-  color: var(--chat-fg);
-  border-radius: 18px;
-  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.18), 0 4px 12px rgba(15, 23, 42, 0.08);
-  border: 1px solid var(--chat-border);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  transform-origin: bottom right;
-}
-
-.chat-panel.is-open {
-  display: flex;
-  animation: chat-pop 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-@keyframes chat-pop {
-  from { opacity: 0; transform: scale(0.92) translateY(8px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-.chat-header {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  padding: 1rem 1.1rem;
-  border-bottom: 1px solid var(--chat-border);
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08) 0%, rgba(129, 140, 248, 0.08) 100%);
-}
-
-.chat-header-avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-
-.chat-header-text { flex: 1; min-width: 0; }
-.chat-header-title { font-weight: 700; font-size: 0.95rem; }
-.chat-header-subtitle { font-size: 0.72rem; color: var(--chat-muted); margin-top: 1px; }
-
-.chat-log {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  scroll-behavior: smooth;
-}
-
-.chat-log::-webkit-scrollbar { width: 4px; }
-.chat-log::-webkit-scrollbar-thumb { background: var(--chat-border); border-radius: 999px; }
-
-.chat-msg {
-  display: flex;
-  max-width: 88%;
-}
-
-.chat-msg-user { align-self: flex-end; }
-.chat-msg-assistant { align-self: flex-start; }
-
-.chat-bubble {
-  padding: 0.65rem 0.9rem;
-  border-radius: 14px;
-  font-size: 0.9rem;
-  line-height: 1.45;
-  word-wrap: break-word;
-}
-
-.chat-msg-user .chat-bubble {
-  background: var(--chat-bubble-user-bg);
-  color: #fff;
-  border-bottom-right-radius: 4px;
-}
-
-.chat-msg-assistant .chat-bubble {
-  background: var(--chat-bubble-assistant-bg);
-  color: var(--chat-fg);
-  border-bottom-left-radius: 4px;
-}
-
-.chat-typing { display: inline-flex; gap: 4px; align-items: center; padding: 0.85rem 0.95rem; }
-.chat-typing-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--chat-muted);
-  animation: chat-dot 1.2s ease-in-out infinite;
-}
-.chat-typing-dot:nth-child(2) { animation-delay: 0.15s; }
-.chat-typing-dot:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes chat-dot {
-  0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
-  40% { transform: scale(1); opacity: 1; }
-}
-
-.chat-suggestions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  padding: 0 1.1rem 0.6rem;
-}
-
-.chat-suggestion {
-  background: var(--chat-bubble-assistant-bg);
-  color: var(--chat-fg);
-  border: 1px solid var(--chat-border);
-  padding: 0.4rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
-}
-
-.chat-suggestion:hover {
-  background: var(--chat-accent);
-  color: #fff;
-  border-color: var(--chat-accent);
-}
-
-.chat-input-row {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.7rem 0.8rem 0.5rem;
-  border-top: 1px solid var(--chat-border);
-}
-
-.chat-input {
-  flex: 1;
-  padding: 0.65rem 0.9rem;
-  border-radius: 999px;
-  border: 1.5px solid var(--chat-border);
-  background: var(--chat-bg);
-  color: var(--chat-fg);
-  font-family: inherit;
-  font-size: 0.9rem;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.chat-input:focus {
-  border-color: var(--chat-accent);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.18);
-}
-
-.chat-input:disabled { opacity: 0.6; }
-
-.chat-send {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.chat-send:hover:not(:disabled) { transform: scale(1.06); }
-.chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.chat-foot {
-  text-align: center;
-  font-size: 0.68rem;
-  color: var(--chat-muted);
-  padding: 0.25rem 0 0.6rem;
-  letter-spacing: 0.2px;
-}
-
-/* Tablet — slightly narrower chat panel */
-@media (max-width: 768px) {
-  .chat-panel {
-    width: 340px;
-    height: 500px;
-  }
+.floating-contact-messenger {
+  background: linear-gradient(135deg, #00c6ff 0%, #a033ff 50%, #ff5678 100%);
 }
 
 @media (max-width: 480px) {
-  .chat-panel {
-    right: 12px;
-    left: 12px;
-    bottom: 80px;
-    width: auto;
-    height: calc(100dvh - 110px); /* dvh respects mobile URL bar */
-  }
-  .chat-fab {
+  .floating-contact {
     right: 14px;
     bottom: 14px;
-    padding: 0.75rem 1rem;
-    font-size: 0.85rem;
+    gap: 10px;
+  }
+
+  .floating-contact-btn {
+    width: 46px;
+    height: 46px;
+  }
+
+  .floating-contact-btn svg {
+    width: 22px;
+    height: 22px;
   }
 }
 
@@ -2650,7 +2332,7 @@ img {
   .scroll-hint--down .scroll-hint-label { display: none; }
 }
 
-/* Tablet — slightly smaller arrow + matching chat FAB right edge */
+/* Tablet — slightly smaller arrow + matching floating contact buttons right edge */
 @media (max-width: 768px) {
   .scroll-hint-arrow { height: 48px; }
 }
@@ -2659,14 +2341,8 @@ img {
   .scroll-hint--down { bottom: 18px; }
   .scroll-hint--top {
     right: 14px;
-    bottom: 76px; /* sits just above the mobile chat FAB */
+    bottom: 76px; /* sits just above the mobile floating contact buttons */
   }
   .scroll-hint-arrow { height: 40px; }
   .scroll-hint-label { font-size: 0.6rem; letter-spacing: 3px; }
-}
-
-/* Hide scroll hints when the chat panel is open (avoids visual conflict) */
-body:has(.chat-panel.is-open) .scroll-hint {
-  opacity: 0 !important;
-  pointer-events: none !important;
 }

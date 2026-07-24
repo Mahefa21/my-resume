@@ -4,6 +4,7 @@ const cvEN = '/CV-RAOELIMAHEFA-Charly-EN.pdf'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { iconDownload, iconMail } from '../utils/icons.js'
+import { circleLabel } from '../utils/circleLabel.js'
 // Lazy-load Three.js so it doesn't block initial page render
 const loadThreeBg = () => import('../utils/three-bg.js')
 
@@ -17,7 +18,13 @@ function animateName(el) {
   // Split into lines, each letter gets a span
   const lines = text.split('\n').map(l => l.trim()).filter(Boolean)
   lines.forEach((line, lineIdx) => {
-    if (lineIdx > 0) el.appendChild(document.createElement('br'))
+    if (lineIdx > 0) {
+      // A real space before the <br>, otherwise the heading's text content reads
+      // "RAOELIMAHEFACharly" to crawlers and the brand query stops matching.
+      // Trailing whitespace before a line break is not rendered.
+      el.appendChild(document.createTextNode(' '))
+      el.appendChild(document.createElement('br'))
+    }
     for (const char of line) {
       const span = document.createElement('span')
       span.className = 'name-char'
@@ -42,16 +49,20 @@ function render() {
         <div class="col-lg-7 py-5">
 
           <div class="banner-status" data-reveal data-delay="1">
-            <span class="status-dot"></span>
-            ${t('banner.greeting')}
+            ${circleLabel(t('banner.greeting'))}
           </div>
 
-          <h1 class="banner-name" id="animatedName" data-reveal data-delay="2">
-            RAOELIMAHEFA
+          <!-- Single H1 for the whole page, and it carries the keywords: the
+               name and the role are both visible text inside it. -->
+          <h1 class="banner-heading">
+            <span class="banner-name" id="animatedName" data-reveal data-delay="2">
+              RAOELIMAHEFA
 Charly
+            </span>
+            <span class="banner-role" data-reveal data-delay="3">${t('banner.role')}</span>
           </h1>
 
-          <p class="banner-role" data-reveal data-delay="3">${t('banner.role')}</p>
+          <p class="banner-tagline" data-reveal data-delay="3">${t('banner.tagline')}</p>
 
           <div class="banner-actions" data-reveal data-delay="4">
             <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-primary-grad">
