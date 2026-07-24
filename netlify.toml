@@ -8,3 +8,51 @@
   from = "/api/chat"
   to = "/.netlify/functions/chat"
   status = 200
+
+# ---------------------------------------------------------------------------
+# Security headers
+#
+# CSP notes:
+#   - script-src 'self'        the build emits no inline JS (JSON-LD blocks are
+#                              data, not scripts, so they are not affected).
+#   - style-src 'unsafe-inline' required: the inline loader <style> in
+#                              index.html, inline style="" attributes, and the
+#                              inline styles GSAP writes while animating.
+#   - img-src cdn.jsdelivr.net / ollama.com  skill section logos.
+#   - connect-src lists the same external origins because the service worker
+#                              re-fetches them from its own context (runtimeCaching),
+#                              and SW fetches are checked against this policy.
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: blob: https://cdn.jsdelivr.net https://ollama.com; connect-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net https://ollama.com; manifest-src 'self'; worker-src 'self'; frame-src 'none'; upgrade-insecure-requests"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "accelerometer=(), autoplay=(), camera=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), midi=(), payment=(), usb=(), xr-spatial-tracking=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Resource-Policy = "same-origin"
+    # Legacy auditor is buggy and superseded by CSP — explicitly off.
+    X-XSS-Protection = "0"
+
+# Social crawlers (Facebook, LinkedIn, X…) must be able to read the preview
+# image and the manifest icons cross-origin, so they opt out of CORP.
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+# The API surface returns JSON only — never let a browser sniff or frame it.
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'none'; frame-ancestors 'none'"
+    Cache-Control = "no-store"
+    X-Content-Type-Options = "nosniff"

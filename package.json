@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "NODE_OPTIONS=--experimental-global-webcrypto vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "indexnow": "node scripts/indexnow.js"
   },
   "devDependencies": {
     "sass": "^1.86.0",
@@ -14,13 +15,9 @@
     "vite-plugin-pwa": "^1.3.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
-    "font-awesome": "^4.7.0",
     "gsap": "^3.14.2",
-    "jquery": "^3.7.1",
-    "print-js": "^1.6.0",
     "three": "^0.183.2"
   }
 }
