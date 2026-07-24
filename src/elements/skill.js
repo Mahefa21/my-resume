@@ -1,14 +1,19 @@
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
+import { circleLabel } from '../utils/circleLabel.js'
 
-const devicon = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${name}`
+// Pinned on purpose: `@latest` resolves to whatever is at the repo HEAD, so the
+// CDN could serve different bytes than the ones reviewed here. Bump manually.
+const DEVICON_VERSION = 'v2.16.0'
+const devicon = (name) =>
+  `https://cdn.jsdelivr.net/gh/devicons/devicon@${DEVICON_VERSION}/icons/${name}`
 
 const programmingLangs = [
-  { name: 'Ruby', pct: 78, color: '#e74c3c', icon: devicon('ruby/ruby-original.svg') },
-  { name: 'JavaScript', pct: 80, color: '#f7df1e', icon: devicon('javascript/javascript-original.svg') },
-  { name: 'TypeScript', pct: 60, color: '#3178c6', icon: devicon('typescript/typescript-original.svg') },
-  { name: 'PHP', pct: 60, color: '#777bb4', icon: devicon('php/php-original.svg') },
-  { name: 'Python', pct: 65, color: '#3776ab', icon: devicon('python/python-original.svg') },
+  { name: 'Ruby', icon: devicon('ruby/ruby-original.svg') },
+  { name: 'JavaScript', icon: devicon('javascript/javascript-original.svg') },
+  { name: 'TypeScript', icon: devicon('typescript/typescript-original.svg') },
+  { name: 'PHP', icon: devicon('php/php-original.svg') },
+  { name: 'Python', icon: devicon('python/python-original.svg') },
 ]
 
 const frameworks = [
@@ -50,25 +55,17 @@ const spokenLangs = [
 
 function circleHTML(lang) {
   const r = 42
-  const c = 2 * Math.PI * r
-  const offset = c - (lang.pct / 100) * c
   return `
     <div class="skill-circle-item">
       <div class="skill-circle-wrap">
         <svg class="skill-circle-svg" viewBox="0 0 100 100">
           <circle class="skill-circle-bg" cx="50" cy="50" r="${r}" />
-          <circle class="skill-circle-fill" cx="50" cy="50" r="${r}"
-            stroke="${lang.color}"
-            stroke-dasharray="${c}"
-            stroke-dashoffset="${c}"
-            data-target-offset="${offset}" />
         </svg>
         <div class="skill-circle-label">
-          <img src="${lang.icon}" alt="${lang.name}" class="skill-circle-icon" />
+          <img src="${lang.icon}" alt="${lang.name} — compétence de Charly RAOELIMAHEFA" class="skill-circle-icon" width="48" height="48" loading="lazy" decoding="async" />
         </div>
       </div>
       <div class="skill-circle-name">${lang.name}</div>
-      <div class="skill-circle-pct">${lang.pct}%</div>
     </div>
   `
 }
@@ -79,8 +76,8 @@ function render() {
       <div class="container">
 
         <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">✦ ${t('nav.skills')}</div>
-          <h2 class="section-title">${t('skills.title').replace('compétences', '<span>compétences</span>').replace('skills', '<span>skills</span>')}</h2>
+          <div class="section-tag">${circleLabel(t('nav.skills'))}</div>
+          <h2 class="section-title">${t('skills.title')}</h2>
           <div class="section-divider mx-auto"></div>
         </div>
 
@@ -100,7 +97,7 @@ function render() {
               <div class="skill-icon-grid">
                 ${frameworks.map(f => `
                   <div class="skill-icon-card glass-card">
-                    <img src="${f.icon}" alt="${f.name}" class="skill-icon-img" />
+                    <img src="${f.icon}" alt="${f.name}" class="skill-icon-img" width="40" height="40" loading="lazy" decoding="async" />
                     <div class="skill-icon-name">${f.name}</div>
                   </div>
                 `).join('')}
@@ -111,7 +108,7 @@ function render() {
               <div class="skill-icon-grid skill-icon-grid-3">
                 ${databases.map(d => `
                   <div class="skill-icon-card glass-card">
-                    <img src="${d.icon}" alt="${d.name}" class="skill-icon-img" />
+                    <img src="${d.icon}" alt="${d.name}" class="skill-icon-img" width="40" height="40" loading="lazy" decoding="async" />
                     <div class="skill-icon-name">${d.name}</div>
                   </div>
                 `).join('')}
@@ -127,7 +124,7 @@ function render() {
             <div class="marquee-track">
               ${[...tools, ...tools].map(tool => `
                 <span class="marquee-item">
-                  <img src="${tool.icon}" alt="${tool.name}" class="marquee-icon" />
+                  <img src="${tool.icon}" alt="${tool.name}" class="marquee-icon" width="28" height="28" loading="lazy" decoding="async" />
                   ${tool.name}
                 </span>
               `).join('')}
@@ -161,22 +158,7 @@ function render() {
   `
 
   observeReveal()
-  animateCircles()
   animateBars()
-}
-
-function animateCircles() {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const circle = entry.target
-        circle.style.strokeDashoffset = circle.dataset.targetOffset
-        observer.unobserve(circle)
-      }
-    })
-  }, { threshold: 0.3 })
-
-  document.querySelectorAll('.skill-circle-fill').forEach(el => observer.observe(el))
 }
 
 function animateBars() {

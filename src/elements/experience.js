@@ -1,6 +1,7 @@
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { iconExternalLink } from '../utils/icons.js'
+import { circleLabel } from '../utils/circleLabel.js'
 
 function render() {
   const jobs = t('experience.jobs')
@@ -12,8 +13,8 @@ function render() {
       <div class="container">
 
         <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">✦ ${t('nav.experience')}</div>
-          <h2 class="section-title">${t('experience.title').replace('professionnelles', '<span>professionnelles</span>').replace('experience', '<span>experience</span>')}</h2>
+          <div class="section-tag">${circleLabel(t('nav.experience'))}</div>
+          <h2 class="section-title">${t('experience.title')}</h2>
           <div class="section-divider mx-auto"></div>
         </div>
 

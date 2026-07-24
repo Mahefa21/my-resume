@@ -2,10 +2,13 @@ import navigatorImage from './../../src/assets/images/navigator.webp'
 import ekitiaImage from './../../src/assets/images/ekitia.webp'
 import topImage from './../../src/assets/images/nounoutop.webp'
 import emitSite from './../../src/assets/images/emit.webp'
+import aegImage from './../../src/assets/images/aeg.webp'
+import washyImage from './../../src/assets/images/washy.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
+import { circleLabel } from '../utils/circleLabel.js'
 
-const projectImages = [navigatorImage, ekitiaImage, topImage, emitSite]
+const projectImages = [washyImage, aegImage, navigatorImage, ekitiaImage, topImage, emitSite]
 
 function render() {
   const projects = t('projects.items')
@@ -15,8 +18,8 @@ function render() {
       <div class="container">
 
         <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">✦ ${t('nav.projects')}</div>
-          <h2 class="section-title">${t('projects.title').replace('réalisations', '<span>réalisations</span>').replace('projects', '<span>projects</span>')}</h2>
+          <div class="section-tag">${circleLabel(t('nav.projects'))}</div>
+          <h2 class="section-title">${t('projects.title')}</h2>
           <div class="section-divider mx-auto"></div>
         </div>
 
@@ -25,7 +28,7 @@ function render() {
           <div class="project-featured" data-reveal data-delay="1">
             <div class="glass-card project-featured-card">
               <div class="project-featured-img">
-                <img src="${projectImages[0]}" alt="${projects[0].name}" />
+                <img src="${projectImages[0]}" alt="${projects[0].name} — projet réalisé par Charly RAOELIMAHEFA" loading="lazy" decoding="async" />
                 <div class="project-featured-overlay"></div>
               </div>
               <div class="project-featured-content">
@@ -52,7 +55,7 @@ function render() {
             <div class="projects-grid-item" data-reveal data-delay="${i + 2}">
               <div class="project-card glass-card">
                 <div class="project-card-img-wrap">
-                  <img src="${projectImages[i + 1]}" alt="${project.name}" />
+                  <img src="${projectImages[i + 1]}" alt="${project.name} — projet réalisé par Charly RAOELIMAHEFA" loading="lazy" decoding="async" />
                   <div class="project-card-img-overlay"></div>
                 </div>
                 <div class="project-card-body">

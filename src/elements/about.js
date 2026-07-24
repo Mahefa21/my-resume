@@ -2,6 +2,7 @@ import charlyImage from './../../src/assets/images/charly.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { iconWhatsapp, iconFacebook, iconMail } from '../utils/icons.js'
+import { circleLabel } from '../utils/circleLabel.js'
 
 function render() {
   document.querySelector('#about').innerHTML = `
@@ -13,7 +14,7 @@ function render() {
           <!-- Left: Photo + Socials -->
           <div class="about-left" data-reveal="left" data-delay="1">
             <div class="about-photo-card">
-              <img class="about-photo" src="${charlyImage}" alt="Charly RAOELIMAHEFA" />
+              <img class="about-photo" src="${charlyImage}" alt="Portrait de Charly RAOELIMAHEFA, développeur full stack" loading="lazy" decoding="async" />
               <div class="about-photo-border"></div>
             </div>
             <div class="about-socials">
@@ -32,8 +33,8 @@ function render() {
           <!-- Right: Content -->
           <div class="about-right">
             <div data-reveal data-delay="1">
-              <div class="section-tag">✦ ${t('nav.about')}</div>
-              <h2 class="section-title">${t('about.title').replace('moi', '<span>moi</span>').replace('me', '<span>me</span>')}</h2>
+              <div class="section-tag">${circleLabel(t('nav.about'))}</div>
+              <h2 class="section-title">${t('about.title')}</h2>
               <div class="section-divider mb-4"></div>
             </div>
 
