@@ -1,10 +1,12 @@
-// Renders a label whose first letters are enclosed in a circle while the rest
-// of the word runs out of it — "(Bon)jour, je suis", "(Com)pétences".
+// Renders a label whose first letters sit inside a solid trapezoid tag while
+// the rest of the word runs out of it — "(Bon)jour, je suis", "(Com)pétences".
+// Name kept as "circle" even though the shape is now a trapezoid (see the CSS
+// rules below it) — renaming would only touch call sites for no behavior change.
 //
-// The cut must land *inside* a word: a circle wrapped around "À p" (space
+// The cut must land *inside* a word: a tag wrapped around "À p" (space
 // included) or "Hi," (comma included) reads as a mistake rather than a device.
 // So the head stops at the first space, which is why FR "À propos" keeps just
-// "À" — a one-letter circle, held to the same diameter by min-width in CSS.
+// "À" as its head.
 
 const MAX_HEAD = 3
 

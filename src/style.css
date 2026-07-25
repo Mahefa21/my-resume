@@ -378,28 +378,27 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  /* Sized to its text, not fixed: a fixed square centres the letters, leaving
-     ~10px of dead space between the last letter and the stroke — which visually
-     detaches "Hel" from "lo". Hugging the text keeps the word joined.
-     min-width only catches the one-letter case (FR "À propos") so it doesn't
-     collapse to a dot; every other head is wider than it anyway. */
-  min-width: 2.4em;
-  aspect-ratio: 1;
   flex-shrink: 0;
-  padding: 0 0.22em;
-  border-radius: 50%;
-  border: 1.5px solid rgba(56, 189, 248, 0.45);
-  background: rgba(56, 189, 248, 0.1);
-  /* letter-spacing adds a trailing gap after the last letter, pushing the text
-     left of true centre — put it back. */
-  text-indent: 0.15em;
+  padding: 0.32em 0.32em 0.32em 0.5em;
+  /* Right-angle trapezoid: left edge stays vertical, right edge slants inward
+     at the bottom. The layout box (and so where the tail starts) stays a plain
+     rectangle — clip-path only paints the fill, it doesn't reshape the box —
+     so any slant here opens a real gap at the bottom between the fill and the
+     tail, even though the top stays flush. Kept small on purpose: enough to
+     read as an angled cut, not enough to leave visible whitespace at the
+     bottom. A steeper slant looked more "distinctive" in isolation but broke
+     the one-word reading the tail depends on. */
+  clip-path: polygon(0 0, 100% 0, calc(100% - 0.16em) 100%, 0 100%);
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 800;
 }
 
 .circle-label-tail {
-  /* Pulled back onto the stroke: with the circle hugging its text, the residual
-     gap is the padding plus the border, which is already more than a normal
-     inter-letter space. The word has to read as one. */
-  margin-left: -0.12em;
+  /* Closes the residual gap left by the slant so the word reads as tight as
+     plain text — this was too generous before (-0.05em against a 0.4em
+     slant), which left a visible wedge of whitespace at the bottom of the tag. */
+  margin-left: -0.14em;
 }
 
 /* The H1 is only a wrapper — its two children carry all the visible styling,

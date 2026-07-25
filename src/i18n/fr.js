@@ -8,7 +8,7 @@ export default {
   },
   meta: {
     title: 'Charly RAOELIMAHEFA — Développeur Full Stack Ruby & IA',
-    description: "Développeur full stack : 4 ans en Ruby on Rails, React et extraction documentaire par IA (OCR, LayoutLM). Basé à Madagascar, disponible en remote.",
+    description: "Développeur full stack : 4 ans en Ruby on Rails, React et extraction documentaire par IA (OCR, LayoutLM). Basé à Madagascar.",
   },
   loader: {
     text: 'Chargement',
