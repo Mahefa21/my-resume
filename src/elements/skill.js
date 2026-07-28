@@ -9,11 +9,11 @@ const devicon = (name) =>
   `https://cdn.jsdelivr.net/gh/devicons/devicon@${DEVICON_VERSION}/icons/${name}`
 
 const programmingLangs = [
-  { name: 'Ruby', icon: devicon('ruby/ruby-original.svg') },
   { name: 'JavaScript', icon: devicon('javascript/javascript-original.svg') },
   { name: 'TypeScript', icon: devicon('typescript/typescript-original.svg') },
   { name: 'PHP', icon: devicon('php/php-original.svg') },
   { name: 'Python', icon: devicon('python/python-original.svg') },
+  { name: 'Ruby', icon: devicon('ruby/ruby-original.svg') },
 ]
 
 const frameworks = [
