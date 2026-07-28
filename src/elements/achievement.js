@@ -20,7 +20,6 @@ function render() {
         <div class="text-center mb-5" data-reveal>
           <div class="section-tag">${circleLabel(t('nav.projects'))}</div>
           <h2 class="section-title">${t('projects.title')}</h2>
-          <div class="section-divider mx-auto"></div>
         </div>
 
         <!-- Featured Project -->

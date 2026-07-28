@@ -34,8 +34,7 @@ function render() {
           <div class="about-right">
             <div data-reveal data-delay="1">
               <div class="section-tag">${circleLabel(t('nav.about'))}</div>
-              <h2 class="section-title">${t('about.title')}</h2>
-              <div class="section-divider mb-4"></div>
+              <h2 class="section-title mb-4">${t('about.title')}</h2>
             </div>
 
             <p class="about-text" data-reveal data-delay="2">

@@ -47,9 +47,13 @@ const tools = [
   { name: 'Mistral AI', icon: devicon('python/python-original.svg') },
 ]
 
+// Bar width follows position on the CEFR 6-level scale (A1-C2) that the
+// labels themselves reference, i.e. level_index / 6 — not a free-standing
+// estimate. B2 is level 4 of 6 (67%), A2 is level 2 of 6 (33%): keeping both
+// on the same scale is what makes the bars comparable to each other.
 const spokenLangs = [
-  { key: 'french',   pct: 80, levelKey: 'intermediate', flag: '🇫🇷' },
-  { key: 'english',  pct: 60, levelKey: 'functional', flag: '🇬🇧' },
+  { key: 'french',   pct: 67, levelKey: 'intermediate', flag: '🇫🇷' },
+  { key: 'english',  pct: 33, levelKey: 'functional', flag: '🇬🇧' },
   { key: 'malagasy', pct: 100, levelKey: 'native', flag: '🇲🇬' },
 ]
 
@@ -78,7 +82,6 @@ function render() {
         <div class="text-center mb-5" data-reveal>
           <div class="section-tag">${circleLabel(t('nav.skills'))}</div>
           <h2 class="section-title">${t('skills.title')}</h2>
-          <div class="section-divider mx-auto"></div>
         </div>
 
         <!-- Programming Languages — Circular Progress -->

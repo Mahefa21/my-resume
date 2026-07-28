@@ -6,21 +6,26 @@
 /* ════════════════════════════════════════
    DESIGN TOKENS
 ════════════════════════════════════════ */
+/* Flat design: no elevation shadows, no blur/glass, no gradient fills.
+   --shadow is kept at "none" (rather than deleted) so the handful of
+   components that reference it don't need a separate edit, and --bg-card /
+   --navbar-bg are solid opaque colors now — they used to be translucent on
+   purpose, to let a backdrop-filter blur show through; without the blur,
+   translucent panels would just look muddy over whatever scrolls behind them. */
 :root {
   --bg:          #f8fafc;
   --bg-2:        #f1f5f9;
-  --bg-card:     rgba(255, 255, 255, 0.75);
+  --bg-card:     #ffffff;
   --primary:     #38bdf8;
   --secondary:   #818cf8;
-  --gradient:    linear-gradient(135deg, #4cacd8 0%, #71727a 100%);
   --text:        #0f172a;
   --text-muted:  #475569;
   --border:      rgba(15, 23, 42, 0.1);
-  --shadow:      0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow:      none;
   --radius:      16px;
   --radius-sm:   8px;
 
-  --navbar-bg:   rgba(248, 250, 252, 0.88);
+  --navbar-bg:   #f8fafc;
   --toggler-inv: invert(0);
   --loader-bg:   #f8fafc;
   --profile-ring-bg: var(--bg);
@@ -32,12 +37,12 @@
 [data-theme="dark"] {
   --bg:          #0f172a;
   --bg-2:        #1e293b;
-  --bg-card:     rgba(30, 41, 59, 0.65);
+  --bg-card:     #1e293b;
   --text:        #f1f5f9;
   --text-muted:  #94a3b8;
   --border:      rgba(148, 163, 184, 0.12);
-  --shadow:      0 8px 32px rgba(0, 0, 0, 0.45);
-  --navbar-bg:   rgba(15, 23, 42, 0.85);
+  --shadow:      none;
+  --navbar-bg:   #0f172a;
   --toggler-inv: invert(1);
   --loader-bg:   #0f172a;
   --profile-ring-bg: var(--bg);
@@ -74,7 +79,7 @@ body {
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  background: var(--primary);
   border-radius: 999px;
 }
 
@@ -136,10 +141,7 @@ body {
 .loader-initials {
   font-size: 22px;
   font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   letter-spacing: 1px;
 }
 
@@ -164,7 +166,7 @@ body {
 
 .loader-bar-fill {
   height: 100%;
-  background: var(--gradient);
+  background: var(--primary);
   animation: loadBar 1.8s ease-in-out forwards;
 }
 
@@ -186,10 +188,7 @@ body {
 ════════════════════════════════════════ */
 #navbar .navbar {
   background: var(--navbar-bg) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 1px 24px rgba(0, 0, 0, 0.3);
   padding: 0.75rem 1.5rem;
 }
 
@@ -229,10 +228,7 @@ body {
 #navbar .brand-name {
   font-size: 16px;
   font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
 #navbar .nav-link {
@@ -253,7 +249,7 @@ body {
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: var(--gradient);
+  background: var(--primary);
   border-radius: 999px;
   transition: width 0.3s ease;
 }
@@ -293,7 +289,7 @@ body {
 }
 
 .lang-btn.active {
-  background: var(--gradient);
+  background: var(--primary);
   color: #fff;
 }
 
@@ -367,38 +363,25 @@ body {
 }
 
 /* Shared circle-label device — see src/utils/circleLabel.js.
-   Everything is sized in em, so the same markup works at 15px in the hero and
-   13px on section tags without a second set of rules. */
+   Flat by design: no box, no gradient fill, just a solid underline beneath
+   the first word-fragment ("head") to mark it as the accent, in line with
+   the site-wide move away from shadowed/gradient-filled shapes. Everything
+   is sized in em, so the same markup works at 15px in the hero and 13px on
+   section tags without a second set of rules. */
 .circle-label {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 .circle-label-head {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  padding: 0.32em 0.32em 0.32em 0.5em;
-  /* Right-angle trapezoid: left edge stays vertical, right edge slants inward
-     at the bottom. The layout box (and so where the tail starts) stays a plain
-     rectangle — clip-path only paints the fill, it doesn't reshape the box —
-     so any slant here opens a real gap at the bottom between the fill and the
-     tail, even though the top stays flush. Kept small on purpose: enough to
-     read as an angled cut, not enough to leave visible whitespace at the
-     bottom. A steeper slant looked more "distinctive" in isolation but broke
-     the one-word reading the tail depends on. */
-  clip-path: polygon(0 0, 100% 0, calc(100% - 0.16em) 100%, 0 100%);
-  background: var(--gradient);
-  color: #fff;
   font-weight: 800;
+  border-bottom: 0.16em solid var(--primary);
+  padding-bottom: 0.05em;
 }
 
 .circle-label-tail {
-  /* Closes the residual gap left by the slant so the word reads as tight as
-     plain text — this was too generous before (-0.05em against a 0.4em
-     slant), which left a visible wedge of whitespace at the bottom of the tag. */
-  margin-left: -0.14em;
+  font-weight: inherit;
+  margin-left: 0.05em;
 }
 
 /* The H1 is only a wrapper — its two children carry all the visible styling,
@@ -451,10 +434,7 @@ body {
   /* Reset what it now inherits from the H1 at small breakpoints. */
   letter-spacing: normal;
   line-height: 1.2;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   margin-top: 8px;
 }
 
@@ -498,7 +478,6 @@ body {
   font-weight: 600;
   padding: 8px 18px;
   border-radius: 999px;
-  backdrop-filter: blur(8px);
   transition: all 0.2s ease;
 }
 
@@ -521,12 +500,11 @@ body {
   max-width: 360px;
 }
 
+/* Flat design drops the soft glow effect these relied on (filter: blur()) —
+   a solid, unblurred disc in its place would just look like a stray shape
+   pasted behind the card, so the decoration is hidden rather than half-kept. */
 .hero-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.3;
-  pointer-events: none;
+  display: none;
 }
 
 .hero-orb-1 {
@@ -557,7 +535,6 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 28px 24px;
-  backdrop-filter: blur(16px);
   font-family: 'Courier New', monospace;
   font-size: 15px;
   line-height: 1.8;
@@ -573,12 +550,15 @@ body {
 .code-string { color: #34d399; }
 .code-bool { color: #f59e0b; }
 
-/* Buttons */
+/* Buttons.
+   .btn-primary-grad keeps its name despite no longer using a gradient fill —
+   same reasoning as .circle-label and .glass-card elsewhere in this file:
+   renaming would only touch call sites, not behavior. */
 .btn-primary-grad {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--gradient);
+  background: var(--primary);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -587,13 +567,11 @@ body {
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.35);
+  transition: transform 0.2s, opacity 0.2s;
 }
 
 .btn-primary-grad:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.45);
   color: #fff;
 }
 
@@ -616,7 +594,6 @@ body {
   cursor: pointer;
   text-decoration: none;
   transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
 }
 
 .btn-outline-grad:hover {
@@ -712,34 +689,21 @@ body {
 }
 
 .section-title span {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
 }
 
-.section-divider {
-  width: 60px;
-  height: 4px;
-  background: var(--gradient);
-  border-radius: 999px;
-  margin-top: 14px;
-}
-
-/* Glass card */
+/* Flat card. Keeps the name ".glass-card" — it was a frosted, blurred panel
+   before; now it's a plain solid card with a border. Renaming would only
+   touch the many call sites in src/elements/*.js for no behavior change. */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: var(--shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .glass-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
   border-color: rgba(56, 189, 248, 0.25);
 }
 
@@ -782,7 +746,7 @@ body {
   position: absolute;
   inset: -3px;
   border-radius: 22px;
-  background: var(--gradient);
+  background: var(--primary);
   z-index: 0;
 }
 
@@ -808,7 +772,6 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  backdrop-filter: blur(12px);
   flex-wrap: wrap;
 }
 
@@ -828,10 +791,7 @@ body {
 .stat-value {
   font-size: 40px;
   font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   line-height: 1;
 }
 
@@ -859,13 +819,11 @@ body {
   border: 1px solid var(--border);
   text-decoration: none;
   transition: all 0.2s ease;
-  backdrop-filter: blur(8px);
 }
 
 .social-link-btn:hover {
   border-color: var(--primary);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
 }
 
 .social-link-btn svg {
@@ -1033,7 +991,6 @@ body {
   padding: 12px 26px;
   border-radius: 999px;
   white-space: nowrap;
-  backdrop-filter: blur(8px);
   flex-shrink: 0;
 }
 
@@ -1097,7 +1054,7 @@ body {
 
 .spoken-bar-fill {
   height: 100%;
-  background: var(--gradient);
+  background: var(--primary);
   border-radius: 999px;
   width: 0;
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -1125,7 +1082,7 @@ body {
   top: 8px;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--primary), var(--secondary), transparent);
+  background: var(--primary);
 }
 
 .timeline-item {
@@ -1140,8 +1097,9 @@ body {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--gradient);
+  background: var(--primary);
   border: 3px solid var(--bg);
+  /* A solid, unblurred ring — not an elevation shadow, so it stays under flat design. */
   box-shadow: 0 0 0 2px var(--primary);
 }
 
@@ -1261,7 +1219,7 @@ body {
   gap: 14px;
   padding: 16px 20px;
   margin-bottom: 12px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(129, 140, 248, 0.05));
+  background: rgba(56, 189, 248, 0.05);
   transition: border-color 0.3s, transform 0.3s;
 }
 
@@ -1480,10 +1438,7 @@ body {
 .footer-logo-text {
   font-size: 24px;
   font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   margin-bottom: 8px;
 }
 
@@ -1547,10 +1502,7 @@ body {
 }
 
 .footer-heart {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--primary);
   font-size: 14px;
 }
 
@@ -1607,11 +1559,6 @@ body {
 
   .about-socials {
     justify-content: center;
-  }
-
-  .section-divider {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   /* Skills responsive */
@@ -1804,24 +1751,8 @@ body {
 [data-theme="light"] #navbar .nav-link.active {
   color: var(--text) !important;
 }
-[data-theme="light"] .glass-card:hover {
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
-}
-[data-theme="light"] .project-card:hover,
-[data-theme="light"] .project-featured-card:hover {
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-}
-[data-theme="light"] .btn-primary-grad {
-  box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
-}
-[data-theme="light"] .btn-primary-grad:hover {
-  box-shadow: 0 8px 28px rgba(56, 189, 248, 0.35);
-}
 [data-theme="light"] .timeline-dot {
   border-color: var(--bg);
-}
-[data-theme="light"] .hero-code-block {
-  background: rgba(255, 255, 255, 0.8);
 }
 
 /* ════════════════════════════════════════
@@ -1972,10 +1903,6 @@ main {
    RESPONSIVE: SMALL PHONE (< 480px)
 ════════════════════════════════════════ */
 @media (max-width: 480px) {
-  :root {
-    --shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  }
-
   * { touch-action: manipulation; }
 
   .container { padding: 0 12px; }
@@ -2205,8 +2132,7 @@ img {
   height: 52px;
   border-radius: 50%;
   color: #fff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease;
 }
 
 .floating-contact-btn:hover {
@@ -2222,8 +2148,10 @@ img {
   background: #25d366;
 }
 
+/* Messenger's own mark is a 3-tone gradient; flattened to their solid brand
+   blue to keep every fill on the site flat, including third-party icons. */
 .floating-contact-messenger {
-  background: linear-gradient(135deg, #00c6ff 0%, #a033ff 50%, #ff5678 100%);
+  background: #0084ff;
 }
 
 @media (max-width: 480px) {

@@ -47,7 +47,10 @@ export function initThreeBg(container) {
     vertexColors: true,
     transparent: true,
     opacity: 0.7,
-    blending: THREE.AdditiveBlending,
+    // Normal (not additive) blending: additive made overlapping particles add
+    // their light together, which is exactly what a glow is — flat design
+    // wants flat colour, not light stacking up into a halo.
+    blending: THREE.NormalBlending,
     depthWrite: false,
   })
 
@@ -66,7 +69,7 @@ export function initThreeBg(container) {
     vertexColors: true,
     transparent: true,
     opacity: 0.15,
-    blending: THREE.AdditiveBlending,
+    blending: THREE.NormalBlending,
     depthWrite: false,
   })
 
@@ -94,7 +97,7 @@ export function initThreeBg(container) {
       color,
       transparent: true,
       opacity: 0.35,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.NormalBlending,
       depthWrite: false,
     })
 
