@@ -2208,10 +2208,19 @@ img {
   transform: translateX(-50%) translateY(0);
 }
 
-/* top button — bottom-right, offset above the chat FAB */
+/* top button — bottom-right, offset above the chat FAB.
+   bottom must clear the FAB stack's own height, not just its bottom margin:
+   the FAB stack is 2 buttons (52px) + 1 gap (12px) = 116px tall, sitting
+   22px off the viewport bottom, so its top edge is 138px up. This button's
+   own rendered height (arrow + label + padding) is ~113px, so a bottom of
+   90px put its bottom edge only 90px up — 48px *into* the FAB stack, with
+   the "HAUT" label landing almost exactly behind the WhatsApp circle
+   (verified by measuring both boxes; the FAB paints over it, z-index 9000
+   vs this button's 80). 160px clears it with a 22px gap, matching the
+   FAB's own bottom offset. */
 .scroll-hint--top {
   right: 22px;
-  bottom: 90px;
+  bottom: 160px;
   transform: translateY(20px);
 }
 .scroll-hint--top.is-visible {
@@ -2268,7 +2277,10 @@ img {
   .scroll-hint--down { bottom: 18px; }
   .scroll-hint--top {
     right: 14px;
-    bottom: 76px; /* sits just above the mobile floating contact buttons */
+    /* Same fix as the base rule above: at this width the FAB stack is
+       2×46px + 10px gap = 102px tall, 14px off the bottom, so its top edge
+       sits 116px up — 76px left this button overlapping it. */
+    bottom: 134px;
   }
   .scroll-hint-arrow { height: 40px; }
   .scroll-hint-label { font-size: 0.6rem; letter-spacing: 3px; }

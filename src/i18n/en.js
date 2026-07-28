@@ -22,7 +22,7 @@ export default {
   banner: {
     greeting: 'Hello, I am',
     role: 'Full Stack Developer',
-    tagline: '<strong>4 years</strong> building with Ruby on Rails, React and Node.js. Based in Antananarivo, Madagascar — <strong>available remote</strong>.',
+    tagline: '<strong>4 years</strong> building with Ruby on Rails, React and Node.js. Based in Antananarivo, Madagascar: <strong>available remote</strong>.',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -30,7 +30,7 @@ export default {
     scroll: 'Scroll',
   },
   about: {
-    title: "Solving real problems with <span>AI</span>",
+    title: "Solving <span>real</span> problems",
     p1: "My goal is straightforward: help businesses <strong>solve real problems</strong> using the power of <strong>artificial intelligence</strong>. At a time when AI is fundamentally changing the way organizations work, I put these technologies <strong>to use on the ground</strong>, where it matters most.",
     p2: "From <strong>document digitalization</strong> to <strong>business process automation</strong>, I design custom, practical AI solutions — leveraging tools like <strong>Ollama and Mistral AI</strong> to address the specific challenges each organization faces.",
     yearsExp: 'Years of experience',

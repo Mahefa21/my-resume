@@ -22,7 +22,7 @@ export default {
   banner: {
     greeting: 'Bonjour, je suis',
     role: 'Développeur Full Stack',
-    tagline: "<strong>4 ans d'expérience</strong> en Ruby on Rails, React et Node.js, et en <strong>extraction documentaire</strong> par IA. Basé à Antananarivo, Madagascar — <strong>disponible en remote</strong>.",
+    tagline: "<strong>4 ans d'expérience</strong> en Ruby on Rails, React et Node.js, et en <strong>extraction documentaire</strong> par IA. Basé à Antananarivo, Madagascar: <strong>disponible en remote</strong>.",
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
