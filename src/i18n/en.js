@@ -71,7 +71,7 @@ export default {
       {
         title: 'Web Designer / Digital Marketing',
         company: 'Impact Production Group (IPG)',
-        location: 'Remote · Mauritius',
+        location: 'Mauritius',
         period: 'October 2025 — April 2026',
         bullets: [
           'Research, design and implementation of <strong>AI-powered solutions</strong> to address the company\'s operational challenges',

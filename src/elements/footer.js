@@ -44,7 +44,7 @@ function render() {
 
         </div>
 
-        <div class="footer-bottom">
+        <div class="footer-bottom text-center">
           <div class="footer-divider"></div>
           <p class="footer-copy">
             ${t('footer.copyright')} &nbsp;·&nbsp;

@@ -85,8 +85,13 @@ Charly
 
         <div class="col-lg-5 d-none d-lg-flex justify-content-center">
           <div class="hero-visual" data-reveal="scale" data-delay="3">
-            <div class="hero-orb hero-orb-1"></div>
-            <div class="hero-orb hero-orb-2"></div>
+            <!-- Flat design dropped the soft-glow look these relied on
+                 (filter: blur()) — a solid, unblurred disc in its place would
+                 look like a stray shape pasted behind the card, so they're
+                 kept in the markup but switched off via Bootstrap's d-none
+                 rather than a custom CSS rule. -->
+            <div class="hero-orb hero-orb-1 d-none"></div>
+            <div class="hero-orb hero-orb-2 d-none"></div>
             <div class="hero-code-block">
               <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">developer</span> = {</div>
               <div class="code-line code-indent"><span class="code-prop">name</span>: <span class="code-string">"Charly"</span>,</div>

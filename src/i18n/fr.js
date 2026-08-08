@@ -71,7 +71,7 @@ export default {
       {
         title: 'Web Designer / Digital Marketing',
         company: 'Impact Production Group (IPG)',
-        location: 'Télétravail · Maurice',
+        location: 'Île Maurice',
         period: 'Octobre 2025 — Avril 2026',
         bullets: [
           'Recherche, conception et réalisation de <strong>solutions IA</strong> pour répondre aux besoins opérationnels de l\'entreprise',
