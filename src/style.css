@@ -2215,7 +2215,6 @@ img {
      landing on top of the word "concrets"). A solid pill gives it its own
      legible surface regardless of what scrolls underneath. */
   background: var(--bg-card);
-  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
 }
 .scroll-hint--top.is-visible {
