@@ -336,6 +336,14 @@ body {
   align-items: center;
   overflow: hidden;
   scroll-snap-align: start;
+  /* Sandbox the WebGL canvas's own GPU compositing layer to this box.
+     overflow:hidden alone is a layout clip — it doesn't guarantee the
+     canvas's paint/compositing layer can't visually interact with
+     neighbouring layers on every GPU driver. contain+isolation make that
+     boundary explicit, which is the standard mitigation for the class of
+     bug where a WebGL layer bleeds into unrelated scrolled content. */
+  contain: layout paint;
+  isolation: isolate;
 }
 
 #banner .banner-content {
@@ -1772,10 +1780,15 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
   }
 }
 
-/* GPU acceleration for smooth scrolling */
-main {
-  will-change: scroll-position;
-}
+/* will-change: scroll-position used to sit here as a blanket hint across the
+   entire main content area (About through Achievements) for the whole time
+   the page is open — that's the opposite of how will-change is meant to be
+   used (a short-lived hint right before a specific animation). Forcing such
+   a large element onto its own GPU compositing layer for the page's whole
+   lifetime, next to the hero's WebGL canvas (#banner, its own layer too),
+   is a known trigger for compositing glitches on some Android GPUs — visible
+   as a band of static/noise where the two layers' boundaries meet during
+   scroll. Removed; #banner is contained separately below instead. */
 
 /* ════════════════════════════════════════
    RESPONSIVE: TABLET (1024px and down)
