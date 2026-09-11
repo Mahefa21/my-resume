@@ -30,9 +30,13 @@
 
   <!-- Poppins, discovered by the preload scanner immediately instead of behind
        an @import in style.css. Only the 6 weights the stylesheet actually uses
-       are requested (was 18 variants, italics included — none are used). -->
+       are requested (was 18 variants, italics included — none are used).
+       Inter is loaded alongside it, in the same request, for the banner name
+       only (.banner-name) — the closest free match to Univers (Frutiger's
+       Linotype/Monotype typeface, not available as a webfont), reserved for
+       that one element; everything else stays on Poppins. -->
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Poppins:wght@400;500;600;700;800;900&display=swap" />
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/favicon.png" />

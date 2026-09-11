@@ -3,10 +3,12 @@ import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { iconWhatsapp, iconFacebook, iconMail } from '../utils/icons.js'
 import { circleLabel } from '../utils/circleLabel.js'
+import { sectionWave } from '../utils/sectionWave.js'
 
 function render() {
   document.querySelector('#about').innerHTML = `
     <div class="section">
+      ${sectionWave}
       <div class="container">
 
         <div class="about-split">
@@ -47,7 +49,7 @@ function render() {
             <!-- Stats Row -->
             <div class="about-stats" data-reveal data-delay="4">
               <div class="about-stat-item">
-                <div class="stat-value">4+</div>
+                <div class="stat-value">3+</div>
                 <div class="stat-label">${t('about.yearsExp')}</div>
               </div>
               <div class="about-stat-divider"></div>
@@ -57,7 +59,7 @@ function render() {
               </div>
               <div class="about-stat-divider"></div>
               <div class="about-stat-item">
-                <div class="stat-value">4</div>
+                <div class="stat-value">4+</div>
                 <div class="stat-label">${t('about.companies')}</div>
               </div>
             </div>

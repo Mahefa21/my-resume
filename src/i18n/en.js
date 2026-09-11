@@ -8,7 +8,7 @@ export default {
   },
   meta: {
     title: 'Charly RAOELIMAHEFA — Full Stack & AI Developer',
-    description: "Full stack developer: 4 years in Ruby on Rails, React and AI document extraction (OCR, LayoutLM). Based in Madagascar, available remote. Projects and CV.",
+    description: "Full stack developer: 3+ years in Ruby on Rails, React and AI document extraction (OCR, LayoutLM). Based in Madagascar, available remote. Projects and CV.",
   },
   loader: {
     text: 'Loading',
@@ -22,7 +22,7 @@ export default {
   banner: {
     greeting: 'Hello, I am',
     role: 'Full Stack Developer',
-    tagline: '<strong>4 years</strong> building with Ruby on Rails, React and Node.js. Based in Antananarivo, Madagascar: <strong>available remote</strong>.',
+    tagline: '<strong>3+ years</strong> building with Ruby on Rails, React and Node.js. Based in Antananarivo, Madagascar: <strong>available remote</strong>.',
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -59,13 +59,24 @@ export default {
       {
         title: 'Web Developer',
         company: 'Ets Andriamiadana',
-        location: 'Remote · Madagascar',
+        location: 'Madagascar',
         period: 'April 2026 — Present',
         bullets: [
-          'Built an application to manage trips for the company\'s <strong>staff vehicles</strong>',
-          'Implemented a <strong>visualization system</strong> for better trip monitoring',
+          'Built an application to manage and log <strong>staff vehicle trips</strong>',
           'Maintained the application and added <strong>new features</strong> based on evolving needs',
-          'Used <strong>React Refine</strong> for the front-end, connected to Google AppSheet endpoints',
+          'Used <strong>React Refine</strong> for the front-end, with Hono.js and MySQL on the back-end, deployed on Cloudflare Workers',
+        ],
+      },
+      {
+        title: 'React Front-End Developer',
+        company: 'Bliss Holiday',
+        location: 'Remote · Mauritius',
+        period: 'April 2026 — June 2026',
+        bullets: [
+          'Built a dynamic <strong>activity catalogue</strong> website for Bliss Holiday',
+          '<strong>Automatic PDF generation</strong> for every newly added activity',
+          'Developed a lightweight <strong>back-office</strong> for adding, editing, and deleting activities',
+          '<strong>Git-as-CMS</strong> architecture: data stored as versioned JSON on GitHub, updated via the GitHub API with a token secured server-side (Cloudflare Pages environment variables, never exposed to the front-end); images hosted on Cloudinary',
         ],
       },
       {
@@ -151,6 +162,20 @@ export default {
     title: "Shipped and running in <span>production</span>",
     visitSite: 'View project',
     items: [
+      {
+        name: 'Harly Cars',
+        employer: 'Ets Andriamiadana',
+        description: 'Fleet management application for tracking staff <strong>car trips</strong>, with vehicle fleet, driver, and fuel consumption management.',
+        tech: ['React Refine', 'Hono.js', 'MySQL', 'Cloudflare Workers'],
+        link: 'https://cars-garage-harly.trip-management.workers.dev/',
+      },
+      {
+        name: 'Bliss Holiday Catalogue',
+        employer: 'Bliss Holiday',
+        description: 'Dynamic catalogue of tourist activities for Bliss Holiday in Mauritius, with automatic PDF generation and a <strong>Git-as-CMS</strong> architecture.',
+        tech: ['React', 'GitHub API', 'Cloudflare Pages', 'Cloudinary'],
+        link: 'https://bliss-holiday-catalogue.pages.dev/',
+      },
       {
         name: 'Washy',
         employer: 'Freelance',

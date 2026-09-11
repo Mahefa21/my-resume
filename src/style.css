@@ -15,9 +15,22 @@
 :root {
   --bg:          #f8fafc;
   --bg-2:        #f1f5f9;
+  /* A visibly distinct section background: --primary tinted at low opacity
+     over the base --bg, so it stays a flat solid color (pre-mixed here, not
+     a runtime rgba()) while reading as clearly different from --bg-2. */
+  --bg-tint:     #eaf6fd;
   --bg-card:     #ffffff;
-  --primary:     #38bdf8;
-  --secondary:   #818cf8;
+  /* Darkened from the original #38bdf8/#818cf8 (accent tones tuned for dark
+     backgrounds): those failed WCAG AA as text/button colors on the light
+     theme's white/near-white surfaces (~2:1). These keep the same hue family
+     but land at ~5.7-6.3:1, since --primary/--secondary double as both text
+     color and button fill throughout this file. */
+  --primary:     #0369a1;
+  --secondary:   #4f46e5;
+  /* Solid fill for white-text buttons (.btn-primary-grad). Same tone in both
+     themes: --primary itself is too light against white text once dark mode
+     brings back its lighter #38bdf8 for readability as inline text/icons. */
+  --btn-bg:      #0369a1;
   --text:        #0f172a;
   --text-muted:  #475569;
   --border:      rgba(15, 23, 42, 0.1);
@@ -37,7 +50,15 @@
 [data-theme="dark"] {
   --bg:          #0f172a;
   --bg-2:        #1e293b;
+  /* Same idea as light mode: --primary mixed into --bg, pre-computed as a
+     flat solid rather than a translucent overlay. */
+  --bg-tint:     #132436;
   --bg-card:     #1e293b;
+  /* The light theme's darker --primary/--secondary (needed for AA contrast
+     on white) go muddy and low-contrast as text on these dark surfaces, so
+     dark mode keeps the original lighter accent tones instead. */
+  --primary:     #38bdf8;
+  --secondary:   #818cf8;
   --text:        #f1f5f9;
   --text-muted:  #94a3b8;
   --border:      rgba(148, 163, 184, 0.12);
@@ -61,6 +82,11 @@
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
+  /* scroll-snap-type overrides each section's own scroll-margin-top when
+     landing on a #anchor — the snap point ends up flush under the fixed
+     navbar regardless of that margin. scroll-padding-top is the scroller's
+     own equivalent and is what the snap algorithm actually respects. */
+  scroll-padding-top: 110px;
 }
 
 body {
@@ -399,10 +425,15 @@ body {
   line-height: inherit;
 }
 
+/* Inter — the closest free match to Univers (Frutiger's Linotype/Monotype
+   typeface, not available as a webfont) — reserved for the name only.
+   Everything else on the page (including .banner-role right below it) stays
+   on Poppins, so this contrast reads as a deliberate choice, not a mix-up. */
 .banner-name {
   display: block;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   font-size: clamp(40px, 7vw, 72px);
-  font-weight: 900;
+  font-weight: 700;
   color: var(--text);
   line-height: 1.05;
   letter-spacing: -2px;
@@ -556,7 +587,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--primary);
+  background: var(--btn-bg);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -653,15 +684,62 @@ body {
 
 /* ════════════════════════════════════════
    SECTIONS SHARED
+   Each section alternates between the two flat background tokens so
+   adjacent sections read as distinct blocks, and a flat-colored SVG wave
+   sits at the bottom of every section to mark the transition — a solid
+   shape with no gradient/shadow, so it stays inside the flat-design rules.
 ════════════════════════════════════════ */
 .section {
-  padding: 100px 0;
+  position: relative;
+  /* Extra bottom padding reserves room for .section-wave (60px tall,
+     absolutely positioned) so its curve doesn't crowd the last row of
+     content — without it, the wave's peak sits almost flush against
+     whatever the section ends with. */
+  padding: 64px 0 96px;
   background: var(--bg);
   scroll-snap-align: start;
 }
 
-.section:nth-child(even) {
-  background: var(--bg-2);
+/* The navbar is fixed (Bootstrap fixed-top), so it reserves no layout space —
+   without this, jumping to a #anchor (nav click, or a direct link) lands the
+   section right under it, hiding the section-tag/title behind the bar.
+   Navbar renders at 79px tall; add real breathing room above the tag rather
+   than landing it flush against the bar's bottom edge. */
+#banner, main > section {
+  scroll-margin-top: 110px;
+}
+
+/* Each `.section` div is the sole child of its own `<section id="...">`
+   wrapper in index.html, so `.section:nth-child()` always resolves to 1 —
+   the alternation has to key off the wrapper's position among its siblings
+   in <main> instead. */
+main section:nth-of-type(even) .section {
+  background: var(--bg-tint);
+}
+
+.section-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 60px;
+  display: block;
+  pointer-events: none;
+}
+
+/* The wave paints in the NEXT section's color — it sits at the bottom
+   of section A but visually belongs to section B, curving up into A. */
+.section-wave path {
+  fill: var(--bg-tint);
+}
+
+main section:nth-of-type(even) .section-wave path {
+  fill: var(--bg);
+}
+
+@media (max-width: 767px) {
+  .section-wave { height: 32px; }
 }
 
 /* The pill background/border is gone: the circle around the first letters is
@@ -680,7 +758,7 @@ body {
 
 .section-title {
   font-size: clamp(28px, 4vw, 44px);
-  font-weight: 800;
+  font-weight: 600;
   color: var(--text);
   line-height: 1.2;
   letter-spacing: -0.5px;
@@ -1061,54 +1139,108 @@ body {
 /* ════════════════════════════════════════
    EXPERIENCE / TIMELINE
 ════════════════════════════════════════ */
-.exp-layout {
+/* Education + Awards, below the full-width timeline. */
+.exp-footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: start;
+  margin-top: 56px;
 }
 
+/* Zigzag timeline: a central axis with cards alternating left/right of it.
+   Full width (no sidebar next to it — see .exp-footer-grid below) so each
+   card has real room instead of a cramped half of a narrow column.
+   Built with a single-column flex flow — each .timeline-item is full width,
+   but its .timeline-card is pulled to one side with margin-left/right:auto,
+   so the axis (centered via the dot's left:50%) visually splits them. */
 .timeline {
   position: relative;
-  padding-left: 28px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 4px 0;
 }
 
 .timeline::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 8px;
+  left: 50%;
+  top: 0;
   bottom: 0;
   width: 2px;
   background: var(--primary);
+  transform: translateX(-50%);
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
 }
 
 .timeline-dot {
   position: absolute;
-  left: -34px;
-  top: 6px;
-  width: 14px;
-  height: 14px;
+  left: 50%;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  transform: translateX(-50%);
   border-radius: 50%;
-  background: var(--primary);
-  border: 3px solid var(--bg);
-  /* A solid, unblurred ring — not an elevation shadow, so it stays under flat design. */
-  box-shadow: 0 0 0 2px var(--primary);
+  background: var(--bg-card);
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--primary);
+  z-index: 1;
 }
 
 .timeline-card {
-  padding: 20px 22px;
+  position: relative;
+  width: calc(50% - 40px);
+  padding: 16px 20px;
   transition: border-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Odd cards sit left of the axis, even cards sit right — the classic zigzag. */
+.timeline-item:nth-child(odd) .timeline-card {
+  margin-right: auto;
+}
+
+.timeline-item:nth-child(even) .timeline-card {
+  margin-left: auto;
+}
+
+/* Diagonal connector from the card's inner edge to the axis dot. */
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  width: 24px;
+  height: 2px;
+  background: var(--primary);
+}
+
+.timeline-item:nth-child(odd) .timeline-card::before {
+  right: -24px;
+}
+
+.timeline-item:nth-child(even) .timeline-card::before {
+  left: -24px;
 }
 
 .timeline-card:hover {
   border-color: rgba(56, 189, 248, 0.3);
   transform: translateX(4px);
+}
+
+.timeline-item:nth-child(even) .timeline-card:hover {
+  transform: translateX(-4px);
 }
 
 .timeline-header {
@@ -1139,31 +1271,34 @@ body {
   margin-top: 2px;
 }
 
+/* Flat label with a colored accent bar on the left, instead of a filled pill —
+   consistent with the rest of the site's move away from bordered/filled
+   badges (see .glass-card, .btn-primary-grad, etc.) toward flat, minimal
+   surfaces. No background, no border: just the accent bar + text. */
 .timeline-badge {
   font-size: 13px;
   font-weight: 600;
   color: var(--primary);
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  padding: 4px 12px;
-  border-radius: 999px;
+  padding-left: 10px;
+  border-left: 3px solid var(--primary);
   white-space: nowrap;
+  line-height: 1.3;
 }
 
 .timeline-bullets {
   list-style: none;
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 
 .timeline-bullets li {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-muted);
   padding-left: 16px;
   position: relative;
-  line-height: 1.5;
+  line-height: 1.45;
 }
 
 .timeline-bullets li::before {
@@ -1422,7 +1557,6 @@ body {
 
 #footer footer {
   background: var(--bg);
-  border-top: 1px solid var(--border);
   padding: 60px 0 28px;
 }
 
@@ -1568,9 +1702,46 @@ body {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  /* Experience → stack */
-  .exp-layout {
+  /* Education/Awards → stack */
+  .exp-footer-grid {
     grid-template-columns: 1fr;
+    margin-top: 40px;
+  }
+
+  /* Zigzag needs room to alternate left/right; below 991px it collapses
+     into a plain left-aligned column, same idea as the old linear timeline. */
+  .timeline::before {
+    left: 12px;
+    transform: none;
+  }
+
+  .timeline-dot {
+    left: 12px;
+    transform: none;
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .timeline-card,
+  .timeline-item:nth-child(odd) .timeline-card,
+  .timeline-item:nth-child(even) .timeline-card {
+    width: auto;
+    margin-left: 44px;
+    margin-right: 0;
+  }
+
+  .timeline-card::before,
+  .timeline-item:nth-child(odd) .timeline-card::before,
+  .timeline-item:nth-child(even) .timeline-card::before {
+    left: -24px;
+    right: auto;
+    top: 13px;
+    width: 20px;
+  }
+
+  .timeline-item:nth-child(even) .timeline-card:hover {
+    transform: translateX(4px);
   }
 
   /* Projects featured → stack */
@@ -1699,9 +1870,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .timeline { padding-left: 20px; }
-  .timeline-dot { left: -26px; }
-
   .projects-grid {
     grid-template-columns: 1fr;
   }
@@ -1811,7 +1979,7 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
   }
 
   /* Improve spacing on tablets */
-  .section { padding: 60px 0; }
+  .section { padding: 44px 0 72px; }
 
   button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
     padding: 12px 20px;
@@ -1823,7 +1991,7 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
    RESPONSIVE: MOBILE LANDSCAPE (768px - 1024px)
 ════════════════════════════════════════ */
 @media (max-width: 1024px) and (orientation: landscape) {
-  .section { padding: 40px 0; }
+  .section { padding: 32px 0 56px; }
 
   #banner { min-height: 80vh; }
 }
@@ -1843,7 +2011,7 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
 
   .container { padding: 0 16px; }
 
-  .section { padding: 50px 0; }
+  .section { padding: 36px 0 52px; }
 
   h1, .banner-name {
     font-size: clamp(28px, 6vw, 48px);
@@ -1906,7 +2074,7 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
 
   .container { padding: 0 12px; }
 
-  .section { padding: 40px 0; }
+  .section { padding: 28px 0 44px; }
 
   h1, .banner-name {
     font-size: clamp(24px, 5vw, 36px);
@@ -2026,10 +2194,20 @@ button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
     min-height: 70px;
   }
 
-  /* Timeline mobile */
-  .timeline { padding-left: 12px; }
-  .timeline-dot { left: -20px; }
-  .timeline-card { margin-left: 12px; }
+  /* Timeline mobile — tighter axis/marker/connector than the 991px fallback. */
+  .timeline::before { left: 8px; }
+  .timeline-dot { left: 8px; width: 24px; height: 24px; font-size: 10px; }
+  .timeline-card,
+  .timeline-item:nth-child(odd) .timeline-card,
+  .timeline-item:nth-child(even) .timeline-card {
+    margin-left: 32px;
+  }
+  .timeline-card::before,
+  .timeline-item:nth-child(odd) .timeline-card::before,
+  .timeline-item:nth-child(even) .timeline-card::before {
+    left: -20px;
+    width: 16px;
+  }
 
   /* Project grid mobile */
   .projects-masonry {
@@ -2221,13 +2399,6 @@ img {
   right: 22px;
   bottom: 160px;
   transform: translateY(20px);
-  /* Unlike --down (which only ever floats over the decorative hero
-     background, where bare text reads fine), this one stays fixed while the
-     visitor scrolls through actual page content — headings on narrow phones
-     can run right up to this corner and collide with the label ("HAUT" was
-     landing on top of the word "concrets"). A solid pill gives it its own
-     legible surface regardless of what scrolls underneath. */
-  background: var(--bg-card);
   border-radius: var(--radius-sm);
 }
 .scroll-hint--top.is-visible {

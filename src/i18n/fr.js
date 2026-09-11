@@ -8,7 +8,7 @@ export default {
   },
   meta: {
     title: 'Charly RAOELIMAHEFA — Développeur Full Stack Ruby & IA',
-    description: "Développeur full stack : 4 ans en Ruby on Rails, React et extraction documentaire par IA (OCR, LayoutLM). Basé à Madagascar.",
+    description: "Développeur full stack : 3 ans et plus en Ruby on Rails, React et extraction documentaire par IA (OCR, LayoutLM). Basé à Madagascar.",
   },
   loader: {
     text: 'Chargement',
@@ -22,7 +22,7 @@ export default {
   banner: {
     greeting: 'Bonjour, je suis',
     role: 'Développeur Full Stack',
-    tagline: "<strong>4 ans d'expérience</strong> en Ruby on Rails, React et Node.js, et en <strong>extraction documentaire</strong> par IA. Basé à Antananarivo, Madagascar: <strong>disponible en remote</strong>.",
+    tagline: "<strong>3 ans et plus d'expérience</strong> en Ruby on Rails, React et Node.js, et en <strong>extraction documentaire</strong> par IA. Basé à Antananarivo, Madagascar: <strong>disponible en remote</strong>.",
     stack: 'Ruby · PHP · JavaScript',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
@@ -59,13 +59,24 @@ export default {
       {
         title: 'Développeur web',
         company: 'Ets Andriamiadana',
-        location: 'Télétravail · Madagascar',
+        location: 'Madagascar',
         period: 'Avril 2026 — Aujourd\'hui',
         bullets: [
-          'Développement d\'une application qui gère les <strong>trajets des voitures</strong> du personnel de la société',
-          'Mise en place d\'un <strong>système de visualisation</strong> pour mieux contrôler les trajets',
+          'Développement d\'une application qui gère et enregistre les <strong>trajets des voitures</strong> du personnel',
           'Maintenance de l\'application et ajout de <strong>nouvelles fonctionnalités</strong> selon les besoins',
-          'Utilisation de <strong>React Refine</strong> comme front-end, relié à des endpoints Google AppSheet',
+          'Utilisation de <strong>React Refine</strong> comme front-end, avec Hono.js et MySQL côté back-end, déployé sur Cloudflare Workers',
+        ],
+      },
+      {
+        title: 'Développeur Front-End React',
+        company: 'Bliss Holiday',
+        location: 'Télétravail · Maurice',
+        period: 'Avril 2026 — Juin 2026',
+        bullets: [
+          'Mise en place d\'un site dynamique de <strong>catalogue d\'activités</strong> pour Bliss Holiday',
+          '<strong>Génération automatique</strong> d\'un document PDF pour chaque nouvelle activité ajoutée',
+          'Développement d\'un petit <strong>back-office</strong> pour l\'ajout, la modification et la suppression des activités',
+          'Architecture <strong>Git as CMS</strong> : données stockées en JSON versionné sur GitHub, mises à jour via l\'API GitHub avec un token sécurisé côté fonction serverless (variables d\'environnement Cloudflare Pages, jamais exposées au front) ; images hébergées sur Cloudinary',
         ],
       },
       {
@@ -151,6 +162,20 @@ export default {
     title: "Des projets livrés en <span>production</span>",
     visitSite: 'Voir le projet',
     items: [
+      {
+        name: 'Harly Cars',
+        employer: 'Ets Andriamiadana',
+        description: 'Application de gestion et de suivi des <strong>trajets des voitures</strong> du personnel, avec gestion du parc de véhicules, des chauffeurs et de la consommation de carburant.',
+        tech: ['React Refine', 'Hono.js', 'MySQL', 'Cloudflare Workers'],
+        link: 'https://cars-garage-harly.trip-management.workers.dev/',
+      },
+      {
+        name: 'Catalogue Bliss Holiday',
+        employer: 'Bliss Holiday',
+        description: 'Catalogue dynamique des activités touristiques de Bliss Holiday à Maurice, avec génération automatique de fiches PDF et une architecture <strong>Git as CMS</strong>.',
+        tech: ['React', 'GitHub API', 'Cloudflare Pages', 'Cloudinary'],
+        link: 'https://bliss-holiday-catalogue.pages.dev/',
+      },
       {
         name: 'Washy',
         employer: 'Freelance',

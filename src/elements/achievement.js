@@ -4,17 +4,25 @@ import topImage from './../../src/assets/images/nounoutop.webp'
 import emitSite from './../../src/assets/images/emit.webp'
 import aegImage from './../../src/assets/images/aeg.webp'
 import washyImage from './../../src/assets/images/washy.webp'
+import blissHolidayImage from './../../src/assets/images/bliss-holiday.webp'
+import harlyCarsImage from './../../src/assets/images/harly-cars.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { circleLabel } from '../utils/circleLabel.js'
+import { sectionWave } from '../utils/sectionWave.js'
 
-const projectImages = [washyImage, aegImage, navigatorImage, ekitiaImage, topImage, emitSite]
+// Index-matched to projects.items in src/i18n/*.js — position here must
+// mirror position there exactly, or images/descriptions pair up wrong.
+// Harly Cars is first: most recent project (2026), so it's also
+// the featured one (projects[0] gets the larger card in the template below).
+const projectImages = [harlyCarsImage, blissHolidayImage, washyImage, aegImage, navigatorImage, ekitiaImage, topImage, emitSite]
 
 function render() {
   const projects = t('projects.items')
 
   document.querySelector('#achievement').innerHTML = `
     <div class="section">
+      ${sectionWave}
       <div class="container">
 
         <div class="text-center mb-5" data-reveal>

@@ -1,6 +1,7 @@
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
 import { circleLabel } from '../utils/circleLabel.js'
+import { sectionWave } from '../utils/sectionWave.js'
 
 // Pinned on purpose: `@latest` resolves to whatever is at the repo HEAD, so the
 // CDN could serve different bytes than the ones reviewed here. Bump manually.
@@ -77,6 +78,7 @@ function circleHTML(lang) {
 function render() {
   document.querySelector('#skill').innerHTML = `
     <div class="section">
+      ${sectionWave}
       <div class="container">
 
         <div class="text-center mb-5" data-reveal>
