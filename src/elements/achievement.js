@@ -8,89 +8,50 @@ import blissHolidayImage from './../../src/assets/images/bliss-holiday.webp'
 import harlyCarsImage from './../../src/assets/images/harly-cars.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
-import { circleLabel } from '../utils/circleLabel.js'
-import { sectionWave } from '../utils/sectionWave.js'
+import { tornEdge } from '../utils/tornEdge.js'
+import { iconArrowRight } from '../utils/icons.js'
 
 // Index-matched to projects.items in src/i18n/*.js — position here must
 // mirror position there exactly, or images/descriptions pair up wrong.
 // Harly Cars is first: most recent project (2026), so it's also
-// the featured one (projects[0] gets the larger card in the template below).
+// the featured one (it gets the wide card in the grid below).
 const projectImages = [harlyCarsImage, blissHolidayImage, washyImage, aegImage, navigatorImage, ekitiaImage, topImage, emitSite]
+
+// Card fills cycle through the logo palette; see .work-card.tone-* in style.css.
+const TONES = ['slate', 'soft', 'deep', 'amber']
 
 function render() {
   const projects = t('projects.items')
 
   document.querySelector('#achievement').innerHTML = `
-    <div class="section">
-      ${sectionWave}
+    <div class="section section-alt">
+      ${tornEdge({ to: 'bg', variant: 4 })}
       <div class="container">
 
-        <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">${circleLabel(t('nav.projects'))}</div>
+        <div class="works-head" data-reveal>
           <h2 class="section-title">${t('projects.title')}</h2>
+          <a class="link-accent" href="mailto:raoelimahefacharly@gmail.com">${t('projects.more')} ${iconArrowRight}</a>
         </div>
 
-        <!-- Featured Project -->
-        ${projects.length > 0 ? `
-          <div class="project-featured" data-reveal data-delay="1">
-            <div class="glass-card project-featured-card">
-              <div class="project-featured-img">
-                <img src="${projectImages[0]}" alt="${projects[0].name} — projet réalisé par Charly RAOELIMAHEFA" loading="lazy" decoding="async" />
-                <div class="project-featured-overlay"></div>
+        <div class="works-grid">
+          ${projects.map((project, i) => `
+            <article class="work-card tone-${TONES[i % TONES.length]}${i === 0 ? ' is-featured' : ''}" data-reveal data-delay="${(i % 3) + 1}">
+              <div class="work-head">
+                <div class="work-employer">${project.employer}</div>
+                <h3 class="work-name">${project.name}</h3>
               </div>
-              <div class="project-featured-content">
-                <div class="project-employer">${projects[0].employer}</div>
-                <div class="project-name project-name-lg">${projects[0].name}</div>
-                <p class="project-description">${projects[0].description}</p>
-                <div class="project-tech">
-                  ${projects[0].tech.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
-                </div>
-                <a href="${projects[0].link}" target="_blank" rel="noopener noreferrer" class="btn-primary-grad btn-sm-grad">
-                  ${t('projects.visitSite')}
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                  </svg>
-                </a>
+              <div class="work-shot">
+                <img src="${projectImages[i]}" alt="${project.name} — projet réalisé par Charly RAOELIMAHEFA" loading="lazy" decoding="async" />
               </div>
-            </div>
-          </div>
-        ` : ''}
-
-        <!-- Other Projects Grid -->
-        <div class="projects-grid">
-          ${projects.slice(1).map((project, i) => `
-            <div class="projects-grid-item" data-reveal data-delay="${i + 2}">
-              <div class="project-card glass-card">
-                <div class="project-card-img-wrap">
-                  <img src="${projectImages[i + 1]}" alt="${project.name} — projet réalisé par Charly RAOELIMAHEFA" loading="lazy" decoding="async" />
-                  <div class="project-card-img-overlay"></div>
-                </div>
-                <div class="project-card-body">
-                  <div class="project-employer">${project.employer}</div>
-                  <div class="project-name">${project.name}</div>
-                  <p class="project-description">${project.description}</p>
-                  <div class="project-tech">
-                    ${project.tech.map(tag => `<span class="tech-badge">${tag}</span>`).join('')}
-                  </div>
-                  <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    ${t('projects.visitSite')}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                  </a>
-                </div>
+              <p class="work-desc">${project.description}</p>
+              <div class="work-tech">
+                ${project.tech.map(tag => `<span class="work-tag">${tag}</span>`).join('')}
               </div>
-            </div>
+              <a href="${project.link}" target="_blank" rel="noopener noreferrer" class="work-link">
+                ${t('projects.visitSite')} ${iconArrowRight}
+              </a>
+            </article>
           `).join('')}
-        </div>
-
-        <div class="text-center mt-5" data-reveal>
-          <a href="mailto:raoelimahefacharly@gmail.com" class="btn-primary-grad">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-            </svg>
-            ${t('banner.contact')}
-          </a>
         </div>
 
       </div>

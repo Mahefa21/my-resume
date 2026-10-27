@@ -1,7 +1,6 @@
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
-import { circleLabel } from '../utils/circleLabel.js'
-import { sectionWave } from '../utils/sectionWave.js'
+import { tornEdge } from '../utils/tornEdge.js'
 
 // Pinned on purpose: `@latest` resolves to whatever is at the repo HEAD, so the
 // CDN could serve different bytes than the ones reviewed here. Bump manually.
@@ -78,13 +77,10 @@ function circleHTML(lang) {
 function render() {
   document.querySelector('#skill').innerHTML = `
     <div class="section">
-      ${sectionWave}
+      ${tornEdge({ to: 'alt', variant: 3 })}
       <div class="container">
 
-        <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">${circleLabel(t('nav.skills'))}</div>
-          <h2 class="section-title">${t('skills.title')}</h2>
-        </div>
+        <h2 class="section-title text-center mb-5" data-reveal>${t('skills.title')}</h2>
 
         <!-- Programming Languages — Circular Progress -->
         <div data-reveal data-delay="1">
@@ -101,7 +97,7 @@ function render() {
               <p class="skill-group-title mb-3">${t('skills.frameworks')}</p>
               <div class="skill-icon-grid">
                 ${frameworks.map(f => `
-                  <div class="skill-icon-card glass-card">
+                  <div class="skill-icon-card">
                     <img src="${f.icon}" alt="${f.name}" class="skill-icon-img" width="40" height="40" loading="lazy" decoding="async" />
                     <div class="skill-icon-name">${f.name}</div>
                   </div>
@@ -112,7 +108,7 @@ function render() {
               <p class="skill-group-title mb-3">${t('skills.databases')}</p>
               <div class="skill-icon-grid skill-icon-grid-3">
                 ${databases.map(d => `
-                  <div class="skill-icon-card glass-card">
+                  <div class="skill-icon-card">
                     <img src="${d.icon}" alt="${d.name}" class="skill-icon-img" width="40" height="40" loading="lazy" decoding="async" />
                     <div class="skill-icon-name">${d.name}</div>
                   </div>
@@ -142,7 +138,7 @@ function render() {
           <p class="skill-group-title text-center mb-4">${t('skills.spoken')}</p>
           <div class="spoken-bars-grid">
             ${spokenLangs.map(l => `
-              <div class="spoken-bar-card glass-card">
+              <div class="spoken-bar-card">
                 <div class="spoken-bar-header">
                   <span class="spoken-bar-name">
                     <span class="spoken-flag">${l.flag}</span>

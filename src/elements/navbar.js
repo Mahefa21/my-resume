@@ -14,8 +14,8 @@ function render() {
       <div class="container">
 
         <a class="navbar-brand" href="#banner" title="Charly RAOELIMAHEFA - Développeur Full Stack">
-          <img class="brand-logo" src="${logoImage}" alt="CR logo - Charly RAOELIMAHEFA portfolio" width="36" height="36" />
-          <span class="brand-name">Charly R.</span>
+          <img class="brand-logo" src="${logoImage}" alt="CR logo - Charly RAOELIMAHEFA portfolio" width="38" height="38" />
+          <span class="brand-name">Charly</span>
         </a>
 
         <button class="navbar-toggler" type="button"
@@ -44,6 +44,7 @@ function render() {
           </ul>
 
           <div class="d-flex align-items-center gap-2 ms-lg-3 mt-2 mt-lg-0">
+            <a class="nav-phone d-none d-xl-inline-flex" href="https://wa.me/261346249833" target="_blank" rel="noopener noreferrer">+261 34 62 498 33</a>
             <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
               ${themeIcon}
             </button>

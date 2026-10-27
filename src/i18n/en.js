@@ -22,14 +22,20 @@ export default {
   banner: {
     greeting: 'Hello, I am',
     role: 'Full Stack Developer',
-    tagline: '<strong>3+ years</strong> building with Ruby on Rails, React and Node.js. Based in Antananarivo, Madagascar: <strong>available remote</strong>.',
-    stack: 'Ruby · PHP · JavaScript',
+    tagline: 'Web apps and <strong>AI</strong> tools that save your team time, from <strong>document extraction</strong> to automation. Based in Antananarivo, Madagascar: <strong>available remote</strong>.',
+    stack: 'JavaScript · PHP · Ruby',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
     contact: 'Contact me',
     scroll: 'Scroll',
   },
   about: {
+    helpTitle: "How can I <span>help</span> you?",
+    services: [
+      { title: 'Full stack web development', sub: 'React · Node.js · Ruby on Rails' },
+      { title: 'AI solutions & document extraction', sub: 'Invoices, contracts, forms' },
+      { title: 'Automation & back-offices', sub: 'APIs · Cloudflare Workers' },
+    ],
     title: "Solving <span>real</span> problems",
     p1: "My goal is straightforward: help businesses <strong>solve real problems</strong> using the power of <strong>artificial intelligence</strong>. At a time when AI is fundamentally changing the way organizations work, I put these technologies <strong>to use on the ground</strong>, where it matters most.",
     p2: "From <strong>document digitalization</strong> to <strong>business process automation</strong>, I design custom, practical AI solutions — leveraging tools like <strong>Ollama and Mistral AI</strong> to address the specific challenges each organization faces.",
@@ -55,6 +61,7 @@ export default {
     title: "What I've <span>built</span> professionally",
     eduTitle: 'Education',
     awardsTitle: 'Awards & Hackathons',
+    current: 'Current',
     jobs: [
       {
         title: 'Web Developer',
@@ -159,6 +166,7 @@ export default {
     ],
   },
   projects: {
+    more: 'Get in touch',
     title: "Shipped and running in <span>production</span>",
     visitSite: 'View project',
     items: [
@@ -221,6 +229,11 @@ export default {
     ],
   },
   footer: {
+    ctaTitle: "Let's build something great together.",
+    ctaStart: 'Start by saying',
+    ctaHi: 'hi',
+    info: 'Information',
+    location: 'Antananarivo, Madagascar',
     copyright: '© 2026 RAOELIMAHEFA Charly — All rights reserved',
     madeWith: 'Made with',
     and: 'and',

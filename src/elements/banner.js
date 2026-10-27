@@ -1,133 +1,92 @@
 // CV PDFs served as static assets from /public (not bundled)
 const cvFR = '/CV-RAOELIMAHEFA-Charly-FR.pdf'
 const cvEN = '/CV-RAOELIMAHEFA-Charly-EN.pdf'
+// Background removed (made from charly.png with an ImageMagick flood fill from
+// the edges) so the portrait sits directly on the brush stroke.
+import charlyImage from './../../src/assets/images/charly-cutout.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
-import { iconDownload, iconMail } from '../utils/icons.js'
-import { circleLabel } from '../utils/circleLabel.js'
-// Lazy-load Three.js so it doesn't block initial page render
-const loadThreeBg = () => import('../utils/three-bg.js')
+import { iconDownload } from '../utils/icons.js'
+import { tornEdge } from '../utils/tornEdge.js'
 
-let cleanupThree = null
+// Painted stroke behind the portrait: a few thick round-capped strokes, then
+// (none low enough to show through the portrait's faded bottom),
+// roughened by a turbulence displacement so the edges read as a dry brush
+// rather than vector lines. Purely decorative, hidden from assistive tech.
+const brushStroke = `
+  <svg class="hero-brush" viewBox="0 0 400 420" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="brushRough" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="3" seed="7" />
+        <feDisplacementMap in="SourceGraphic" scale="22" />
+      </filter>
+    </defs>
+    <g filter="url(#brushRough)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M70 120 C150 60 250 40 330 70" stroke-width="54" />
+      <path d="M40 230 C140 150 260 120 360 150" stroke-width="64" />
+      <path d="M60 330 C160 260 270 240 350 270" stroke-width="58" />
+    </g>
+  </svg>
+`
 
-function animateName(el) {
-  const text = el.textContent
-  el.innerHTML = ''
-  let charIndex = 0
-
-  // Split into lines, each letter gets a span
-  const lines = text.split('\n').map(l => l.trim()).filter(Boolean)
-  lines.forEach((line, lineIdx) => {
-    if (lineIdx > 0) {
-      // A real space before the <br>, otherwise the heading's text content reads
-      // "RAOELIMAHEFACharly" to crawlers and the brand query stops matching.
-      // Trailing whitespace before a line break is not rendered.
-      el.appendChild(document.createTextNode(' '))
-      el.appendChild(document.createElement('br'))
-    }
-    for (const char of line) {
-      const span = document.createElement('span')
-      span.className = 'name-char'
-      span.textContent = char === ' ' ? '\u00A0' : char
-      span.style.animationDelay = `${0.4 + charIndex * 0.05}s`
-      el.appendChild(span)
-      charIndex++
-    }
-  })
-}
+const iconCode = `<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
 
 function render() {
-  // Cleanup previous Three.js scene
-  if (cleanupThree) {
-    cleanupThree()
-    cleanupThree = null
-  }
-
   document.querySelector('#banner').innerHTML = `
-    <div class="container banner-content">
-      <div class="row align-items-center min-vh-100">
-        <div class="col-lg-7 py-5">
+    <div class="container hero">
 
-          <div class="banner-status" data-reveal data-delay="1">
-            ${circleLabel(t('banner.greeting'))}
-          </div>
+      <div class="hero-left">
+        <!-- Single H1 for the whole page; it carries the full name and the role
+             as visible text so the keywords stay where crawlers expect them. -->
+        <h1 class="hero-title" data-reveal data-delay="1">
+          <span class="hero-hello">${t('banner.greeting')}</span>
+          <span class="hero-name">Charly</span>
+          <span class="hero-fullname">RAOELIMAHEFA Charly · ${t('banner.role')}</span>
+        </h1>
 
-          <!-- Single H1 for the whole page, and it carries the keywords: the
-               name and the role are both visible text inside it. -->
-          <h1 class="banner-heading">
-            <span class="banner-name" id="animatedName" data-reveal data-delay="2">
-              RAOELIMAHEFA
-Charly
-            </span>
-            <span class="banner-role" data-reveal data-delay="3">${t('banner.role')}</span>
-          </h1>
+        <a class="hero-mail" href="mailto:raoelimahefacharly@gmail.com" data-reveal data-delay="2">raoelimahefacharly@gmail.com</a>
 
-          <p class="banner-tagline" data-reveal data-delay="3">${t('banner.tagline')}</p>
-
-          <div class="banner-actions" data-reveal data-delay="4">
-            <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-primary-grad">
-              ${iconDownload}
-              ${t('banner.downloadFR')}
-            </a>
-
-            <a href="${cvEN}" download="CV-RAOELIMAHEFA-Charly-EN.pdf" class="btn-outline-grad">
-              ${iconDownload}
-              ${t('banner.downloadEN')}
-            </a>
-
-            <a href="mailto:raoelimahefacharly@gmail.com" class="btn-ghost">
-              ${iconMail}
-              ${t('banner.contact')}
-            </a>
-          </div>
-
+        <div class="hero-actions" data-reveal data-delay="3">
+          <a href="${cvFR}" download="CV-RAOELIMAHEFA-Charly-FR.pdf" class="btn-pill btn-pill-solid">
+            ${iconDownload} ${t('banner.downloadFR')}
+          </a>
+          <a href="${cvEN}" download="CV-RAOELIMAHEFA-Charly-EN.pdf" class="btn-pill btn-pill-outline">
+            ${iconDownload} ${t('banner.downloadEN')}
+          </a>
         </div>
 
-        <div class="col-lg-5 d-none d-lg-flex justify-content-center">
-          <div class="hero-visual" data-reveal="scale" data-delay="3">
-            <!-- Flat design dropped the soft-glow look these relied on
-                 (filter: blur()) — a solid, unblurred disc in its place would
-                 look like a stray shape pasted behind the card, so they're
-                 kept in the markup but switched off via Bootstrap's d-none
-                 rather than a custom CSS rule. -->
-            <div class="hero-orb hero-orb-1 d-none"></div>
-            <div class="hero-orb hero-orb-2 d-none"></div>
-            <div class="hero-code-block">
-              <div class="code-line"><span class="code-keyword">const</span> <span class="code-var">developer</span> = {</div>
-              <div class="code-line code-indent"><span class="code-prop">name</span>: <span class="code-string">"Charly"</span>,</div>
-              <div class="code-line code-indent"><span class="code-prop">role</span>: <span class="code-string">"Full Stack"</span>,</div>
-              <div class="code-line code-indent"><span class="code-prop">passion</span>: <span class="code-string">"Building"</span>,</div>
-              <div class="code-line code-indent"><span class="code-prop">coffee</span>: <span class="code-bool">true</span>,</div>
-              <div class="code-line">};</div>
-            </div>
+        <div class="hero-years" data-reveal data-delay="4">
+          <span class="hero-years-num">3+</span>
+          <span class="hero-years-label">${t('about.yearsExp')}</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" data-reveal="scale" data-delay="2">
+        <!-- Fixed-ratio stage: brush and portrait are sized in % of it,
+             so they keep the same composition at every screen width. -->
+        <div class="hero-stage">
+          ${brushStroke}
+          <div class="hero-portrait">
+            <img src="${charlyImage}" alt="Portrait de Charly RAOELIMAHEFA, développeur full stack" width="600" height="620" fetchpriority="high" decoding="async" />
           </div>
         </div>
       </div>
+
+      <div class="hero-right">
+        <p class="hero-tagline" data-reveal data-delay="3">${t('banner.tagline')}</p>
+
+        <div class="hero-badge" data-reveal data-delay="4">
+          <span class="hero-badge-icon">${iconCode}</span>
+          <span class="hero-badge-text">
+            <strong>${t('banner.role')}</strong>
+            ${t('banner.stack')}
+          </span>
+        </div>
+      </div>
+
     </div>
-
+    ${tornEdge({ to: 'bg', variant: 0 })}
   `
-
-  // Animate the name letters
-  const nameEl = document.getElementById('animatedName')
-  if (nameEl) animateName(nameEl)
-
-  // Init Three.js background — skip on mobile or if user prefers reduced motion,
-  // and defer until browser is idle to preserve LCP/FCP on desktop.
-  const banner = document.querySelector('#banner')
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const isMobile = window.matchMedia('(max-width: 768px)').matches
-  if (banner && !prefersReducedMotion && !isMobile) {
-    const startThree = () => {
-      loadThreeBg().then(({ initThreeBg }) => {
-        cleanupThree = initThreeBg(banner)
-      })
-    }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(startThree, { timeout: 2500 })
-    } else {
-      setTimeout(startThree, 1500)
-    }
-  }
 
   observeReveal()
 }

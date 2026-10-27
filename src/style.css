@@ -1,72 +1,73 @@
-/* Poppins is loaded from a <link> in index.html, not with @import.
-   An @import here forced the browser to download and parse this stylesheet
-   before it could even discover the font request, serialising the chain
-   HTML → style.css → Google CSS → font files and delaying first paint. */
+/* Fonts are loaded from a <link> in index.html, not with @import: an @import
+   here would serialise HTML → style.css → Google CSS → font files and delay
+   first paint. */
 
 /* ════════════════════════════════════════
    DESIGN TOKENS
+   Palette follows the CR logo: a single slate (#3c3f55) on white. Slate and
+   its tints carry the whole layout; amber is the one accent, kept to small
+   details (underlines, the current-job dot, one card tone).
 ════════════════════════════════════════ */
-/* Flat design: no elevation shadows, no blur/glass, no gradient fills.
-   --shadow is kept at "none" (rather than deleted) so the handful of
-   components that reference it don't need a separate edit, and --bg-card /
-   --navbar-bg are solid opaque colors now — they used to be translucent on
-   purpose, to let a backdrop-filter blur show through; without the blur,
-   translucent panels would just look muddy over whatever scrolls behind them. */
 :root {
-  --bg:          #f8fafc;
-  --bg-2:        #f1f5f9;
-  /* A visibly distinct section background: --primary tinted at low opacity
-     over the base --bg, so it stays a flat solid color (pre-mixed here, not
-     a runtime rgba()) while reading as clearly different from --bg-2. */
-  --bg-tint:     #eaf6fd;
-  --bg-card:     #ffffff;
-  /* Darkened from the original #38bdf8/#818cf8 (accent tones tuned for dark
-     backgrounds): those failed WCAG AA as text/button colors on the light
-     theme's white/near-white surfaces (~2:1). These keep the same hue family
-     but land at ~5.7-6.3:1, since --primary/--secondary double as both text
-     color and button fill throughout this file. */
-  --primary:     #0369a1;
-  --secondary:   #4f46e5;
-  /* Solid fill for white-text buttons (.btn-primary-grad). Same tone in both
-     themes: --primary itself is too light against white text once dark mode
-     brings back its lighter #38bdf8 for readability as inline text/icons. */
-  --btn-bg:      #0369a1;
-  --text:        #0f172a;
-  --text-muted:  #475569;
-  --border:      rgba(15, 23, 42, 0.1);
-  --shadow:      none;
-  --radius:      16px;
-  --radius-sm:   8px;
+  --bg:           #f7f7fa;
+  --bg-alt:       #eaebf2;   /* hero and alternate sections */
+  --card:         #ffffff;
 
-  --navbar-bg:   #f8fafc;
-  --toggler-inv: invert(0);
-  --loader-bg:   #f8fafc;
-  --profile-ring-bg: var(--bg);
+  --brand:        #3c3f55;   /* logo slate: headings, icons, outlines */
+  --brand-fill:   #3c3f55;   /* solid fills under white text (same in dark) */
+  --brand-dark:   #2a2c3d;
+  --brand-mid:    #6b6f8a;
+  --brand-soft:   #e6e7ee;
+
+  --accent:       #e8a33d;   /* amber: decoration only, never body text */
+  --accent-text:  #a8691a;   /* amber dark enough for AA as text on light */
+  --accent-soft:  #fbefd9;
+
+  --text:         #23253a;
+  --muted:        #5e6178;
+  --border:       rgba(60, 63, 85, 0.12);
+  --shadow:       0 18px 40px -22px rgba(60, 63, 85, 0.35);
+  --shadow-sm:    0 8px 24px -16px rgba(60, 63, 85, 0.35);
+
+  --radius-sm:    12px;
+  --radius:       20px;
+  --radius-lg:    28px;
+
+  --navbar-bg:    rgba(247, 247, 250, 0.92);
+  --toggler-inv:  invert(0);
+
+  /* Torn amber brush stroke: the site's one underline/highlight mark (nav,
+     section-title keywords, links). Same dry-brush look as the section edges. */
+  --brush:        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cfilter id='r' filterUnits='userSpaceOnUse' x='0' y='0' width='120' height='14'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='7'/%3E%3C/filter%3E%3Cpath filter='url(%23r)' d='M6 8 C 32 5, 74 10, 114 6' fill='none' stroke='%23e8a33d' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  --font:         'Hanken Grotesk', system-ui, sans-serif;
+  --font-script:  'Caveat', cursive;
 }
 
-/* ════════════════════════════════════════
-   DARK THEME OVERRIDES
-════════════════════════════════════════ */
 [data-theme="dark"] {
-  --bg:          #0f172a;
-  --bg-2:        #1e293b;
-  /* Same idea as light mode: --primary mixed into --bg, pre-computed as a
-     flat solid rather than a translucent overlay. */
-  --bg-tint:     #132436;
-  --bg-card:     #1e293b;
-  /* The light theme's darker --primary/--secondary (needed for AA contrast
-     on white) go muddy and low-contrast as text on these dark surfaces, so
-     dark mode keeps the original lighter accent tones instead. */
-  --primary:     #38bdf8;
-  --secondary:   #818cf8;
-  --text:        #f1f5f9;
-  --text-muted:  #94a3b8;
-  --border:      rgba(148, 163, 184, 0.12);
-  --shadow:      none;
-  --navbar-bg:   #0f172a;
-  --toggler-inv: invert(1);
-  --loader-bg:   #0f172a;
-  --profile-ring-bg: var(--bg);
+  --bg:           #17181f;
+  --bg-alt:       #20222f;
+  --card:         #23253a;
+
+  /* The logo slate is too dark to read as text on these surfaces, so text
+     and outlines use a light slate; solid fills keep the real logo color. */
+  --brand:        #b9bcd3;
+  --brand-fill:   #3c3f55;
+  --brand-dark:   #121319;
+  --brand-mid:    #8d91ad;
+  --brand-soft:   #2c2f45;
+
+  --accent-text:  #f0b862;
+  --accent-soft:  #3a2f1f;
+
+  --text:         #eceef6;
+  --muted:        #a3a6bd;
+  --border:       rgba(185, 188, 211, 0.12);
+  --shadow:       0 18px 40px -22px rgba(0, 0, 0, 0.7);
+  --shadow-sm:    0 8px 24px -16px rgba(0, 0, 0, 0.7);
+
+  --navbar-bg:    rgba(23, 24, 31, 0.92);
+  --toggler-inv:  invert(1);
 }
 
 /* ════════════════════════════════════════
@@ -76,24 +77,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-snap-type: y proximity;
-  /* scroll-snap-type overrides each section's own scroll-margin-top when
-     landing on a #anchor — the snap point ends up flush under the fixed
-     navbar regardless of that margin. scroll-padding-top is the scroller's
-     own equivalent and is what the snap algorithm actually respects. */
-  scroll-padding-top: 110px;
+  /* With scroll-snap on, this (not each section's scroll-margin-top) is what
+     keeps #anchor jumps clear of the fixed navbar. */
+  scroll-padding-top: 90px;
 }
 
-body {
+/* Bootstrap's CSS is imported after this file (src/dependancies.js), so base
+   element rules here are made one step more specific to win over its reboot. */
+html body {
+  font-family: var(--font);
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   max-width: 100vw;
+  -webkit-font-smoothing: antialiased;
 }
 
 #navbar, #banner, main, #footer {
@@ -101,21 +103,34 @@ body {
   overflow-x: clip;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 999px;
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
+body a { color: inherit; }
+
+body ul,
+body ol { padding-left: 0; margin-bottom: 0; }
+
+body p { margin-bottom: 0; }
+
+body h1, body h2, body h3 { margin-bottom: 0; }
+
+strong { font-weight: 700; color: var(--text); }
+
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--brand-mid); border-radius: 999px; }
+
 /* ════════════════════════════════════════
-   LOADER
+   LOADER (critical copy also inlined in index.html)
 ════════════════════════════════════════ */
 #loader {
   position: fixed;
   inset: 0;
-  background: var(--loader-bg);
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,11 +139,7 @@ body {
   transition: opacity 0.7s ease, visibility 0.7s ease;
 }
 
-#loader.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
+#loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
 .loader-rings {
   position: relative;
@@ -139,908 +150,879 @@ body {
   justify-content: center;
 }
 
-.loader-ring {
-  position: absolute;
-  border-radius: 50%;
-  border: 3px solid transparent;
-}
+.loader-ring { position: absolute; border-radius: 50%; border: 3px solid transparent; }
 
 .loader-ring-outer {
   width: 110px;
   height: 110px;
-  border-top-color: var(--primary);
-  border-right-color: var(--primary);
+  border-top-color: var(--brand);
+  border-right-color: var(--brand);
   animation: spin 1.4s linear infinite;
 }
 
 .loader-ring-inner {
   width: 78px;
   height: 78px;
-  border-bottom-color: var(--secondary);
-  border-left-color: var(--secondary);
+  border-bottom-color: var(--accent);
+  border-left-color: var(--accent);
   animation: spin 0.9s linear infinite reverse;
 }
 
-.loader-initials {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--primary);
-  letter-spacing: 1px;
-}
+.loader-initials { font-size: 22px; font-weight: 800; color: var(--brand); letter-spacing: 1px; }
 
 .loader-text {
   margin-top: 28px;
   font-size: 12px;
   font-weight: 500;
-  color: var(--text-muted);
+  color: var(--muted);
   letter-spacing: 3px;
   text-transform: uppercase;
   animation: pulse 1.4s ease-in-out infinite;
 }
 
-.loader-bar-wrap {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background: var(--bg-2);
-}
+.loader-bar-wrap { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--brand-soft); }
+.loader-bar-fill { height: 100%; background: var(--brand); animation: loadBar 1.8s ease-in-out forwards; }
 
-.loader-bar-fill {
-  height: 100%;
-  background: var(--primary);
-  animation: loadBar 1.8s ease-in-out forwards;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-}
-@keyframes loadBar {
-  0%   { width: 0%; }
-  60%  { width: 75%; }
-  100% { width: 100%; }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+@keyframes loadBar { 0% { width: 0%; } 60% { width: 75%; } 100% { width: 100%; } }
 
 /* ════════════════════════════════════════
    NAVBAR
 ════════════════════════════════════════ */
 #navbar .navbar {
   background: var(--navbar-bg) !important;
+  backdrop-filter: saturate(140%) blur(10px);
+  -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid var(--border);
-  padding: 0.75rem 1.5rem;
+  padding: 0.7rem 1.5rem;
 }
 
 #navbar .navbar-brand {
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 #navbar .brand-logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid var(--primary);
-  background: rgba(15, 23, 42, 0.1);
-  padding: 4px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
-  object-position: center;
-  filter: brightness(1) saturate(100%);
-  transition: filter 0.3s ease;
 }
 
-#navbar .brand-logo:hover {
-  filter: brightness(1.1) saturate(110%);
+/* The logo PNG is solid slate; on the dark theme it's flipped to white. */
+[data-theme="dark"] #navbar .brand-logo,
+[data-theme="dark"] .footer-brand img {
+  filter: brightness(0) invert(1);
 }
 
-/* Adjust logo for dark theme */
-[data-theme="dark"] #navbar .brand-logo {
-  background: rgba(56, 189, 248, 0.15);
-  filter: brightness(0) saturate(100%) invert(100%);
+#navbar .brand-name,
+.footer-brand span {
+  font-family: var(--font-script);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--brand);
 }
 
-[data-theme="dark"] #navbar .brand-logo:hover {
-  filter: brightness(0) saturate(100%) invert(100%) brightness(1.2);
-}
-
-#navbar .brand-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-}
-
+/* Plain links; the active one gets a torn amber brush stroke underneath, in
+   the same dry-brush style as the section edges. The stroke "paints" itself
+   left to right (clip-path), and shows faintly on hover. */
 #navbar .nav-link {
-  color: var(--text-muted) !important;
-  font-size: 15px;
-  font-weight: 500;
-  padding: 0.4rem 0.75rem !important;
-  border-radius: var(--radius-sm);
-  transition: color 0.2s, background 0.2s;
   position: relative;
+  isolation: isolate;   /* keeps the ::after stroke behind the text only */
+  display: flex;
+  align-items: center;
+  color: var(--muted) !important;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.5rem 0.95rem !important;
+  transition: color 0.25s ease;
 }
 
 #navbar .nav-link::after {
   content: '';
   position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 2px;
-  background: var(--primary);
-  border-radius: 999px;
-  transition: width 0.3s ease;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 9px;
+  height: 13px;
+  z-index: -1;
+  transform: rotate(-1.5deg);
+  background: var(--brush) center / 100% 100% no-repeat;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.45s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.25s ease;
+  pointer-events: none;
 }
 
-#navbar .nav-link:hover,
-#navbar .nav-link.active {
-  color: var(--text) !important;
-}
+#navbar .nav-link:hover { color: var(--brand) !important; }
 
-#navbar .nav-link.active::after,
 #navbar .nav-link:hover::after {
-  width: 60%;
+  clip-path: inset(0 0 0 0);
+  opacity: 0.35;
 }
 
-/* Language switcher */
+#navbar .nav-link.active {
+  color: var(--brand) !important;
+  font-weight: 700;
+}
+
+#navbar .nav-link.active::after {
+  clip-path: inset(0 0 0 0);
+  opacity: 1;
+}
+
+.nav-phone {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  margin-right: 6px;
+}
+
+.nav-phone:hover { color: var(--brand); }
+
 .lang-switcher {
   display: flex;
   align-items: center;
-  gap: 4px;
-  background: var(--bg-2);
+  gap: 2px;
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 4px 6px;
+  padding: 3px;
 }
 
 .lang-btn {
   background: none;
   border: none;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 5px 12px;
+  color: var(--muted);
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 11px;
   border-radius: 999px;
   cursor: pointer;
-  transition: all 0.2s ease;
-  letter-spacing: 0.5px;
+  transition: background 0.2s, color 0.2s;
 }
 
-.lang-btn.active {
-  background: var(--primary);
-  color: #fff;
-}
+.lang-btn.active { background: var(--brand-fill); color: #fff; }
+.lang-btn:hover:not(.active) { color: var(--text); }
 
-.lang-btn:hover:not(.active) {
-  color: var(--text);
-}
-
-/* hamburger icon color */
-#navbar .navbar-toggler {
-  border-color: var(--border);
-}
-#navbar .navbar-toggler-icon {
-  filter: var(--toggler-inv);
-}
-
-/* Theme toggle */
 .theme-toggle {
-  background: var(--bg-2);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 16px;
-  color: var(--text-muted);
+  color: var(--brand);
   padding: 0;
-}
-
-.theme-toggle:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-  transform: rotate(20deg);
-}
-
-/* ════════════════════════════════════════
-   BANNER / HERO
-════════════════════════════════════════ */
-#banner {
-  min-height: 100vh;
-  background: var(--bg);
-  position: relative;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  scroll-snap-align: start;
-  /* Sandbox the WebGL canvas's own GPU compositing layer to this box.
-     overflow:hidden alone is a layout clip — it doesn't guarantee the
-     canvas's paint/compositing layer can't visually interact with
-     neighbouring layers on every GPU driver. contain+isolation make that
-     boundary explicit, which is the standard mitigation for the class of
-     bug where a WebGL layer bleeds into unrelated scrolled content. */
-  contain: layout paint;
-  isolation: isolate;
-}
-
-#banner .banner-content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Status badge — the greeting is cut mid-word: its first three letters are
-   enclosed in a circle and the remainder runs out of it, "(Bon)jour, je suis".
-   The container carries no background or border of its own; the circle is the
-   only enclosed part, which is what makes the split readable. */
-.banner-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 0;
-  margin-bottom: 20px;
-  color: var(--primary);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-/* Shared circle-label device — see src/utils/circleLabel.js.
-   Flat by design: no box, no gradient fill, just a solid underline beneath
-   the first word-fragment ("head") to mark it as the accent, in line with
-   the site-wide move away from shadowed/gradient-filled shapes. Everything
-   is sized in em, so the same markup works at 15px in the hero and 13px on
-   section tags without a second set of rules. */
-.circle-label {
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.circle-label-head {
-  font-weight: 800;
-  border-bottom: 0.16em solid var(--primary);
-  padding-bottom: 0.05em;
-}
-
-.circle-label-tail {
-  font-weight: inherit;
-  margin-left: 0.05em;
-}
-
-/* The H1 is only a wrapper — its two children carry all the visible styling,
-   so the name and the role sit in one heading without changing the layout. */
-.banner-heading {
-  margin: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: normal;
-  line-height: inherit;
-}
-
-/* Inter — the closest free match to Univers (Frutiger's Linotype/Monotype
-   typeface, not available as a webfont) — reserved for the name only.
-   Everything else on the page (including .banner-role right below it) stays
-   on Poppins, so this contrast reads as a deliberate choice, not a mix-up. */
-.banner-name {
-  display: block;
-  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-  font-size: clamp(40px, 7vw, 72px);
-  font-weight: 700;
-  color: var(--text);
-  line-height: 1.05;
-  letter-spacing: -2px;
-}
-
-/* Letter-by-letter reveal animation */
-.name-char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(30px) rotateX(-40deg);
-  animation: charReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes charReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(30px) rotateX(-40deg);
-    filter: blur(6px);
-  }
-  60% {
-    filter: blur(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) rotateX(0);
-    filter: blur(0);
-  }
-}
-
-.banner-role {
-  display: block;
-  font-size: clamp(20px, 3vw, 30px);
-  font-weight: 700;
-  /* Reset what it now inherits from the H1 at small breakpoints. */
-  letter-spacing: normal;
-  line-height: 1.2;
-  color: var(--primary);
-  margin-top: 8px;
-}
-
-.banner-tagline {
-  max-width: 60ch;
-  margin-top: 18px;
-  font-size: clamp(15px, 1.6vw, 18px);
-  line-height: 1.65;
-  color: var(--text-muted);
-}
-
-/* Key phrases inside body copy.
-   The surrounding prose is --text-muted, so stepping up to the full-contrast
-   --text plus a moderate 600 weight is enough to make a phrase surface when
-   scanning — without the shouty look of a default browser <strong>, which
-   would fight the headings for attention. */
-.about-text strong,
-.banner-tagline strong,
-.project-description strong,
-.timeline-bullets li strong {
-  font-weight: 600;
-  color: var(--text);
-}
-
-/* Stack pills */
-.banner-stack-wrap {
-  margin-top: 16px;
-}
-
-.banner-stack-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.stack-pill {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 600;
-  padding: 8px 18px;
-  border-radius: 999px;
-  transition: all 0.2s ease;
-}
-
-.stack-pill:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-}
-
-.banner-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-/* Hero visual / code block */
-.hero-visual {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-}
-
-.hero-orb-1 {
-  width: 200px;
-  height: 200px;
-  background: var(--primary);
-  top: -40px;
-  right: -40px;
-  animation: orbFloat 6s ease-in-out infinite;
-}
-
-.hero-orb-2 {
-  width: 150px;
-  height: 150px;
-  background: var(--secondary);
-  bottom: -20px;
-  left: -30px;
-  animation: orbFloat 6s ease-in-out infinite reverse;
-}
-
-@keyframes orbFloat {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(10px, -15px); }
-}
-
-.hero-code-block {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px 24px;
-  font-family: 'Courier New', monospace;
-  font-size: 15px;
-  line-height: 1.8;
-  position: relative;
-  z-index: 1;
-}
-
-.code-line { white-space: nowrap; }
-.code-indent { padding-left: 24px; }
-.code-keyword { color: var(--secondary); font-weight: 600; }
-.code-var { color: var(--text); }
-.code-prop { color: var(--primary); }
-.code-string { color: #34d399; }
-.code-bool { color: #f59e0b; }
-
-/* Buttons.
-   .btn-primary-grad keeps its name despite no longer using a gradient fill —
-   same reasoning as .circle-label and .glass-card elsewhere in this file:
-   renaming would only touch call sites, not behavior. */
-.btn-primary-grad {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--btn-bg);
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  padding: 14px 28px;
-  border-radius: 999px;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: transform 0.2s, opacity 0.2s;
-}
-
-.btn-primary-grad:hover {
-  transform: translateY(-2px);
-  color: #fff;
-}
-
-.btn-sm-grad {
-  font-size: 14px;
-  padding: 12px 22px;
-}
-
-.btn-outline-grad {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--text);
-  font-size: 15px;
-  font-weight: 600;
-  padding: 13px 28px;
-  border-radius: 999px;
-  border: 1.5px solid var(--border);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.btn-outline-grad:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 15px;
-  font-weight: 500;
-  padding: 13px 24px;
-  border-radius: 999px;
-  border: 1.5px solid var(--border);
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.btn-ghost:hover {
-  color: var(--text);
-  border-color: var(--secondary);
-}
-
-/* Scroll indicator */
-.scroll-indicator {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  text-decoration: none;
-  animation: bounceDown 2s ease-in-out infinite;
-}
-
-.scroll-indicator svg {
-  width: 20px;
-  height: 20px;
-  stroke: var(--primary);
-}
-
-@keyframes bounceDown {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
-}
-
-/* ════════════════════════════════════════
-   SECTIONS SHARED
-   Each section alternates between the two flat background tokens so
-   adjacent sections read as distinct blocks, and a flat-colored SVG wave
-   sits at the bottom of every section to mark the transition — a solid
-   shape with no gradient/shadow, so it stays inside the flat-design rules.
-════════════════════════════════════════ */
-.section {
-  position: relative;
-  /* Extra bottom padding reserves room for .section-wave (60px tall,
-     absolutely positioned) so its curve doesn't crowd the last row of
-     content — without it, the wave's peak sits almost flush against
-     whatever the section ends with. */
-  padding: 64px 0 96px;
-  background: var(--bg);
-  scroll-snap-align: start;
-}
-
-/* The navbar is fixed (Bootstrap fixed-top), so it reserves no layout space —
-   without this, jumping to a #anchor (nav click, or a direct link) lands the
-   section right under it, hiding the section-tag/title behind the bar.
-   Navbar renders at 79px tall; add real breathing room above the tag rather
-   than landing it flush against the bar's bottom edge. */
-#banner, main > section {
-  scroll-margin-top: 110px;
-}
-
-/* Each `.section` div is the sole child of its own `<section id="...">`
-   wrapper in index.html, so `.section:nth-child()` always resolves to 1 —
-   the alternation has to key off the wrapper's position among its siblings
-   in <main> instead. */
-main section:nth-of-type(even) .section {
-  background: var(--bg-tint);
-}
-
-.section-wave {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  width: 100%;
-  height: 60px;
-  display: block;
-  pointer-events: none;
-}
-
-/* The wave paints in the NEXT section's color — it sits at the bottom
-   of section A but visually belongs to section B, curving up into A. */
-.section-wave path {
-  fill: var(--bg-tint);
-}
-
-main section:nth-of-type(even) .section-wave path {
-  fill: var(--bg);
-}
-
-@media (max-width: 767px) {
-  .section-wave { height: 32px; }
-}
-
-/* The pill background/border is gone: the circle around the first letters is
-   now the only enclosed part, and keeping a second outline around the whole
-   label would fight it. */
-.section-tag {
-  display: inline-flex;
-  align-items: center;
-  color: var(--primary);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-
-.section-title {
-  font-size: clamp(28px, 4vw, 44px);
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.2;
-  letter-spacing: -0.5px;
-}
-
-.section-title span {
-  color: var(--primary);
-}
-
-/* Flat card. Keeps the name ".glass-card" — it was a frosted, blurred panel
-   before; now it's a plain solid card with a border. Renaming would only
-   touch the many call sites in src/elements/*.js for no behavior change. */
-.glass-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
   transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.glass-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.25);
-}
+.theme-toggle:hover { border-color: var(--brand); transform: rotate(20deg); }
+
+#navbar .navbar-toggler { border-color: var(--border); }
+#navbar .navbar-toggler-icon { filter: var(--toggler-inv); }
 
 /* ════════════════════════════════════════
-   ABOUT — Split Layout
+   BUTTONS & LINKS
 ════════════════════════════════════════ */
-.about-split {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 60px;
+.btn-pill {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1.5px solid var(--brand-fill);
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.about-left {
+.btn-pill:hover { transform: translateY(-2px); }
+
+.btn-pill-solid { background: var(--brand-fill); color: #fff; }
+.btn-pill-solid:hover { background: var(--brand-dark); color: #fff; }
+
+.btn-pill-outline { background: transparent; color: var(--brand); border-color: var(--brand); }
+.btn-pill-outline:hover { background: var(--brand-fill); border-color: var(--brand-fill); color: #fff; }
+
+/* Text link with the amber underline used across the page. */
+.link-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--brand);
+  text-decoration: none;
+  background: var(--brush) 0 100% / 100% 9px no-repeat;
+  padding-bottom: 3px;
+  min-height: 0;
+  transition: gap 0.2s ease;
+}
+
+.link-accent:hover { gap: 10px; color: var(--brand); }
+
+/* ════════════════════════════════════════
+   HERO
+════════════════════════════════════════ */
+#banner {
+  position: relative;
+  background: var(--bg-alt);
+  scroll-snap-align: start;
+}
+
+/* Torn dry-brush divider at the bottom of the hero and of every section
+   (src/utils/tornEdge.js), painted in the next section's background. */
+.torn-edge {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 70px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.torn-edge--to-bg  { color: var(--bg); }
+.torn-edge--to-alt { color: var(--bg-alt); }
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr 0.7fr;
+  grid-template-rows: 1fr auto;
+  gap: 24px 40px;
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 0;
+  align-items: start;
+}
+
+.hero-left {
+  grid-row: 1 / span 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 24px;
+  align-self: stretch;
+  padding-top: 24px;
+  padding-bottom: 56px;
 }
 
-.about-photo-card {
-  position: relative;
-  width: 280px;
-  height: 340px;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.about-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-.about-photo-border {
-  position: absolute;
-  inset: -3px;
-  border-radius: 22px;
-  background: var(--primary);
-  z-index: 0;
-}
-
-.about-socials {
+.hero-title {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
+  margin: 0;
+  color: var(--brand);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -2px;
 }
 
-.about-text {
+.hero-hello {
+  font-size: clamp(28px, 3.4vw, 46px);
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+
+.hero-name {
+  font-size: clamp(64px, 9vw, 128px);
+  letter-spacing: -4px;
+  color: var(--text);
+}
+
+.hero-fullname {
+  margin-top: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero-mail {
+  align-self: flex-start;
+  margin-top: 28px;
   font-size: 16px;
-  color: var(--text-muted);
-  line-height: 1.8;
-  margin-bottom: 16px;
-  overflow-wrap: break-word;
+  font-weight: 600;
+  color: var(--brand);
+  text-decoration: none;
+  background: var(--brush) 0 100% / 100% 10px no-repeat;
+  padding-bottom: 4px;
+  min-height: 0;
 }
 
-.about-stats {
+.hero-mail:hover { color: var(--brand-dark); }
+
+[data-theme="dark"] .hero-mail:hover { color: var(--text); }
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.hero-years {
+  margin-top: auto;
+  padding-top: 40px;
   display: flex;
   align-items: center;
-  gap: 28px;
-  margin-top: 32px;
-  padding: 28px 32px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  flex-wrap: wrap;
+  gap: 14px;
 }
 
-.about-stat-item {
-  text-align: center;
-  flex: 1;
-  min-width: 0;
+.hero-years-num {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--brand);
+  letter-spacing: -2px;
 }
 
-.about-stat-divider {
-  width: 1px;
-  height: 48px;
-  background: var(--border);
+.hero-years-label {
+  max-width: 110px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+/* Portrait: cut-out photo in front of a slate brush stroke. */
+.hero-visual {
+  grid-row: 1 / span 2;
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  /* Size container: the stage below is sized from both the column's height
+     and its width, so it fills tall screens without overflowing narrow ones. */
+  container-type: size;
+}
+
+.hero-stage {
+  position: relative;
+  /* As tall as the hero allows, capped so it never gets wider than ~110% of
+     its column (121cqw × 10/11) or absurdly large on 4K screens. */
+  height: min(100cqh, 121cqw, 780px);
+  aspect-ratio: 10 / 11;
   flex-shrink: 0;
 }
 
-.stat-value {
-  font-size: 40px;
-  font-weight: 800;
-  color: var(--primary);
-  line-height: 1;
+.hero-brush {
+  position: absolute;
+  left: 0;
+  top: 2%;
+  width: 100%;
+  height: auto;
+  transform: rotate(-8deg);
+  color: var(--brand-fill);
+  opacity: 0.92;
 }
 
-.stat-label {
-  font-size: 14px;
-  color: var(--text-muted);
-  font-weight: 500;
-  margin-top: 6px;
+.hero-portrait {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 78%;
+  transform: translateX(-50%);
 }
 
-.social-links {
+.hero-portrait img {
+  width: 100%;
+  height: auto;
+  /* The shirt is cropped by the photo's frame on three sides. Fade the
+     bottom and both sides (the sides only hit the shoulders: above them the
+     cut-out is already transparent), so no straight edge shows; the hero's
+     .torn-edge finishes the bottom. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 72%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, #000 72%, transparent 98%),
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.hero-right {
+  grid-row: 1 / span 2;
+  align-self: stretch;
   display: flex;
-  gap: 12px;
-  margin-top: 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 40px;
+  padding-bottom: 56px;
 }
 
-.social-link-btn {
+.hero-tagline {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+.hero-badge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.hero-badge-icon {
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand);
+  color: var(--brand);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  text-decoration: none;
-  transition: all 0.2s ease;
 }
 
-.social-link-btn:hover {
-  border-color: var(--primary);
-  transform: translateY(-3px);
+.hero-badge-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.social-link-btn svg {
-  width: 18px;
-  height: 18px;
-  color: var(--text-muted);
-  fill: var(--text-muted);
-  stroke: var(--text-muted);
-  transition: all 0.2s;
+.hero-badge-text strong { font-size: 14px; color: var(--brand); }
+
+/* ════════════════════════════════════════
+   SECTIONS SHARED
+════════════════════════════════════════ */
+.section {
+  position: relative;
+  /* Extra bottom room so the torn edge never crowds the last row. */
+  padding: 96px 0 140px;
+  background: var(--bg);
+  scroll-snap-align: start;
 }
 
-.social-link-btn:hover svg {
-  color: var(--primary);
-  fill: var(--primary);
-  stroke: var(--primary);
+.section-alt { background: var(--bg-alt); }
+
+#banner, main > section { scroll-margin-top: 90px; }
+
+.section-title {
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  color: var(--brand);
+}
+
+[data-theme="dark"] .section-title { color: var(--text); }
+
+.section-title span {
+  color: var(--brand);
+  /* Brush sits behind the lower part of the word, like the nav's. */
+  background: var(--brush) 0 88% / 100% 0.32em no-repeat;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.group-title,
+.skill-group-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 20px;
+}
+
+.body-text {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 14px;
 }
 
 /* ════════════════════════════════════════
-   SKILLS — Modern Layout
+   ABOUT → "How can I help?"
 ════════════════════════════════════════ */
-.skill-group-title {
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--primary);
-  margin-bottom: 16px;
+.help-split {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 72px;
+  align-items: center;
 }
 
-/* Circular progress indicators */
+.service-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 22px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover { transform: translateX(6px); }
+
+/* Staggered like the mockup's cards */
+.service-card:nth-child(2) { margin-left: 32px; }
+
+.service-icon {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.service-icon-1 { background: var(--brand-fill); }
+.service-icon-2 { background: var(--brand-mid); }
+.service-icon-3 { background: var(--accent); color: #2a2c3d; }
+
+.service-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.service-sub {
+  display: block;
+  margin-top: 3px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.help-lead {
+  margin: 18px 0 14px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.help-lead span { color: var(--brand); }
+
+.help-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 32px;
+}
+
+.help-stat-value {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.5px;
+  color: var(--brand);
+}
+
+.help-stat-label {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ════════════════════════════════════════
+   EXPERIENCE — timeline (where/when · axis · what)
+════════════════════════════════════════ */
+.tl-panel {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 48px 24px;
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.tl {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tl-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 220px 40px 1fr;
+  padding-bottom: 36px;
+}
+
+/* The axis: a line running down the middle column, stopping at the last dot. */
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: 239px;
+  top: 10px;
+  bottom: 0;
+  width: 2px;
+  background: var(--brand-soft);
+}
+
+.tl-item:last-child::before { display: none; }
+
+.tl-dot {
+  grid-column: 2;
+  justify-self: center;
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--brand-fill);
+  box-shadow: 0 0 0 5px var(--card), 0 0 0 7px var(--brand-soft);
+}
+
+[data-theme="dark"] .tl-dot { background: var(--brand); }
+
+.tl-item.is-current .tl-dot {
+  background: var(--accent);
+  box-shadow: 0 0 0 5px var(--card), 0 0 0 7px var(--accent-soft);
+}
+
+.tl-when { grid-column: 1; padding-right: 8px; }
+.tl-what { grid-column: 3; }
+
+.tl-company {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.tl-period {
+  margin-top: 3px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--brand-mid);
+}
+
+.tl-location {
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.tl-role {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--brand);
+}
+
+.tl-live {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-text);
+}
+
+.tl-bullets {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tl-bullets li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+.tl-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-mid);
+}
+
+.tl-bullets li strong { font-weight: 600; }
+
+/* Education: same timeline, tighter and without a panel. */
+.tl-compact .tl-item {
+  grid-template-columns: 100px 32px 1fr;
+  padding-bottom: 24px;
+}
+
+.tl-compact .tl-item::before { left: 115px; }
+.tl-compact .tl-dot { box-shadow: 0 0 0 5px var(--bg-alt), 0 0 0 7px var(--brand-soft); }
+.tl-compact .tl-role { font-size: 15px; color: var(--text); }
+
+.tl-school {
+  margin-top: 4px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.exp-extra {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  max-width: 980px;
+  margin: 64px auto 0;
+}
+
+.award-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.award-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 22px;
+  border-radius: var(--radius);
+  background: var(--accent-soft);
+  transition: transform 0.3s ease;
+}
+
+.award-card:hover { transform: translateY(-4px); }
+
+.award-medal {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.award-title { font-size: 15px; font-weight: 700; color: var(--text); }
+
+.award-detail {
+  margin: 4px 0 8px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.award-card .link-accent { min-height: 0; font-size: 13px; }
+
+/* ════════════════════════════════════════
+   SKILLS
+════════════════════════════════════════ */
 .skill-circles-row {
   display: flex;
   justify-content: center;
-  gap: 32px;
   flex-wrap: wrap;
-  margin-bottom: 48px;
+  gap: 28px;
+  margin-bottom: 56px;
 }
 
 .skill-circle-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  position: relative;
-}
-
-.skill-circle-svg {
-  width: 110px;
-  height: 110px;
-}
-
-.skill-circle-bg {
-  fill: none;
-  stroke: var(--bg-2);
-  stroke-width: 6;
+  gap: 10px;
 }
 
 .skill-circle-wrap {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.3s ease;
+}
+
+.skill-circle-item:hover .skill-circle-wrap { transform: translateY(-4px); }
+
+.skill-circle-svg { width: 104px; height: 104px; }
+
+.skill-circle-bg {
+  fill: none;
+  stroke: var(--brand-soft);
+  stroke-width: 3;
+  stroke-dasharray: 4 6;
 }
 
 .skill-circle-label {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 110px;
-  height: 110px;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.skill-circle-icon {
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-}
+.skill-circle-icon { width: 42px; height: 42px; object-fit: contain; }
 
-.skill-circle-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-}
+.skill-circle-name { font-size: 14px; font-weight: 700; color: var(--text); }
 
-/* Icon cards for frameworks/databases */
-.skills-cards-section {
-  margin-bottom: 40px;
-}
+.skills-cards-section { margin-bottom: 56px; }
 
 .skills-cards-row {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 24px;
+  gap: 40px;
 }
 
 .skill-icon-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
-.skill-icon-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
+.skill-icon-grid-3 { grid-template-columns: repeat(2, 1fr); }
 
 .skill-icon-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 16px 8px;
+  gap: 10px;
+  padding: 20px 12px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
   text-align: center;
-  gap: 8px;
-  cursor: default;
+  transition: transform 0.3s ease;
 }
 
-.skill-icon-img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
+.skill-icon-card:hover { transform: translateY(-4px); }
 
-.skill-icon-card:hover .skill-icon-img {
-  transform: scale(1.15);
-}
+.skill-icon-img { width: 38px; height: 38px; object-fit: contain; }
 
-.skill-icon-name {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-muted);
-  text-align: center;
-  overflow-wrap: break-word;
-}
+.skill-icon-name { font-size: 13px; font-weight: 600; color: var(--text); }
 
-/* Marquee for tools */
-.skills-marquee-section {
-  margin-bottom: 40px;
-}
+.skills-marquee-section { margin-bottom: 56px; }
 
 .marquee-wrap {
   overflow: hidden;
@@ -1050,592 +1032,329 @@ main section:nth-of-type(even) .section-wave path {
 
 .marquee-track {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   width: max-content;
-  animation: marqueeScroll 20s linear infinite;
+  padding: 6px 0;
+  animation: marqueeScroll 24s linear infinite;
 }
 
 .marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 15px;
-  font-weight: 600;
-  padding: 12px 26px;
+  gap: 10px;
+  padding: 10px 18px;
   border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
   white-space: nowrap;
-  flex-shrink: 0;
 }
 
-.marquee-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
+.marquee-icon { width: 22px; height: 22px; object-fit: contain; }
 
 @keyframes marqueeScroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* Spoken languages bars */
 .spoken-bars-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .spoken-bar-card {
-  padding: 20px;
+  padding: 20px 22px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
 .spoken-bar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 14px;
 }
 
 .spoken-bar-name {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text);
 }
 
-.spoken-flag {
-  font-size: 20px;
-  line-height: 1;
-}
+.spoken-flag { font-size: 20px; }
 
-.spoken-bar-level {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
+.spoken-bar-level { font-size: 12px; font-weight: 600; color: var(--muted); }
 
 .spoken-bar-track {
-  height: 6px;
-  background: var(--bg-2);
+  height: 8px;
   border-radius: 999px;
+  background: var(--brand-soft);
   overflow: hidden;
 }
 
+/* Slate bar with an amber tip. */
 .spoken-bar-fill {
-  height: 100%;
-  background: var(--primary);
-  border-radius: 999px;
   width: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--brand-fill);
+  box-shadow: inset -10px 0 0 var(--accent);
   transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+[data-theme="dark"] .spoken-bar-fill { background: var(--brand); }
+
 /* ════════════════════════════════════════
-   EXPERIENCE / TIMELINE
+   PROJECTS → "Latest works"
 ════════════════════════════════════════ */
-/* Education + Awards, below the full-width timeline. */
-.exp-footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: start;
-  margin-top: 56px;
-}
-
-/* Zigzag timeline: a central axis with cards alternating left/right of it.
-   Full width (no sidebar next to it — see .exp-footer-grid below) so each
-   card has real room instead of a cramped half of a narrow column.
-   Built with a single-column flex flow — each .timeline-item is full width,
-   but its .timeline-card is pulled to one side with margin-left/right:auto,
-   so the axis (centered via the dot's left:50%) visually splits them. */
-.timeline {
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 4px 0;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: var(--primary);
-  transform: translateX(-50%);
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.timeline-item:last-child {
-  margin-bottom: 0;
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  width: 34px;
-  height: 34px;
-  transform: translateX(-50%);
-  border-radius: 50%;
-  background: var(--bg-card);
-  border: 2px solid var(--primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 800;
-  color: var(--primary);
-  z-index: 1;
-}
-
-.timeline-card {
-  position: relative;
-  width: calc(50% - 40px);
-  padding: 16px 20px;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-
-/* Odd cards sit left of the axis, even cards sit right — the classic zigzag. */
-.timeline-item:nth-child(odd) .timeline-card {
-  margin-right: auto;
-}
-
-.timeline-item:nth-child(even) .timeline-card {
-  margin-left: auto;
-}
-
-/* Diagonal connector from the card's inner edge to the axis dot. */
-.timeline-card::before {
-  content: '';
-  position: absolute;
-  top: 16px;
-  width: 24px;
-  height: 2px;
-  background: var(--primary);
-}
-
-.timeline-item:nth-child(odd) .timeline-card::before {
-  right: -24px;
-}
-
-.timeline-item:nth-child(even) .timeline-card::before {
-  left: -24px;
-}
-
-.timeline-card:hover {
-  border-color: rgba(56, 189, 248, 0.3);
-  transform: translateX(4px);
-}
-
-.timeline-item:nth-child(even) .timeline-card:hover {
-  transform: translateX(-4px);
-}
-
-.timeline-header {
+.works-head {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: flex-end;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 10px;
+  gap: 16px;
+  margin-bottom: 40px;
 }
 
-.timeline-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.timeline-company {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--primary);
-  margin-top: 2px;
-}
-
-.timeline-location {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-/* Flat label with a colored accent bar on the left, instead of a filled pill —
-   consistent with the rest of the site's move away from bordered/filled
-   badges (see .glass-card, .btn-primary-grad, etc.) toward flat, minimal
-   surfaces. No background, no border: just the accent bar + text. */
-.timeline-badge {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  padding-left: 10px;
-  border-left: 3px solid var(--primary);
-  white-space: nowrap;
-  line-height: 1.3;
-}
-
-.timeline-bullets {
-  list-style: none;
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.timeline-bullets li {
-  font-size: 14px;
-  color: var(--text-muted);
-  padding-left: 16px;
-  position: relative;
-  line-height: 1.45;
-}
-
-.timeline-bullets li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: var(--primary);
-  font-size: 12px;
-  top: 2px;
-}
-
-/* Education & Award entries */
-.edu-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.edu-card {
-  padding: 16px 20px;
-  transition: border-color 0.3s, transform 0.3s;
-}
-
-.edu-card:hover {
-  border-color: rgba(129, 140, 248, 0.3);
-  transform: translateX(4px);
-}
-
-.edu-degree {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.edu-school {
-  font-size: 14px;
-  color: var(--secondary);
-  margin-top: 3px;
-  font-weight: 500;
-}
-
-.edu-period {
-  font-size: 13px;
-  color: var(--text-muted);
-  margin-top: 4px;
-}
-
-.award-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 16px 20px;
-  margin-bottom: 12px;
-  background: rgba(56, 189, 248, 0.05);
-  transition: border-color 0.3s, transform 0.3s;
-}
-
-.award-card:hover {
-  border-color: rgba(56, 189, 248, 0.3);
-  transform: translateY(-2px);
-}
-
-.award-medal {
-  font-size: 28px;
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.award-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.award-detail {
-  font-size: 14px;
-  color: var(--text-muted);
-  margin-top: 3px;
-}
-
-.award-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--primary);
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  margin-top: 6px;
-  transition: gap 0.2s, color 0.2s;
-}
-
-.award-link:hover {
-  gap: 8px;
-  color: var(--secondary);
-}
-
-/* ════════════════════════════════════════
-   PROJECTS — Featured + Grid
-════════════════════════════════════════ */
-.project-featured {
-  margin-bottom: 24px;
-}
-
-.project-featured-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
-}
-
-.project-featured-img {
-  position: relative;
-  min-height: 280px;
-  overflow: hidden;
-}
-
-.project-featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.project-featured-card:hover .project-featured-img img {
-  transform: scale(1.05);
-}
-
-.project-featured-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, var(--bg-card));
-  pointer-events: none;
-}
-
-.project-featured-content {
-  padding: 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.project-name-lg {
-  font-size: 26px;
-}
-
-.projects-grid {
+.works-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 22px;
 }
 
-.project-card {
-  overflow: hidden;
+.work-card {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  transition: transform 0.3s ease;
+  --tone-text: #fff;
+  --tone-muted: rgba(255, 255, 255, 0.78);
+  --tone-tag: rgba(255, 255, 255, 0.14);
+  color: var(--tone-text);
 }
 
-.project-card-img-wrap {
-  position: relative;
-  height: 160px;
+.work-card:hover { transform: translateY(-6px); }
+
+.work-card.is-featured { grid-column: span 2; }
+
+.tone-slate { background: #3c3f55; }
+.tone-deep  { background: #2a2c3d; }
+
+/* Amber keeps dark ink in both themes, since its fill doesn't change. */
+.tone-amber {
+  --tone-text: #23253a;
+  --tone-muted: #4e5168;
+  --tone-tag: rgba(60, 63, 85, 0.1);
+  background: #f6d9a6;
+}
+
+/* Plain card: follows the theme like every other card. */
+.tone-soft {
+  --tone-text: var(--text);
+  --tone-muted: var(--muted);
+  --tone-tag: var(--brand-soft);
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
+.work-employer {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--tone-muted);
+}
+
+.work-name {
+  margin: 4px 0 18px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--tone-text);
+}
+
+.work-shot {
+  border-radius: var(--radius);
   overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.project-card-img-wrap img {
+.work-card.is-featured .work-shot { aspect-ratio: 16 / 7; }
+
+.work-shot img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  object-position: top;
   transition: transform 0.5s ease;
 }
 
-.project-card:hover .project-card-img-wrap img {
-  transform: scale(1.05);
+.work-card:hover .work-shot img { transform: scale(1.04); }
+
+.work-desc {
+  margin: 18px 0 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--tone-muted);
 }
 
-.project-card-img-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, var(--bg-card));
-  pointer-events: none;
-}
+.work-desc strong { color: var(--tone-text); }
 
-.project-card-body {
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.project-employer {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--primary);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-bottom: 8px;
-}
-
-.project-name {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 10px;
-}
-
-.project-description {
-  font-size: 15px;
-  color: var(--text-muted);
-  line-height: 1.7;
-  flex: 1;
-}
-
-.project-tech {
+.work-tech {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
-.tech-badge {
-  font-size: 13px;
+.work-tag {
+  font-size: 12px;
   font-weight: 600;
-  background: rgba(129, 140, 248, 0.1);
-  border: 1px solid rgba(129, 140, 248, 0.25);
-  color: var(--secondary);
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 999px;
+  background: var(--tone-tag);
+  color: var(--tone-text);
 }
 
-.project-link {
+.work-link {
+  margin-top: auto;
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--primary);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--tone-text);
   text-decoration: none;
-  transition: gap 0.2s;
-  margin-top: auto;
+  background: var(--brush) 0 100% / 100% 9px no-repeat;
+  min-height: 0;
+  padding-bottom: 3px;
+  transition: gap 0.2s ease;
 }
 
-.project-link:hover {
-  gap: 10px;
-  color: var(--primary);
-}
+.work-link:hover { gap: 10px; color: var(--tone-text); }
 
 /* ════════════════════════════════════════
-   FOOTER — Modern multi-column
+   FOOTER
 ════════════════════════════════════════ */
-#footer {
-  scroll-snap-align: start;
-}
-
 #footer footer {
   background: var(--bg);
-  padding: 60px 0 28px;
+  padding: 88px 0 28px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
-  gap: 40px;
-  margin-bottom: 40px;
+  grid-template-columns: 1.6fr 1fr 0.8fr;
+  gap: 48px;
 }
 
-.footer-logo-text {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--primary);
-  margin-bottom: 8px;
+.footer-cta-title {
+  max-width: 460px;
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  color: var(--brand);
 }
 
-.footer-tagline {
-  font-size: 15px;
-  color: var(--text-muted);
-  margin-bottom: 16px;
+[data-theme="dark"] .footer-cta-title { color: var(--text); }
+
+.footer-cta-start {
+  margin-top: 22px;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.footer-cta-start a {
+  color: var(--brand);
+  text-decoration: none;
+  background: var(--brush) 0 92% / 100% 0.42em no-repeat;
+  padding: 0 2px;
+  min-height: 0;
 }
 
 .footer-socials {
   display: flex;
   gap: 10px;
+  margin-top: 28px;
 }
 
+.social-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--brand);
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.social-btn:hover { background: var(--brand-fill); color: #fff; transform: translateY(-3px); }
+
+.social-btn svg { width: 18px; height: 18px; }
+
 .footer-col-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--primary);
+  color: var(--text);
   margin-bottom: 16px;
 }
 
-.footer-nav-list {
+.footer-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding-left: 0;
+  gap: 4px;
+  font-size: 14px;
+  color: var(--muted);
 }
 
-.footer-nav-list a {
-  color: var(--text-muted);
-  font-size: 15px;
-  font-weight: 500;
+.footer-list a {
+  color: var(--muted);
   text-decoration: none;
-  transition: color 0.2s;
-  word-break: break-all;
-  overflow-wrap: anywhere;
+  min-height: 32px;
+  justify-content: flex-start;
 }
 
-.footer-nav-list a:hover {
-  color: var(--primary);
+.footer-list a:hover { color: var(--brand); }
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 64px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
 }
 
-.footer-divider {
-  width: 100%;
-  height: 1px;
-  background: var(--border);
-  margin-bottom: 20px;
+.footer-brand {
+  gap: 8px;
+  text-decoration: none;
 }
 
-.footer-copy {
-  font-size: 14px;
-  color: var(--text-muted);
-  text-align: center;
-}
+.footer-brand img { width: 30px; height: 30px; }
+.footer-brand span { font-size: 26px; }
 
-.footer-heart {
-  color: var(--primary);
-  font-size: 14px;
-}
+.footer-copy { font-size: 13px; color: var(--muted); }
+.footer-heart { color: var(--accent); }
 
 /* ════════════════════════════════════════
-   SCROLL REVEAL ANIMATIONS
+   SCROLL REVEAL
 ════════════════════════════════════════ */
 [data-reveal] {
   opacity: 0;
@@ -1643,24 +1362,12 @@ main section:nth-of-type(even) .section-wave path {
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-[data-reveal="left"] {
-  transform: translateX(-30px);
-}
+[data-reveal="left"]  { transform: translateX(-30px); }
+[data-reveal="right"] { transform: translateX(30px); }
+[data-reveal="scale"] { transform: scale(0.95); }
 
-[data-reveal="right"] {
-  transform: translateX(30px);
-}
+[data-reveal].revealed { opacity: 1; transform: translate(0) scale(1); }
 
-[data-reveal="scale"] {
-  transform: scale(0.95);
-}
-
-[data-reveal].revealed {
-  opacity: 1;
-  transform: translate(0) scale(1);
-}
-
-/* Stagger delays */
 [data-delay="1"] { transition-delay: 0.1s; }
 [data-delay="2"] { transition-delay: 0.2s; }
 [data-delay="3"] { transition-delay: 0.3s; }
@@ -1668,621 +1375,8 @@ main section:nth-of-type(even) .section-wave path {
 [data-delay="5"] { transition-delay: 0.5s; }
 
 /* ════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════ */
-@media (max-width: 991px) {
-  /* About split → stack */
-  .about-split {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .about-left {
-    justify-content: center;
-  }
-
-  .about-right {
-    text-align: center;
-  }
-
-  .about-socials {
-    justify-content: center;
-  }
-
-  /* Skills responsive */
-  .skills-cards-row {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .skill-icon-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .spoken-bars-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Education/Awards → stack */
-  .exp-footer-grid {
-    grid-template-columns: 1fr;
-    margin-top: 40px;
-  }
-
-  /* Zigzag needs room to alternate left/right; below 991px it collapses
-     into a plain left-aligned column, same idea as the old linear timeline. */
-  .timeline::before {
-    left: 12px;
-    transform: none;
-  }
-
-  .timeline-dot {
-    left: 12px;
-    transform: none;
-    width: 28px;
-    height: 28px;
-    font-size: 11px;
-  }
-
-  .timeline-card,
-  .timeline-item:nth-child(odd) .timeline-card,
-  .timeline-item:nth-child(even) .timeline-card {
-    width: auto;
-    margin-left: 44px;
-    margin-right: 0;
-  }
-
-  .timeline-card::before,
-  .timeline-item:nth-child(odd) .timeline-card::before,
-  .timeline-item:nth-child(even) .timeline-card::before {
-    left: -24px;
-    right: auto;
-    top: 13px;
-    width: 20px;
-  }
-
-  .timeline-item:nth-child(even) .timeline-card:hover {
-    transform: translateX(4px);
-  }
-
-  /* Projects featured → stack */
-  .project-featured-card {
-    grid-template-columns: 1fr;
-  }
-
-  .project-featured-img {
-    min-height: 200px;
-  }
-
-  .project-featured-overlay {
-    background: linear-gradient(180deg, transparent 40%, var(--bg-card));
-  }
-
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Footer → 2 col */
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .footer-brand {
-    grid-column: 1 / 3;
-  }
-}
-
-@media (max-width: 768px) {
-  #banner {
-    justify-content: center;
-  }
-
-  #banner .banner-content {
-    text-align: center;
-  }
-
-  .banner-status {
-    justify-content: center;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .banner-name {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .banner-role {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .banner-stack-wrap {
-    display: flex;
-    justify-content: center;
-  }
-
-  .banner-actions {
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .btn-primary-grad, .btn-outline-grad, .btn-ghost { justify-content: center; }
-
-  #about .profile-img {
-    width: 180px;
-    height: 180px;
-  }
-
-  /* About stats tablet/mobile */
-  .about-stats {
-    padding: 20px 16px;
-    gap: 16px;
-  }
-
-  .about-photo-card {
-    width: 100%;
-    max-width: 280px;
-  }
-
-  /* Bento → single column */
-  .about-bento {
-    grid-template-columns: 1fr;
-  }
-
-  .bento-photo,
-  .bento-bio {
-    grid-column: auto;
-  }
-
-  .skills-cards-row {
-    grid-template-columns: 1fr;
-  }
-
-  .skill-icon-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .skill-circles-row {
-    gap: 20px;
-  }
-
-  .skill-circle-svg {
-    width: 90px;
-    height: 90px;
-  }
-
-  .skill-circle-wrap {
-    width: 90px;
-    height: 90px;
-  }
-
-  .skill-circle-label {
-    width: 90px;
-    height: 90px;
-  }
-
-  .skill-circle-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  .spoken-bars-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  .footer-brand {
-    grid-column: auto;
-    text-align: center;
-  }
-
-  .footer-logo-text {
-    font-size: 20px;
-  }
-
-  .footer-socials {
-    justify-content: center;
-  }
-
-  .footer-col-title {
-    text-align: center;
-  }
-
-  .footer-nav-list {
-    align-items: center;
-  }
-
-  #footer footer {
-    padding: 40px 0 20px;
-  }
-}
-
-/* Light theme extra fixes */
-[data-theme="light"] #navbar .nav-link {
-  color: var(--text-muted) !important;
-}
-[data-theme="light"] #navbar .nav-link:hover,
-[data-theme="light"] #navbar .nav-link.active {
-  color: var(--text) !important;
-}
-[data-theme="light"] .timeline-dot {
-  border-color: var(--bg);
-}
-
-/* ════════════════════════════════════════
-   TOUCH-FRIENDLY OPTIMIZATION
-════════════════════════════════════════ */
-/* Minimum touch target size: 44x44px */
-button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
-  min-height: 44px;
-  min-width: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Improve tap feedback */
-@media (hover: none) and (pointer: coarse) {
-  button:active, a:active, [role="button"]:active {
-    transform: scale(0.98);
-  }
-}
-
-/* ════════════════════════════════════════
-   PERFORMANCE OPTIMIZATION
-════════════════════════════════════════ */
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* will-change: scroll-position used to sit here as a blanket hint across the
-   entire main content area (About through Achievements) for the whole time
-   the page is open — that's the opposite of how will-change is meant to be
-   used (a short-lived hint right before a specific animation). Forcing such
-   a large element onto its own GPU compositing layer for the page's whole
-   lifetime, next to the hero's WebGL canvas (#banner, its own layer too),
-   is a known trigger for compositing glitches on some Android GPUs — visible
-   as a band of static/noise where the two layers' boundaries meet during
-   scroll. Removed; #banner is contained separately below instead. */
-
-/* ════════════════════════════════════════
-   RESPONSIVE: TABLET (1024px and down)
-════════════════════════════════════════ */
-@media (max-width: 1024px) {
-  .container {
-    padding: 0 20px;
-  }
-
-  h1, .banner-name {
-    font-size: clamp(32px, 6vw, 64px);
-  }
-
-  h2, .section-title {
-    font-size: clamp(28px, 5vw, 48px);
-  }
-
-  p {
-    font-size: clamp(14px, 2.5vw, 16px);
-  }
-
-  /* Improve spacing on tablets */
-  .section { padding: 44px 0 72px; }
-
-  button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
-    padding: 12px 20px;
-    font-size: 14px;
-  }
-}
-
-/* ════════════════════════════════════════
-   RESPONSIVE: MOBILE LANDSCAPE (768px - 1024px)
-════════════════════════════════════════ */
-@media (max-width: 1024px) and (orientation: landscape) {
-  .section { padding: 32px 0 56px; }
-
-  #banner { min-height: 80vh; }
-}
-
-/* ════════════════════════════════════════
-   RESPONSIVE: LARGE PHONE (481px - 768px)
-════════════════════════════════════════ */
-@media (max-width: 768px) {
-  html {
-    scroll-snap-type: none;
-  }
-
-  :root {
-    --radius: 12px;
-    --radius-sm: 6px;
-  }
-
-  .container { padding: 0 16px; }
-
-  .section { padding: 36px 0 52px; }
-
-  h1, .banner-name {
-    font-size: clamp(28px, 6vw, 48px);
-    line-height: 1.2;
-  }
-
-  h2, .section-title {
-    font-size: clamp(24px, 5vw, 36px);
-  }
-
-  h3 {
-    font-size: clamp(18px, 4vw, 24px);
-  }
-
-  p, body {
-    font-size: clamp(14px, 2.3vw, 16px);
-    line-height: 1.6;
-  }
-
-  /* Touch-friendly buttons */
-  button, .btn-primary-grad, .btn-outline-grad, .btn-ghost {
-    padding: 12px 16px;
-    font-size: 14px;
-    min-height: 48px;
-  }
-
-  /* Improve gap/spacing */
-  .gap-4 { gap: 12px !important; }
-  .gap-3 { gap: 12px !important; }
-
-  /* Navbar responsive - center collapsed content */
-  #navbar { padding: 12px 0; }
-
-  #navbar .navbar-collapse {
-    text-align: center;
-  }
-
-  #navbar .navbar-nav {
-    align-items: center;
-  }
-
-  #navbar .navbar-collapse .d-flex {
-    justify-content: center;
-  }
-
-  /* Card improvements for mobile */
-  .glass-card, .glass-card-enhanced {
-    padding: 16px;
-  }
-
-  /* Stack flex items */
-  .flex-md-column { flex-direction: column; }
-}
-
-/* ════════════════════════════════════════
-   RESPONSIVE: SMALL PHONE (< 480px)
-════════════════════════════════════════ */
-@media (max-width: 480px) {
-  * { touch-action: manipulation; }
-
-  .container { padding: 0 12px; }
-
-  .section { padding: 28px 0 44px; }
-
-  h1, .banner-name {
-    font-size: clamp(24px, 5vw, 36px);
-    letter-spacing: -1px;
-  }
-
-  h2, .section-title {
-    font-size: clamp(20px, 4vw, 28px);
-  }
-
-  h3 {
-    font-size: clamp(16px, 3vw, 20px);
-  }
-
-  p {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  /* Aggressive mobile button sizing */
-  button, a, .btn-primary-grad, .btn-outline-grad, .btn-ghost, [role="button"] {
-    min-height: 48px;
-    min-width: 48px;
-    padding: 12px 16px;
-    font-size: 13px;
-    border-radius: 8px;
-  }
-
-  /* Stack everything */
-  .row { gap: 12px; }
-
-  /* Remove unnecessary spacing */
-  .mb-5 { margin-bottom: 24px; }
-  .mb-4 { margin-bottom: 16px; }
-  .mb-3 { margin-bottom: 12px; }
-  .mt-4 { margin-top: 16px; }
-  .mt-3 { margin-top: 12px; }
-
-  /* Hero/Banner optimizations */
-  #banner {
-    min-height: 90vh;
-    padding: 20px 0;
-  }
-
-  #banner .banner-status {
-    font-size: 12px;
-    padding: 8px 12px;
-  }
-
-  .banner-actions {
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .banner-actions a {
-    width: 100%;
-    justify-content: center;
-  }
-
-  /* Card optimization */
-  .glass-card, .glass-card-enhanced {
-    padding: 12px;
-    gap: 8px;
-  }
-
-  /* Profile image mobile */
-  #about .profile-img {
-    width: 140px;
-    height: 140px;
-  }
-
-  /* About stats mobile */
-  .about-stats {
-    padding: 16px 12px;
-    gap: 8px 12px;
-    justify-content: center;
-  }
-
-  .about-stat-divider {
-    display: none;
-  }
-
-  .about-stat-item {
-    min-width: 70px;
-  }
-
-  .stat-value {
-    font-size: 28px;
-  }
-
-  .stat-label {
-    font-size: 11px;
-    word-break: break-word;
-  }
-
-  .about-photo-card {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    aspect-ratio: 280 / 340;
-  }
-
-  /* Skill grid mobile */
-  .skills-hexagon-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    padding: 8px;
-  }
-
-  .skill-hexagon {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1;
-  }
-
-  .skill-hexagon-inner {
-    min-height: 70px;
-  }
-
-  /* Timeline mobile — tighter axis/marker/connector than the 991px fallback. */
-  .timeline::before { left: 8px; }
-  .timeline-dot { left: 8px; width: 24px; height: 24px; font-size: 10px; }
-  .timeline-card,
-  .timeline-item:nth-child(odd) .timeline-card,
-  .timeline-item:nth-child(even) .timeline-card {
-    margin-left: 32px;
-  }
-  .timeline-card::before,
-  .timeline-item:nth-child(odd) .timeline-card::before,
-  .timeline-item:nth-child(even) .timeline-card::before {
-    left: -20px;
-    width: 16px;
-  }
-
-  /* Project grid mobile */
-  .projects-masonry {
-    grid-template-columns: 1fr;
-    grid-auto-rows: 250px;
-    gap: 12px;
-    padding: 12px;
-  }
-
-  /* Footer mobile */
-  #footer footer { padding: 30px 0 15px; }
-
-  .footer-grid {
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-
-  .footer-logo-text { font-size: 18px; }
-
-  .footer-socials { gap: 8px; }
-
-  .footer-nav-list {
-    gap: 8px;
-    align-items: center;
-  }
-
-  .footer-nav-list a { font-size: 13px; }
-
-  .footer-links-col {
-    text-align: center;
-  }
-
-  .footer-copy { font-size: 12px; }
-
-  /* Reduce loader text size */
-  .loader-text { font-size: 12px; }
-}
-
-/* ════════════════════════════════════════
-   PERFORMANCE: CRITICAL META
-════════════════════════════════════════ */
-/* Prioritize Above-the-Fold Content */
-/* NB: this rule used to carry a `font--weight: 700` typo. It was silently
-   dropped by the parser, so each element kept its own weight (.banner-name is
-   900). Removed rather than corrected — "fixing" it would have restyled the
-   name. Only the containment hint was ever doing anything here. */
-.banner-name, .section-title, .banner-role {
-  contain: layout style paint;
-}
-
-/* Image lazy loading container optimization */
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* Optimize scrollbar performance */
-::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 999px;
-}
-
-/* ================================================================
    FLOATING CONTACT BUTTONS (WhatsApp + Messenger)
-   ================================================================ */
+════════════════════════════════════════ */
 #chat-widget-root {
   position: fixed;
   inset: auto 0 0 auto;
@@ -2309,49 +1403,19 @@ img {
   height: 52px;
   border-radius: 50%;
   color: #fff;
+  box-shadow: var(--shadow-sm);
   transition: transform 0.2s ease;
 }
 
-.floating-contact-btn:hover {
-  transform: translateY(-3px);
-}
+.floating-contact-btn:hover { transform: translateY(-3px); }
+.floating-contact-btn svg { width: 26px; height: 26px; }
 
-.floating-contact-btn svg {
-  width: 26px;
-  height: 26px;
-}
+.floating-contact-whatsapp  { background: #25d366; }
+.floating-contact-messenger { background: #0084ff; }
 
-.floating-contact-whatsapp {
-  background: #25d366;
-}
-
-/* Messenger's own mark is a 3-tone gradient; flattened to their solid brand
-   blue to keep every fill on the site flat, including third-party icons. */
-.floating-contact-messenger {
-  background: #0084ff;
-}
-
-@media (max-width: 480px) {
-  .floating-contact {
-    right: 14px;
-    bottom: 14px;
-    gap: 10px;
-  }
-
-  .floating-contact-btn {
-    width: 46px;
-    height: 46px;
-  }
-
-  .floating-contact-btn svg {
-    width: 22px;
-    height: 22px;
-  }
-}
-
-/* ================================================================
-   SCROLL HINTS (long arrows: down on banner, up when scrolled)
-   ================================================================ */
+/* ════════════════════════════════════════
+   SCROLL HINTS (down on hero, up once scrolled)
+════════════════════════════════════════ */
 .scroll-hint {
   position: fixed;
   display: inline-flex;
@@ -2364,43 +1428,37 @@ img {
   cursor: pointer;
   opacity: 0;
   pointer-events: none;
-  color: var(--text-secondary, #475569);
+  color: var(--muted);
+  font-family: var(--font);
   transition: opacity 0.35s ease, transform 0.35s ease, color 0.2s ease;
   z-index: 80;
 }
 
-[data-theme="dark"] .scroll-hint { color: #cbd5e0; }
+.scroll-hint:hover { color: var(--brand); }
 
-.scroll-hint:hover { color: #38bdf8; }
-
-/* down hint — centered at the bottom of the banner */
+/* Bottom-left corner rather than centered: the hero portrait owns the
+   middle of the screen. */
 .scroll-hint--down {
   bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
+  left: 22px;
+  transform: translateY(20px);
 }
+
 .scroll-hint--down.is-visible {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
+  transform: translateY(0);
 }
 
-/* top button — bottom-right, offset above the chat FAB.
-   bottom must clear the FAB stack's own height, not just its bottom margin:
-   the FAB stack is 2 buttons (52px) + 1 gap (12px) = 116px tall, sitting
-   22px off the viewport bottom, so its top edge is 138px up. This button's
-   own rendered height (arrow + label + padding) is ~113px, so a bottom of
-   90px put its bottom edge only 90px up — 48px *into* the FAB stack, with
-   the "HAUT" label landing almost exactly behind the WhatsApp circle
-   (verified by measuring both boxes; the FAB paints over it, z-index 9000
-   vs this button's 80). 160px clears it with a 22px gap, matching the
-   FAB's own bottom offset. */
+/* bottom clears the FAB stack (2×52px + 12px gap, 22px off the edge = 138px)
+   plus a 22px gap, so the label never lands behind the WhatsApp button. */
 .scroll-hint--top {
   right: 22px;
   bottom: 160px;
   transform: translateY(20px);
   border-radius: var(--radius-sm);
 }
+
 .scroll-hint--top.is-visible {
   opacity: 1;
   pointer-events: auto;
@@ -2422,9 +1480,7 @@ img {
   animation: scroll-hint-bounce 1.8s ease-in-out infinite;
 }
 
-.scroll-hint--top .scroll-hint-arrow {
-  animation: scroll-hint-bounce-up 1.8s ease-in-out infinite;
-}
+.scroll-hint--top .scroll-hint-arrow { animation: scroll-hint-bounce-up 1.8s ease-in-out infinite; }
 
 @keyframes scroll-hint-bounce {
   0%, 100% { transform: translateY(0); opacity: 0.85; }
@@ -2436,30 +1492,150 @@ img {
   50% { transform: translateY(-8px); opacity: 1; }
 }
 
+/* ════════════════════════════════════════
+   TOUCH & MOTION
+════════════════════════════════════════ */
+/* Minimum touch target size: 44x44px */
+button, a, .btn-pill, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  button:active, a:active, [role="button"]:active { transform: scale(0.98); }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
   .scroll-hint-arrow { animation: none; }
 }
 
-/* Laptops / narrow desktops — hide the down label to avoid overlapping
-   with the banner buttons. Arrow alone stays as the visual cue. */
+/* ════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════ */
 @media (max-width: 1200px) {
   .scroll-hint--down .scroll-hint-label { display: none; }
 }
 
-/* Tablet — slightly smaller arrow + matching floating contact buttons right edge */
-@media (max-width: 768px) {
+@media (max-width: 1100px) {
+  /* Two columns: text stacked on the left, portrait spanning the full height
+     on the right so the cut-off shirt still rests on the hero's bottom edge. */
+  .hero {
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "left visual" "right visual";
+  }
+  .hero-left { grid-area: left; padding-bottom: 0; }
+  .hero-right {
+    grid-area: right;
+    justify-content: flex-start;
+    gap: 28px;
+    padding: 32px 0 56px;
+  }
+  .hero-visual { grid-area: visual; }
+
+  .works-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 991px) {
+  #navbar .navbar-collapse { padding: 12px 0; }
+  #navbar .nav-link { display: inline-flex; }
+  #navbar .nav-link { justify-content: flex-start; }
+  /* Full-width links in the collapsed menu: keep the stroke word-sized. */
+  #navbar .nav-link::after { right: auto; width: 84px; }
+  /* Opaque bar so the page doesn't show through the open menu. */
+  #navbar .navbar { background: var(--bg) !important; }
+
+  .help-split,
+  .exp-extra,
+  .skills-cards-row { grid-template-columns: 1fr; }
+
+  .help-split { gap: 48px; }
+  .service-card:nth-child(2) { margin-left: 0; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid > :first-child { grid-column: 1 / -1; }
+}
+
+/* Hero switches to one column a bit earlier than the rest: in a tablet's
+   portrait width the two-column hero leaves a big hole above the photo. */
+@media (max-width: 991px) {
+  .hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    min-height: auto;
+    padding-top: 100px;
+    gap: 0;
+  }
+  .hero { grid-template-areas: none; }
+  .hero-left, .hero-visual, .hero-right { grid-area: auto; grid-row: auto; grid-column: 1; }
+  .hero-left { padding-bottom: 8px; }
+  .hero-years { padding-top: 28px; }
+  /* Portrait last, so the cut-off shirt rests on the bottom edge of the hero
+     like on desktop instead of floating above the tagline. */
+  .hero-right { order: 2; }
+  .hero-visual { order: 3; margin-top: 32px; container-type: normal; }
+  .hero-stage { width: min(420px, 100%); height: auto; }
+  /* The portrait already signals there's more below; the arrow just
+     collides with content on narrow screens. */
+  .scroll-hint--down { display: none; }
+  .hero-right { flex-direction: column; align-items: flex-start; gap: 20px; padding: 28px 0 0; }
+}
+
+@media (max-width: 767px) {
+  .section { padding: 64px 0 100px; }
+
+  .tl-panel { padding: 28px 20px 8px; }
+
+  /* Timeline collapses to a single column with the axis on the left. */
+  .tl-item,
+  .tl-compact .tl-item {
+    grid-template-columns: 24px 1fr;
+    padding-bottom: 28px;
+  }
+  .tl-item::before,
+  .tl-compact .tl-item::before { left: 11px; }
+  .tl-dot { grid-column: 1; grid-row: 1 / span 2; }
+  .tl-when, .tl-what { grid-column: 2; padding-left: 12px; }
+  .tl-what { margin-top: 8px; }
+
+  .skill-icon-grid { grid-template-columns: repeat(2, 1fr); }
+  .spoken-bars-grid { grid-template-columns: 1fr; }
+
+  .works-grid { grid-template-columns: 1fr; }
+  .work-card.is-featured { grid-column: auto; }
+  .work-card.is-featured .work-shot { aspect-ratio: 16 / 10; }
+
+  .help-stats { gap: 28px; }
+  .help-stat-value { font-size: 38px; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+
   .scroll-hint-arrow { height: 48px; }
+  .torn-edge { height: 44px; }
 }
 
 @media (max-width: 480px) {
+  .hero-actions .btn-pill { flex: 1 1 auto; }
+  .skill-circles-row { gap: 18px; }
+  .skill-circle-wrap, .skill-circle-svg { width: 84px; height: 84px; }
+  .skill-circle-icon { width: 34px; height: 34px; }
+
+  .floating-contact { right: 14px; bottom: 14px; gap: 10px; }
+  .floating-contact-btn { width: 46px; height: 46px; }
+  .floating-contact-btn svg { width: 22px; height: 22px; }
+
   .scroll-hint--down { bottom: 18px; }
-  .scroll-hint--top {
-    right: 14px;
-    /* Same fix as the base rule above: at this width the FAB stack is
-       2×46px + 10px gap = 102px tall, 14px off the bottom, so its top edge
-       sits 116px up — 76px left this button overlapping it. */
-    bottom: 134px;
-  }
+  /* FAB stack here: 2×46px + 10px gap, 14px off the bottom → top at 116px. */
+  .scroll-hint--top { right: 14px; bottom: 134px; }
   .scroll-hint-arrow { height: 40px; }
   .scroll-hint-label { font-size: 0.6rem; letter-spacing: 3px; }
 }

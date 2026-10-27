@@ -1,6 +1,6 @@
 import { iconWhatsapp, iconMessenger } from '../utils/icons.js'
 
-const WHATSAPP_URL = 'https://wa.me/261343926527'
+const WHATSAPP_URL = 'https://wa.me/261346249833'
 const MESSENGER_URL = 'https://m.me/raoel.mahefa'
 
 function ensureRoot() {

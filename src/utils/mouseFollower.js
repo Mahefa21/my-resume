@@ -52,18 +52,19 @@ export function initMouseFollower() {
   function updateColors() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
 
+    // Logo palette: slate (#3c3f55, lightened to #b9bcd3 on dark) + amber accent.
     if (isDark) {
-      bgBlob.style.background = 'rgba(56, 189, 248, 0.35)'
-      bgBlob.style.boxShadow = '0 0 40px rgba(56, 189, 248, 0.4)'
+      bgBlob.style.background = 'rgba(185, 188, 211, 0.22)'
+      bgBlob.style.boxShadow = '0 0 40px rgba(185, 188, 211, 0.25)'
 
-      fgBlob.style.background = 'rgba(129, 140, 248, 0.5)'
-      fgBlob.style.boxShadow = '0 0 30px rgba(129, 140, 248, 0.5), inset -5px -5px 15px rgba(0, 0, 0, 0.3)'
+      fgBlob.style.background = 'rgba(232, 163, 61, 0.45)'
+      fgBlob.style.boxShadow = '0 0 30px rgba(232, 163, 61, 0.4), inset -5px -5px 15px rgba(0, 0, 0, 0.3)'
     } else {
-      bgBlob.style.background = 'rgba(129, 140, 248, 0.25)'
-      bgBlob.style.boxShadow = '0 0 40px rgba(129, 140, 248, 0.3)'
+      bgBlob.style.background = 'rgba(60, 63, 85, 0.14)'
+      bgBlob.style.boxShadow = '0 0 40px rgba(60, 63, 85, 0.18)'
 
-      fgBlob.style.background = 'rgba(56, 189, 248, 0.4)'
-      fgBlob.style.boxShadow = '0 0 30px rgba(56, 189, 248, 0.4), inset -5px -5px 15px rgba(0, 0, 0, 0.1)'
+      fgBlob.style.background = 'rgba(232, 163, 61, 0.4)'
+      fgBlob.style.boxShadow = '0 0 30px rgba(232, 163, 61, 0.35), inset -5px -5px 15px rgba(0, 0, 0, 0.08)'
     }
   }
 

@@ -1,8 +1,7 @@
 import { t, onLangChange } from '../i18n/index.js'
 import { observeReveal } from '../utils/reveal.js'
+import { tornEdge } from '../utils/tornEdge.js'
 import { iconExternalLink } from '../utils/icons.js'
-import { circleLabel } from '../utils/circleLabel.js'
-import { sectionWave } from '../utils/sectionWave.js'
 
 function render() {
   const jobs = t('experience.jobs')
@@ -10,73 +9,77 @@ function render() {
   const awards = t('experience.awards')
 
   document.querySelector('#experience').innerHTML = `
-    <div class="section">
-      ${sectionWave}
+    <div class="section section-alt">
+      ${tornEdge({ to: 'bg', variant: 2 })}
       <div class="container">
 
-        <div class="text-center mb-5" data-reveal>
-          <div class="section-tag">${circleLabel(t('nav.experience'))}</div>
-          <h2 class="section-title">${t('experience.title')}</h2>
-        </div>
+        <h2 class="section-title text-center mb-5" data-reveal>${t('experience.title')}</h2>
 
-        <!-- Zigzag timeline: full width so cards can alternate left/right of
-             a central axis without a sidebar competing for space. Numbered
-             markers (01, 02...) replace the old plain dot. -->
-        <div class="timeline" data-reveal data-delay="1">
-          ${jobs.map((job, i) => `
-            <div class="timeline-item">
-              <div class="timeline-dot">${String(i + 1).padStart(2, '0')}</div>
-              <div class="timeline-card glass-card">
-                <div class="timeline-header">
-                  <div>
-                    <div class="timeline-title">${job.title}</div>
-                    <div class="timeline-company">${job.company}</div>
-                    <div class="timeline-location">${job.location}</div>
-                  </div>
-                  <span class="timeline-badge">${job.period}</span>
+        <!-- Three-column timeline: where/when on the left, the axis in the
+             middle, what was done on the right. Jobs are listed newest first,
+             so the first one is the current position. -->
+        <div class="tl-panel" data-reveal data-delay="1">
+          <ol class="tl">
+            ${jobs.map((job, i) => `
+              <li class="tl-item${i === 0 ? ' is-current' : ''}">
+                <div class="tl-when">
+                  <div class="tl-company">${job.company}</div>
+                  <div class="tl-period">${job.period}</div>
+                  <div class="tl-location">${job.location}</div>
                 </div>
-                <ul class="timeline-bullets">
-                  ${job.bullets.map(b => `<li>${b}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-          `).join('')}
+                <span class="tl-dot" aria-hidden="true"></span>
+                <div class="tl-what">
+                  <div class="tl-role">
+                    ${job.title}
+                    ${i === 0 ? `<span class="tl-live">${t('experience.current')}</span>` : ''}
+                  </div>
+                  <ul class="tl-bullets">
+                    ${job.bullets.map(b => `<li>${b}</li>`).join('')}
+                  </ul>
+                </div>
+              </li>
+            `).join('')}
+          </ol>
         </div>
 
-        <!-- Education + Awards: below the timeline, side by side. -->
-        <div class="exp-footer-grid">
+        <div class="exp-extra">
+          <div data-reveal data-delay="1">
+            <h3 class="group-title">${t('experience.eduTitle')}</h3>
+            <ol class="tl tl-compact">
+              ${education.map(edu => `
+                <li class="tl-item">
+                  <div class="tl-when">
+                    <div class="tl-period">${edu.period}</div>
+                  </div>
+                  <span class="tl-dot" aria-hidden="true"></span>
+                  <div class="tl-what">
+                    <div class="tl-role">${edu.degree}</div>
+                    <div class="tl-school">${edu.school}</div>
+                  </div>
+                </li>
+              `).join('')}
+            </ol>
+          </div>
 
           <div data-reveal data-delay="2">
-            <p class="skill-group-title mb-3">${t('experience.eduTitle')}</p>
-            <div class="edu-stack">
-              ${education.map(edu => `
-                <div class="edu-card glass-card">
-                  <div class="edu-degree">${edu.degree}</div>
-                  <div class="edu-school">${edu.school}</div>
-                  <div class="edu-period">${edu.period}</div>
+            <h3 class="group-title">${t('experience.awardsTitle')}</h3>
+            <div class="award-stack">
+              ${awards.map(award => `
+                <div class="award-card">
+                  <div class="award-medal">${award.medal}</div>
+                  <div>
+                    <div class="award-title">${award.title}</div>
+                    <div class="award-detail">${award.detail}</div>
+                    ${award.link ? `
+                      <a href="${award.link}" target="_blank" rel="noopener noreferrer" class="link-accent">
+                        ${iconExternalLink} ${award.linkText}
+                      </a>
+                    ` : ''}
+                  </div>
                 </div>
               `).join('')}
             </div>
           </div>
-
-          <div data-reveal data-delay="3">
-            <p class="skill-group-title mb-3">${t('experience.awardsTitle')}</p>
-            ${awards.map(award => `
-              <div class="award-card glass-card">
-                <div class="award-medal">${award.medal}</div>
-                <div>
-                  <div class="award-title">${award.title}</div>
-                  <div class="award-detail">${award.detail}</div>
-                  ${award.link ? `
-                    <a href="${award.link}" target="_blank" rel="noopener noreferrer" class="award-link">
-                      ${iconExternalLink} ${award.linkText}
-                    </a>
-                  ` : ''}
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
         </div>
 
       </div>

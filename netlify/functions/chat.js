@@ -91,7 +91,7 @@ Title: Développeur Full Stack
 Based in: Antananarivo, Madagascar
 Address: LOT AD 13 BIS Ambohitrarahaba, Antananarivo, Madagascar
 Email: raoelimahefacharly@gmail.com
-Phone / WhatsApp: +261 34 39 265 27
+Phone / WhatsApp: +261 34 62 498 33
 Website: https://raoelimahefa.netlify.app
 GitHub: github.com/raoelimahefa
 LinkedIn: linkedin.com/in/raoelimahefa

@@ -22,14 +22,20 @@ export default {
   banner: {
     greeting: 'Bonjour, je suis',
     role: 'Développeur Full Stack',
-    tagline: "<strong>3 ans et plus d'expérience</strong> en Ruby on Rails, React et Node.js, et en <strong>extraction documentaire</strong> par IA. Basé à Antananarivo, Madagascar: <strong>disponible en remote</strong>.",
-    stack: 'Ruby · PHP · JavaScript',
+    tagline: "Des applications web et des outils d'<strong>IA</strong> qui font gagner du temps à vos équipes, de l'<strong>extraction documentaire</strong> à l'automatisation. Basé à Antananarivo, Madagascar&nbsp;: <strong>disponible en remote</strong>.",
+    stack: 'JavaScript · PHP · Ruby',
     downloadFR: 'CV Français',
     downloadEN: 'CV English',
     contact: 'Me contacter',
     scroll: 'Défiler',
   },
   about: {
+    helpTitle: "Comment puis-je vous <span>aider</span>&nbsp;?",
+    services: [
+      { title: 'Développement web full stack', sub: 'React · Node.js · Ruby on Rails' },
+      { title: 'Solutions IA & extraction documentaire', sub: 'Factures, contrats, formulaires' },
+      { title: 'Automatisation & back-offices', sub: 'API · Cloudflare Workers' },
+    ],
     title: "Résoudre des problèmes <span>concrets</span>",
     p1: "Mon objectif est simple : aider les entreprises à <strong>résoudre leurs problèmes concrets</strong> grâce à la puissance de l'<strong>intelligence artificielle</strong>. À une époque où l'IA transforme profondément les façons de travailler, je mets ces technologies au service des <strong>besoins réels du terrain</strong>.",
     p2: "De la <strong>digitalisation de documents</strong> à l'<strong>automatisation de processus métier</strong>, je conçois des solutions IA sur mesure, accessibles et efficaces, en m'appuyant sur des outils comme <strong>Ollama et Mistral AI</strong> pour répondre précisément aux défis de chaque organisation.",
@@ -55,6 +61,7 @@ export default {
     title: "Ce que j'ai <span>construit</span> en entreprise",
     eduTitle: 'Formation & Diplômes',
     awardsTitle: 'Distinctions & Hackathons',
+    current: 'En cours',
     jobs: [
       {
         title: 'Développeur web',
@@ -159,6 +166,7 @@ export default {
     ],
   },
   projects: {
+    more: 'Me contacter',
     title: "Des projets livrés en <span>production</span>",
     visitSite: 'Voir le projet',
     items: [
@@ -221,6 +229,11 @@ export default {
     ],
   },
   footer: {
+    ctaTitle: 'Construisons quelque chose de bien ensemble.',
+    ctaStart: 'Commencez par me dire',
+    ctaHi: 'bonjour',
+    info: 'Informations',
+    location: 'Antananarivo, Madagascar',
     copyright: '© 2026 RAOELIMAHEFA Charly — Tous droits réservés',
     madeWith: 'Fait avec',
     and: 'et',

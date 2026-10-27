@@ -1,3 +1,4 @@
+import logoImage from './../../src/assets/images/logos/cr-logo.webp'
 import { t, onLangChange } from '../i18n/index.js'
 import { iconWhatsapp, iconFacebook, iconMail } from '../utils/icons.js'
 
@@ -7,25 +8,37 @@ function render() {
       <div class="container">
         <div class="footer-grid">
 
-          <div class="footer-brand">
-            <div class="footer-logo-text">Charly R.</div>
-            <p class="footer-tagline">Full Stack Web Developer</p>
+          <div class="footer-cta">
+            <p class="footer-cta-title">${t('footer.ctaTitle')}</p>
+            <p class="footer-cta-start">
+              ${t('footer.ctaStart')}
+              <a href="mailto:raoelimahefacharly@gmail.com">${t('footer.ctaHi')}</a>
+            </p>
             <div class="footer-socials">
-              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://wa.me/261343926527" aria-label="WhatsApp">
+              <a class="social-btn" target="_blank" rel="noopener noreferrer" href="https://wa.me/261346249833" aria-label="WhatsApp">
                 ${iconWhatsapp}
               </a>
-              <a class="social-link-btn" target="_blank" rel="noopener noreferrer" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
+              <a class="social-btn" target="_blank" rel="noopener noreferrer" href="https://facebook.com/raoel.mahefa" aria-label="Facebook">
                 ${iconFacebook}
               </a>
-              <a class="social-link-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">
+              <a class="social-btn" href="mailto:raoelimahefacharly@gmail.com" aria-label="Email">
                 ${iconMail}
               </a>
             </div>
           </div>
 
-          <div class="footer-links-col">
+          <div>
+            <div class="footer-col-title">${t('footer.info')}</div>
+            <ul class="footer-list">
+              <li><a href="mailto:raoelimahefacharly@gmail.com">raoelimahefacharly@gmail.com</a></li>
+              <li><a href="https://wa.me/261346249833" target="_blank" rel="noopener noreferrer">+261 34 62 498 33</a></li>
+              <li>${t('footer.location')}</li>
+            </ul>
+          </div>
+
+          <div>
             <div class="footer-col-title">Navigation</div>
-            <ul class="footer-nav-list">
+            <ul class="footer-list">
               <li><a href="#banner">${t('nav.home')}</a></li>
               <li><a href="#about">${t('nav.about')}</a></li>
               <li><a href="#experience">${t('nav.experience')}</a></li>
@@ -34,18 +47,13 @@ function render() {
             </ul>
           </div>
 
-          <div class="footer-links-col">
-            <div class="footer-col-title">Contact</div>
-            <ul class="footer-nav-list">
-              <li><a href="mailto:raoelimahefacharly@gmail.com">raoelimahefacharly@gmail.com</a></li>
-              <li><a href="https://wa.me/261343926527" target="_blank" rel="noopener noreferrer">+261 34 39 265 27</a></li>
-            </ul>
-          </div>
-
         </div>
 
-        <div class="footer-bottom text-center">
-          <div class="footer-divider"></div>
+        <div class="footer-bottom">
+          <a class="footer-brand" href="#banner">
+            <img src="${logoImage}" alt="" width="30" height="30" />
+            <span>Charly</span>
+          </a>
           <p class="footer-copy">
             ${t('footer.copyright')} &nbsp;·&nbsp;
             ${t('footer.madeWith')} <span class="footer-heart">♥</span> ${t('footer.and')} ☕
