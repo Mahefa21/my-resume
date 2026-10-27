@@ -69,9 +69,9 @@ export default {
         location: 'Madagascar',
         period: 'Avril 2026 — Aujourd\'hui',
         bullets: [
-          'Développement d\'une application qui gère et enregistre les <strong>trajets des voitures</strong> du personnel',
-          'Maintenance de l\'application et ajout de <strong>nouvelles fonctionnalités</strong> selon les besoins',
-          'Utilisation de <strong>React Refine</strong> comme front-end, avec Hono.js et MySQL côté back-end, déployé sur Cloudflare Workers',
+          'Développement d\'une application de gestion du parc automobile : suivi des <strong>trajets des voitures</strong> du personnel, des chauffeurs et de la <strong>consommation de carburant</strong>',
+          '<strong>Maintenance</strong> de l\'application et ajout de nouvelles fonctionnalités selon les besoins',
+          'Architecture : front-end <strong>React Refine</strong>, API <strong>Hono.js</strong> et MySQL, déployée sur <strong>Cloudflare Workers</strong>',
         ],
       },
       {
@@ -81,9 +81,10 @@ export default {
         period: 'Avril 2026 — Juin 2026',
         bullets: [
           'Mise en place d\'un site dynamique de <strong>catalogue d\'activités</strong> pour Bliss Holiday',
-          '<strong>Génération automatique</strong> d\'un document PDF pour chaque nouvelle activité ajoutée',
+          '<strong>Génération automatique du catalogue PDF</strong> : une nouvelle page est ajoutée à chaque activité (tour) publiée, sans intervention manuelle',
           'Développement d\'un petit <strong>back-office</strong> pour l\'ajout, la modification et la suppression des activités',
-          'Architecture <strong>Git as CMS</strong> : données stockées en JSON versionné sur GitHub, mises à jour via l\'API GitHub avec un token sécurisé côté fonction serverless (variables d\'environnement Cloudflare Pages, jamais exposées au front) ; images hébergées sur Cloudinary',
+          'Architecture <strong>Git as CMS</strong> : données stockées en JSON versionné sur GitHub et mises à jour via l\'API GitHub ; images hébergées sur Cloudinary',
+          'Sécurité : <strong>token GitHub gardé côté serverless</strong> (variables d\'environnement Cloudflare Pages), jamais exposé au front',
         ],
       },
       {
@@ -104,8 +105,8 @@ export default {
         period: 'Mars 2024 — Mars 2025',
         bullets: [
           'Développement et optimisation d\'une <strong>plateforme SaaS</strong> (Ruby on Rails, Vue.js, Stimulus, Turbo, MySQL)',
-          'Amélioration des <strong>performances</strong>, débogage et <strong>refactorisation</strong> du code',
-          'Intégration de nouvelles fonctionnalités et <strong>tests unitaires</strong> avec RSpec',
+          'Amélioration des <strong>performances</strong>, débogage et refactorisation du code',
+          'Intégration de nouvelles fonctionnalités et <strong>tests unitaires</strong> avec <strong>RSpec</strong>',
         ],
       },
       {
@@ -126,7 +127,7 @@ export default {
         period: 'Janvier — Septembre 2021',
         bullets: [
           'Développement d\'une plateforme de <strong>gestion logistique</strong> (Node.js, React.js, PostgreSQL)',
-          'Mise en place d\'un <strong>back-office</strong> de gestion des <strong>stocks</strong> entrants et sortants',
+          'Mise en place d\'un back-office de <strong>gestion des stocks</strong> entrants et sortants',
           'Intégration d\'un système de <strong>lecture de codes-barres</strong> pour les produits',
         ],
       },
@@ -180,7 +181,7 @@ export default {
       {
         name: 'Catalogue Bliss Holiday',
         employer: 'Bliss Holiday',
-        description: 'Catalogue dynamique des activités touristiques de Bliss Holiday à Maurice, avec génération automatique de fiches PDF et une architecture <strong>Git as CMS</strong>.',
+        description: 'Catalogue dynamique des activités touristiques de Bliss Holiday à Maurice, avec génération automatique du <strong>catalogue PDF</strong> (une page par activité) et une architecture <strong>Git as CMS</strong>.',
         tech: ['React', 'GitHub API', 'Cloudflare Pages', 'Cloudinary'],
         link: 'https://bliss-holiday-catalogue.pages.dev/',
       },

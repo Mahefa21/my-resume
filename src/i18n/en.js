@@ -69,9 +69,9 @@ export default {
         location: 'Madagascar',
         period: 'April 2026 — Present',
         bullets: [
-          'Built an application to manage and log <strong>staff vehicle trips</strong>',
-          'Maintained the application and added <strong>new features</strong> based on evolving needs',
-          'Used <strong>React Refine</strong> for the front-end, with Hono.js and MySQL on the back-end, deployed on Cloudflare Workers',
+          'Built a fleet-management application: tracking of <strong>staff vehicle trips</strong>, drivers and <strong>fuel consumption</strong>',
+          '<strong>Maintained</strong> the application and added new features based on evolving needs',
+          'Architecture: <strong>React Refine</strong> front-end, <strong>Hono.js</strong> and MySQL API, deployed on <strong>Cloudflare Workers</strong>',
         ],
       },
       {
@@ -81,9 +81,10 @@ export default {
         period: 'April 2026 — June 2026',
         bullets: [
           'Built a dynamic <strong>activity catalogue</strong> website for Bliss Holiday',
-          '<strong>Automatic PDF generation</strong> for every newly added activity',
+          '<strong>Automatic PDF catalogue generation</strong>: a new page is added for every activity (tour) published, with no manual work',
           'Developed a lightweight <strong>back-office</strong> for adding, editing, and deleting activities',
-          '<strong>Git-as-CMS</strong> architecture: data stored as versioned JSON on GitHub, updated via the GitHub API with a token secured server-side (Cloudflare Pages environment variables, never exposed to the front-end); images hosted on Cloudinary',
+          '<strong>Git-as-CMS</strong> architecture: data stored as versioned JSON on GitHub and updated via the GitHub API; images hosted on Cloudinary',
+          'Security: <strong>GitHub token kept server-side</strong> in serverless functions (Cloudflare Pages environment variables), never exposed to the front-end',
         ],
       },
       {
@@ -104,8 +105,8 @@ export default {
         period: 'March 2024 — March 2025',
         bullets: [
           'Built and optimized a <strong>SaaS platform</strong> using Ruby on Rails, Vue.js, Stimulus, Turbo, and MySQL',
-          'Improved <strong>performance</strong>, debugged issues, and <strong>refactored</strong> legacy code',
-          'Integrated new features and wrote <strong>unit tests</strong> with RSpec',
+          'Improved <strong>performance</strong>, debugged issues, and refactored legacy code',
+          'Integrated new features and wrote <strong>unit tests</strong> with <strong>RSpec</strong>',
         ],
       },
       {
@@ -126,7 +127,7 @@ export default {
         period: 'January — September 2021',
         bullets: [
           'Developed a <strong>logistics management</strong> platform (Node.js, React.js, PostgreSQL)',
-          'Built a <strong>back-office</strong> system for managing inbound and outbound <strong>inventory</strong>',
+          'Built a back-office system for managing <strong>inbound and outbound inventory</strong>',
           'Implemented a <strong>barcode scanning</strong> system for product tracking',
         ],
       },
@@ -180,7 +181,7 @@ export default {
       {
         name: 'Bliss Holiday Catalogue',
         employer: 'Bliss Holiday',
-        description: 'Dynamic catalogue of tourist activities for Bliss Holiday in Mauritius, with automatic PDF generation and a <strong>Git-as-CMS</strong> architecture.',
+        description: 'Dynamic catalogue of tourist activities for Bliss Holiday in Mauritius, with automatic <strong>PDF catalogue</strong> generation (one page per activity) and a <strong>Git-as-CMS</strong> architecture.',
         tech: ['React', 'GitHub API', 'Cloudflare Pages', 'Cloudinary'],
         link: 'https://bliss-holiday-catalogue.pages.dev/',
       },

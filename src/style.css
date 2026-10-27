@@ -252,7 +252,7 @@ strong { font-weight: 700; color: var(--text); }
   position: absolute;
   left: 0.5rem;
   right: 0.5rem;
-  bottom: 9px;
+  bottom: 2px;
   height: 13px;
   z-index: -1;
   transform: rotate(-1.5deg);
@@ -369,8 +369,10 @@ strong { font-weight: 700; color: var(--text); }
   font-weight: 700;
   color: var(--brand);
   text-decoration: none;
+  /* Stroke starts below the descenders (p, j, y): the padding is its room. */
   background: var(--brush) 0 100% / 100% 9px no-repeat;
-  padding-bottom: 3px;
+  line-height: 1.35;
+  padding-bottom: 6px;
   min-height: 0;
   transition: gap 0.2s ease;
 }
@@ -460,7 +462,8 @@ strong { font-weight: 700; color: var(--text); }
   color: var(--brand);
   text-decoration: none;
   background: var(--brush) 0 100% / 100% 10px no-repeat;
-  padding-bottom: 4px;
+  line-height: 1.35;
+  padding-bottom: 7px;
   min-height: 0;
 }
 
@@ -632,8 +635,9 @@ strong { font-weight: 700; color: var(--text); }
 
 .section-title span {
   color: var(--brand);
-  /* Brush sits behind the lower part of the word, like the nav's. */
-  background: var(--brush) 0 88% / 100% 0.32em no-repeat;
+  /* Brush sits right under the baseline, clear of the letters' bodies. */
+  background: var(--brush) 0 100% / 100% 0.3em no-repeat;
+  padding-bottom: 0.1em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
@@ -1240,8 +1244,9 @@ strong { font-weight: 700; color: var(--text); }
   color: var(--tone-text);
   text-decoration: none;
   background: var(--brush) 0 100% / 100% 9px no-repeat;
+  line-height: 1.35;
   min-height: 0;
-  padding-bottom: 3px;
+  padding-bottom: 6px;
   transition: gap 0.2s ease;
 }
 
@@ -1282,8 +1287,8 @@ strong { font-weight: 700; color: var(--text); }
 .footer-cta-start a {
   color: var(--brand);
   text-decoration: none;
-  background: var(--brush) 0 92% / 100% 0.42em no-repeat;
-  padding: 0 2px;
+  background: var(--brush) 0 100% / 100% 0.4em no-repeat;
+  padding: 0 2px 0.2em;
   min-height: 0;
 }
 
@@ -1587,6 +1592,13 @@ button, a, .btn-pill, [role="button"] {
   .hero-right { order: 2; }
   .hero-visual { order: 3; margin-top: 32px; container-type: normal; }
   .hero-stage { width: min(420px, 100%); height: auto; }
+  /* The torn edge is only ~44px tall here, so the desktop's long bottom fade
+     would end above it and wash the shirt out. Keep the shirt solid down to
+     the edge and only soften the sides. */
+  .hero-portrait img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  }
   /* The portrait already signals there's more below; the arrow just
      collides with content on narrow screens. */
   .scroll-hint--down { display: none; }

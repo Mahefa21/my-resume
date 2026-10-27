@@ -6,6 +6,13 @@ import gsap from 'gsap'
  */
 
 export function initMouseFollower() {
+  // A trailing blob only makes sense with a real pointer. On touch screens
+  // (phones, tablets) there is no hover, so it would just sit frozen over the
+  // text; skip it entirely, as well as for people who asked for less motion.
+  const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  if (!canHover || reduceMotion) return null
+
   // Create container
   const container = document.createElement('div')
   container.id = 'mouse-follower-container'
@@ -18,54 +25,32 @@ export function initMouseFollower() {
     pointer-events: none;
     z-index: 9998;
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
   `
   document.body.appendChild(container)
-
-  // Create background blob
-  const bgBlob = document.createElement('div')
-  bgBlob.className = 'blob-background'
-  bgBlob.style.cssText = `
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-    pointer-events: none;
-    z-index: 1;
-  `
 
   // Create foreground blob
   const fgBlob = document.createElement('div')
   fgBlob.className = 'blob-foreground'
   fgBlob.style.cssText = `
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     pointer-events: none;
     z-index: 2;
   `
 
-  container.appendChild(bgBlob)
   container.appendChild(fgBlob)
 
   // Update colors based on theme
   function updateColors() {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark'
 
-    // Logo palette: slate (#3c3f55, lightened to #b9bcd3 on dark) + amber accent.
-    if (isDark) {
-      bgBlob.style.background = 'rgba(185, 188, 211, 0.22)'
-      bgBlob.style.boxShadow = '0 0 40px rgba(185, 188, 211, 0.25)'
-
-      fgBlob.style.background = 'rgba(232, 163, 61, 0.45)'
-      fgBlob.style.boxShadow = '0 0 30px rgba(232, 163, 61, 0.4), inset -5px -5px 15px rgba(0, 0, 0, 0.3)'
-    } else {
-      bgBlob.style.background = 'rgba(60, 63, 85, 0.14)'
-      bgBlob.style.boxShadow = '0 0 40px rgba(60, 63, 85, 0.18)'
-
-      fgBlob.style.background = 'rgba(232, 163, 61, 0.4)'
-      fgBlob.style.boxShadow = '0 0 30px rgba(232, 163, 61, 0.35), inset -5px -5px 15px rgba(0, 0, 0, 0.08)'
-    }
+    // Logo palette: one amber dot, kept faint so it never fights the text.
+    fgBlob.style.background = isDark ? 'rgba(232, 163, 61, 0.4)' : 'rgba(232, 163, 61, 0.35)'
+    fgBlob.style.boxShadow = 'none'
   }
 
   updateColors()
@@ -82,39 +67,42 @@ export function initMouseFollower() {
   let prevMouseX = mouseX
   let prevMouseY = mouseY
 
+  let seen = false
   document.addEventListener('mousemove', (e) => {
     prevMouseX = mouseX
     prevMouseY = mouseY
     mouseX = e.clientX
     mouseY = e.clientY
+    // Stay invisible until the pointer is really there, not parked mid-screen.
+    if (!seen) {
+      seen = true
+      state.fgX = mouseX
+      state.fgY = mouseY
+      container.style.opacity = '1'
+    }
+  })
+  document.documentElement.addEventListener('mouseleave', () => {
+    container.style.opacity = '0'
+    seen = false
   })
 
   // Animation state
   const state = {
-    bgX: mouseX,
-    bgY: mouseY,
     fgX: mouseX,
     fgY: mouseY,
     skewX: 0,
-    rotationBg: 0,
     rotationFg: 0,
   }
 
   // GSAP ticker for smooth animation
   gsap.ticker.add(() => {
     // Smooth follow with easing
-    // Background blob slower tracking
-    state.bgX += (mouseX - state.bgX) * 0.08
-    state.bgY += (mouseY - state.bgY) * 0.08
-
-    // Foreground blob faster tracking
     state.fgX += (mouseX - state.fgX) * 0.15
     state.fgY += (mouseY - state.fgY) * 0.15
 
     // Calculate velocity for skew effect
     const vx = mouseX - prevMouseX
     const vy = mouseY - prevMouseY
-    const distance = Math.hypot(vx, vy)
     const angle = Math.atan2(vy, vx) * 180 / Math.PI
 
     // Velocity-based skew (smooth easing)
@@ -122,22 +110,12 @@ export function initMouseFollower() {
     state.skewX += (targetSkew - state.skewX) * 0.15
 
     // Rotation based on movement
-    state.rotationBg += angle * 0.04
     state.rotationFg += angle * 0.08
-
-    // Update background blob position and transform
-    gsap.set(bgBlob, {
-      x: state.bgX - 40,
-      y: state.bgY - 40,
-      rotation: state.rotationBg % 360,
-      skewX: state.skewX * 0.4,
-      transformOrigin: '50% 50%',
-    })
 
     // Update foreground blob position and transform
     gsap.set(fgBlob, {
-      x: state.fgX - 25,
-      y: state.fgY - 25,
+      x: state.fgX - 18,
+      y: state.fgY - 18,
       rotation: state.rotationFg % 360,
       skewX: state.skewX,
       transformOrigin: '50% 50%',
@@ -158,5 +136,5 @@ export function initMouseFollower() {
     }
   })
 
-  return { container, bgBlob, fgBlob }
+  return { container, fgBlob }
 }

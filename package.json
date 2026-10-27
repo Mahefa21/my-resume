@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "NODE_OPTIONS=--experimental-global-webcrypto vite build",
     "preview": "vite preview",
-    "indexnow": "node scripts/indexnow.js"
+    "indexnow": "node scripts/indexnow.js",
+    "cv": "node scripts/build-cv.mjs"
   },
   "devDependencies": {
     "sass": "^1.86.0",
