@@ -177,6 +177,7 @@
   <!-- Inline critical loader CSS so it's visible before JS/CSS modules load -->
   <style>
     #loader {
+      --brush: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 14' preserveAspectRatio='none'%3E%3Cfilter id='r' filterUnits='userSpaceOnUse' x='0' y='0' width='120' height='14'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.09' numOctaves='2' seed='5'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='7'/%3E%3C/filter%3E%3Cpath filter='url(%23r)' d='M6 8 C 32 5, 74 10, 114 6' fill='none' stroke='%23e8a33d' stroke-width='10' stroke-linecap='round'/%3E%3C/svg%3E");
       position: fixed;
       inset: 0;
       background: #f7f7fa;
@@ -188,44 +189,40 @@
       transition: opacity 0.7s ease, visibility 0.7s ease;
     }
     [data-theme="dark"] #loader { background: #17181f; }
-    [data-theme="dark"] .loader-initials { color: #b9bcd3; }
-    [data-theme="dark"] .loader-ring-outer { border-top-color: #b9bcd3; border-right-color: #b9bcd3; }
+    [data-theme="dark"] .loader-logo { filter: brightness(0) invert(1); }
+    [data-theme="dark"] .loader-name { color: #b9bcd3; }
+    [data-theme="dark"] .loader-text { color: #a3a6bd; }
     #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-rings {
+    .loader-logo {
+      width: 104px;
+      height: 104px;
+      object-fit: contain;
+      animation: logoIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both, breathe 2.4s ease-in-out 0.7s infinite;
+    }
+    .loader-name {
       position: relative;
-      width: 110px;
-      height: 110px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .loader-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 3px solid transparent;
-    }
-    .loader-ring-outer {
-      width: 110px;
-      height: 110px;
-      border-top-color: #3c3f55;
-      border-right-color: #3c3f55;
-      animation: spin 1.4s linear infinite;
-    }
-    .loader-ring-inner {
-      width: 78px;
-      height: 78px;
-      border-bottom-color: #e8a33d;
-      border-left-color: #e8a33d;
-      animation: spin 0.9s linear infinite reverse;
-    }
-    .loader-initials {
-      font-size: 22px;
-      font-weight: 800;
+      margin-top: 18px;
+      padding: 0 6px 12px;
+      font-family: 'Caveat', cursive;
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1;
       color: #3c3f55;
-      letter-spacing: 1px;
+      animation: riseIn 0.6s ease 0.25s both;
+    }
+    /* The site's amber brush stroke paints itself under the name: it is the progress bar. */
+    .loader-name::after {
+      content: "";
+      position: absolute;
+      left: -6px;
+      right: -6px;
+      bottom: 0;
+      height: 14px;
+      background: var(--brush) center / 100% 100% no-repeat;
+      animation: paint 1.8s cubic-bezier(0.55, 0, 0.25, 1) 0.2s both;
     }
     .loader-text {
-      margin-top: 28px;
+      margin-top: 22px;
       font-size: 12px;
       font-weight: 500;
       color: #5e6178;
@@ -234,22 +231,14 @@
       font-family: 'Hanken Grotesk', sans-serif;
       animation: pulse 1.4s ease-in-out infinite;
     }
-    .loader-bar-wrap {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: #e6e7ee;
-    }
-    .loader-bar-fill {
-      height: 100%;
-      background: #3c3f55;
-      animation: loadBar 1.8s ease-in-out forwards;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes logoIn { from { opacity: 0; transform: scale(0.8) rotate(-8deg); } to { opacity: 1; transform: none; } }
+    @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes paint { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
     @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-    @keyframes loadBar { 0% { width: 0%; } 60% { width: 75%; } 100% { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .loader-logo, .loader-name, .loader-name::after, .loader-text { animation: none; }
+    }
   </style>
 </head>
 
@@ -292,16 +281,10 @@
   </noscript>
 
   <!-- LOADER -->
-  <div id="loader">
-    <div class="loader-rings">
-      <div class="loader-ring loader-ring-outer"></div>
-      <div class="loader-ring loader-ring-inner"></div>
-      <div class="loader-initials">CR</div>
-    </div>
+  <div id="loader" role="status" aria-live="polite">
+    <img class="loader-logo" src="/src/assets/images/logos/cr-logo.webp" alt="" width="104" height="104" />
+    <div class="loader-name">Charly</div>
     <div class="loader-text">Loading</div>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar-fill"></div>
-    </div>
   </div>
 
   <!-- NAVBAR -->

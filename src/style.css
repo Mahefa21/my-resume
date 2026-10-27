@@ -141,37 +141,42 @@ strong { font-weight: 700; color: var(--text); }
 
 #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-.loader-rings {
+.loader-logo {
+  width: 104px;
+  height: 104px;
+  object-fit: contain;
+  animation: logoIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both, breathe 2.4s ease-in-out 0.7s infinite;
+}
+
+/* Same treatment as the navbar logo: flipped to white on the dark theme. */
+[data-theme="dark"] .loader-logo { filter: brightness(0) invert(1); }
+
+.loader-name {
   position: relative;
-  width: 110px;
-  height: 110px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: 18px;
+  padding: 0 6px 12px;
+  font-family: var(--font-script);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--brand);
+  animation: riseIn 0.6s ease 0.25s both;
 }
 
-.loader-ring { position: absolute; border-radius: 50%; border: 3px solid transparent; }
-
-.loader-ring-outer {
-  width: 110px;
-  height: 110px;
-  border-top-color: var(--brand);
-  border-right-color: var(--brand);
-  animation: spin 1.4s linear infinite;
+/* The amber brush paints itself under the name: it is the progress bar. */
+.loader-name::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  right: -6px;
+  bottom: 0;
+  height: 14px;
+  background: var(--brush) center / 100% 100% no-repeat;
+  animation: paint 1.8s cubic-bezier(0.55, 0, 0.25, 1) 0.2s both;
 }
-
-.loader-ring-inner {
-  width: 78px;
-  height: 78px;
-  border-bottom-color: var(--accent);
-  border-left-color: var(--accent);
-  animation: spin 0.9s linear infinite reverse;
-}
-
-.loader-initials { font-size: 22px; font-weight: 800; color: var(--brand); letter-spacing: 1px; }
 
 .loader-text {
-  margin-top: 28px;
+  margin-top: 22px;
   font-size: 12px;
   font-weight: 500;
   color: var(--muted);
@@ -180,12 +185,11 @@ strong { font-weight: 700; color: var(--text); }
   animation: pulse 1.4s ease-in-out infinite;
 }
 
-.loader-bar-wrap { position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: var(--brand-soft); }
-.loader-bar-fill { height: 100%; background: var(--brand); animation: loadBar 1.8s ease-in-out forwards; }
-
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes logoIn { from { opacity: 0; transform: scale(0.8) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes paint { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
 @keyframes pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-@keyframes loadBar { 0% { width: 0%; } 60% { width: 75%; } 100% { width: 100%; } }
 
 /* ════════════════════════════════════════
    NAVBAR
